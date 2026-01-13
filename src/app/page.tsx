@@ -12,6 +12,7 @@ import meghna from "@/assets/images/home/sponsors/meghna.png";
 import OurMission from "@/components/Home/OurMission";
 import UpcomingEvents from "@/components/Home/UpcommingEvents";
 import QuickLinks from "@/components/Home/QuickLinks";
+import FetchDataComp from "@/components/fetch-data-comp";
 
 
 const sponsors = [
@@ -61,9 +62,9 @@ const HomePage = () => {
   return (
     <div>
       <Hero />
+      <FetchDataComp />
       <OurMission />
       <LatestNews />
-
       <UpcomingEvents />
       <AthleteSpotlight />
       {/* <SponsorsSection sponsors={sponsors} page="home" /> */}
