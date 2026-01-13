@@ -395,7 +395,7 @@ export default function Header() {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <Drawer title="" closable onClose={onClose} open={isMenuOpen} width={250} bodyStyle={{ padding: 0 }}>
+          <Drawer title="" closable onClose={onClose} open={isMenuOpen} width={250} styles={{body: { padding: 0 }}}>
             <div
               className={`absolute top-0 right-0 h-full w-full sm:w-96 bg-white shadow-2xl transform transition-transform duration-300 ${
                 isMenuOpen ? "translate-x-0" : "translate-x-full"

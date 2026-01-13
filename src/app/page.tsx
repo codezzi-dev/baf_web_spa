@@ -62,7 +62,7 @@ const HomePage = () => {
   return (
     <div>
       <Hero />
-      <FetchDataComp />
+      {/* <FetchDataComp /> */}
       <OurMission />
       <LatestNews />
       <UpcomingEvents />
