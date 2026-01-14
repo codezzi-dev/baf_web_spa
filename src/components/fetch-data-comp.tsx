@@ -1,18 +1,5 @@
 import { useGetAllPosts } from "@/hooks/post.hook";
 
-// type Post = {
-//     userId: number;
-//     id: number;
-//     title: string;
-//     body: string;
-// };
-
-// export function fetchPosts (): Promise<Post[]>{
-//     const response = fetch('https://jsonplaceholder.typicode.com/posts')
-//         .then(res => res.json());
-//     return response;
-// }
-
 export default function FetchDataComp() {
     const { data, isLoading, error } = useGetAllPosts();
     if (isLoading) {
