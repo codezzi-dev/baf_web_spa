@@ -2,21 +2,7 @@ import Link from "next/link";
 import { Calendar, ChevronRight } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import { cn } from "@/lib/utils";
-
-export interface Story {
-  id: string;
-  title: string;
-  excerpt: string;
-  date: string;
-  category: "announcement" | "event" | "partnership";
-  image: string;
-  slug: string;
-}
-
-interface StoryCardProps {
-  story: Story;
-  featured?: boolean;
-}
+import { StoryCardProps } from "@/types/press-realease/story";
 
 const categoryStyles = {
   announcement: "bg-badge-announcement text-white",

@@ -1,4 +1,7 @@
-import { Story } from "@/components/press-releases/StoryCard";
+import { Story } from "@/types/press-realease/story";
+import { Facebook } from "lucide-react";
+
+
 
 export const stories: Story[] = [
   {
@@ -11,6 +14,20 @@ export const stories: Story[] = [
     image:
       "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&q=80",
     slug: "new-training-program",
+    socialLinks: [
+      {
+        socialPlatform: "facebook",
+        url: "https://facebook.com/share/story/1",
+      },
+      {
+        socialPlatform: "twitter",
+        url: "https://twitter.com/share/story/1",
+      },
+      {
+        socialPlatform: "linkedin",
+        url: "https://linkedin.com/share/story/1",
+      },
+    ]
   },
   {
     id: "2",
@@ -22,6 +39,20 @@ export const stories: Story[] = [
     image:
       "https://images.unsplash.com/photo-1532444458054-01a7dd3e9fca?w=800&q=80",
     slug: "national-championship-2025",
+    socialLinks: [
+      {
+        socialPlatform: "facebook",
+        url: "https://facebook.com/share/story/1",
+      },
+      {
+        socialPlatform: "twitter",
+        url: "https://twitter.com/share/story/1",
+      },
+      {
+        socialPlatform: "copylink",
+        url: "https://linkedin.com/share/story/1",
+      },
+    ]
   },
   {
     id: "3",
@@ -33,6 +64,20 @@ export const stories: Story[] = [
     image:
       "https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=800&q=80",
     slug: "global-sports-partnership",
+    socialLinks: [
+      {
+        socialPlatform: "facebook",
+        url: "https://facebook.com/share/story/1",
+      },
+      {
+        socialPlatform: "twitter",
+        url: "https://twitter.com/share/story/1",
+      },
+      {
+        socialPlatform: "linkedin",
+        url: "https://linkedin.com/share/story/1",
+      },
+    ]
   },
   {
     id: "4",
@@ -44,6 +89,20 @@ export const stories: Story[] = [
     image:
       "https://images.unsplash.com/photo-1517649763962-0c623066013b?w=800&q=80",
     slug: "youth-development-milestone",
+    socialLinks: [
+      {
+        socialPlatform: "facebook",
+        url: "https://facebook.com/share/story/1",
+      },
+      {
+        socialPlatform: "twitter",
+        url: "https://twitter.com/share/story/1",
+      },
+      {
+        socialPlatform: "linkedin",
+        url: "https://linkedin.com/share/story/1",
+      },
+    ]
   },
 ];
 
