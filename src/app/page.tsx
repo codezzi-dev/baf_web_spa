@@ -13,6 +13,7 @@ import OurMission from "@/components/Home/OurMission";
 import UpcomingEvents from "@/components/Home/UpcommingEvents";
 import QuickLinks from "@/components/Home/QuickLinks";
 import FetchDataComp from "@/components/fetch-data-comp";
+import RunningNotice from "@/components/news/RunningNotice";
 
 
 const sponsors = [
@@ -62,6 +63,7 @@ const HomePage = () => {
   return (
     <div>
       <Hero />
+      <RunningNotice/>
       {/* <FetchDataComp /> */}
       <OurMission />
       <LatestNews />
