@@ -322,8 +322,10 @@ body {
   );
 }
 .marquee-content {
-  animation: marquee 15s linear infinite;   
-  will-change: transform;           
+  display: flex;
+  flex-wrap: nowrap;
+  animation: marquee 35s linear infinite;   
+  will-change: transform;          
 }
 .marquee-container:hover .marquee-content{
   animation-play-state: paused;

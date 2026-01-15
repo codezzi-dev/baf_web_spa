@@ -64,11 +64,11 @@ const HomePage = () => {
     <div>
       <Hero />
       <RunningNotice/>
-      {/* <FetchDataComp /> */}
       <OurMission />
-      <LatestNews />
+      <LatestNews   />
       <UpcomingEvents />
       <AthleteSpotlight />
+
       {/* <SponsorsSection sponsors={sponsors} page="home" /> */}
       <QuickLinks />
     </div>
