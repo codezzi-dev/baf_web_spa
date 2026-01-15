@@ -3,7 +3,7 @@ import { Inter, Roboto, Poppins, Lato, Nunito, Noto_Sans } from "next/font/googl
 
 import Layout from "@/components/layout/Layout";
 import "./globals.css";
-import QueryProvider from "./components/QueryProvider";
+import QueryProvider from "./providers/QueryProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -60,7 +60,7 @@ export default function RootLayout({
           <QueryProvider>
             {children}
           </QueryProvider>
-          </Layout>
+        </Layout>
       </body>
     </html>
   );

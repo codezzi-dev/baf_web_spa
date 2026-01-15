@@ -8,34 +8,7 @@ import logo from "@/assets/images/logo_title.png";
 import Image from "next/image";
 import { TiMinus } from "react-icons/ti";
 import { Drawer } from "antd";
-
-// Type definitions
-interface MenuItem {
-  name: string;
-  href: string;
-  hasMegamenu?: boolean;
-}
-
-interface MegamenuLink {
-  name: string;
-  href: string;
-}
-
-interface MegamenuSection {
-  title: string;
-  links?: MegamenuLink[];
-  content?: React.ReactNode;
-}
-
-interface MegamenuContentItem {
-  sections: MegamenuSection[];
-}
-
-interface MegamenuContent {
-  [key: string]: MegamenuContentItem;
-}
-
-type NavigationLevel = "main" | "sections" | "links";
+import { MegamenuContent, MegamenuContentItem, MegamenuLink, MegamenuSection, MenuItem, NavigationLevel } from "@/types/navigation";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -44,7 +17,6 @@ export default function Header() {
   const [isLangOpen, setIsLangOpen] = useState<boolean>(false);
   const [language, setLanguage] = useState<string>("bn");
 
-  // Navigation state for mobile
   // Navigation state for mobile
   const [navigationLevel, setNavigationLevel] = useState<NavigationLevel>("main");
   const [selectedMenu, setSelectedMenu] = useState<string | null>(null);
@@ -252,7 +224,7 @@ export default function Header() {
             <Link href="/">
               <Image
                 src={logo}
-                className="w-32 md:w-44 lg:w-48 h-auto py-2 lg:py-3"
+                className="w-auto md:min-w-32 lg:w-48 py-3"
                 width={200}
                 height={400}
                 alt="logo-title"
@@ -395,7 +367,7 @@ export default function Header() {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <Drawer title="" closable onClose={onClose} open={isMenuOpen} width={250} bodyStyle={{ padding: 0 }}>
+          <Drawer title="" closable onClose={onClose} open={isMenuOpen} width={250} styles={{body: { padding: 0 }}}>
             <div
               className={`absolute top-0 right-0 h-full w-full sm:w-96 bg-white shadow-2xl transform transition-transform duration-300 ${
                 isMenuOpen ? "translate-x-0" : "translate-x-full"
