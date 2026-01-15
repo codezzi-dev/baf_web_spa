@@ -294,9 +294,26 @@ body {
     transform: translateY(0);
   }
 }
-
+@keyframes marquee {
+  from { transform: translateX(0);    }
+  to   { transform: translateX(-50%); }
+}
 .animate-fadeIn {
   animation: fadeIn 0.2s ease-in-out;
+}
+/* Marquee Animation */
+.marquee-container {
+  overflow: hidden;
+  position: relative;
+  background-color: transparent;
+  border: none;
+}
+.marquee-content {
+  animation: marquee 15s linear infinite;   /* ← this makes it move */
+  will-change: transform;                   /* optional: smoother on some browsers */
+}
+.marquee-container:hover .marquee-content {
+  animation-play-state: paused;
 }
 
 :root {
