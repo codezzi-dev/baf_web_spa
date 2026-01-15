@@ -60,7 +60,7 @@ export default function RootLayout({
           <QueryProvider>
             {children}
           </QueryProvider>
-          </Layout>
+        </Layout>
       </body>
     </html>
   );
