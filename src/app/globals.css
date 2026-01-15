@@ -303,16 +303,31 @@ body {
 }
 /* Marquee Animation */
 .marquee-container {
-  overflow: hidden;
   position: relative;
   background-color: transparent;
-  border: none;
+  overflow: hidden;
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black    8%,   
+    black   92%,     
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black    8%,
+    black   92%,
+    transparent 100%
+  );
 }
 .marquee-content {
-  animation: marquee 15s linear infinite;   /* ← this makes it move */
-  will-change: transform;                   /* optional: smoother on some browsers */
+  display: flex;
+  flex-wrap: nowrap;
+  animation: marquee 35s linear infinite;   
+  will-change: transform;          
 }
-.marquee-container:hover .marquee-content {
+.marquee-container:hover .marquee-content{
   animation-play-state: paused;
 }
 

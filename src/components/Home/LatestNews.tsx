@@ -54,8 +54,8 @@ const LatestNews: React.FC = () => {
   ];
 
   return (
-    <section className="py-20 bg-gray-50">
-      <div className="main_container mx-auto px-4 sm:px-6 lg:px-4 xl:px-0">
+    <section className="py-20 bg-gray-50 ">
+      <div className="main_container mx-auto px-4 sm:px-6 md:px-10 lg:px-4 xl:px-0">
         {/* Header */}
         <div className="text-center mb-16">
           <div className="text-[#00916e] font-semibold text-sm uppercase tracking-wider mb-2">Stay Updated</div>
@@ -67,7 +67,7 @@ const LatestNews: React.FC = () => {
         </div>
 
         {/* News Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8 mx-10">
           {newsItems.map((news) => (
             <div
               key={news.id}
