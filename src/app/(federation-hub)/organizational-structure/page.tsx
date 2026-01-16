@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -28,6 +28,8 @@ import riajul_islam from '@/assets/images/organizational-people/md-riajul-islam.
 import touhidul_islam from '@/assets/images/organizational-people/colonel-md-touhidul-islam.png'
 import nadiruzamman from '@/assets/images/organizational-people/commander-nadiruzzaman.png'
 import ekramul_haque from '@/assets/images/organizational-people/wing-commander-md-ekramul-haque.png'
+import OrgChart from "@/components/FederationHub/Organogram";
+import Organogram2, { defaultOrganogramData } from "@/components/FederationHub/Organogram-2";
 
 
 
@@ -135,7 +137,7 @@ const dummyMembers = [
     phone: "+8801743-487255",
     photo_url:
       "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YXZhdGFyfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=500",
-    image: nayeem,  
+    image: nayeem,
     bio: "Leading the Bangladesh Athletics Federation with a focus on development and excellence.",
     achievements: ["Led national sports program", "Increased funding by 30%"],
   },
@@ -179,7 +181,7 @@ const dummyMembers = [
   {
     id: 5,
     full_name: "Md. Shah Alam",
-    category: ["calendar","trainingSelection"],
+    category: ["calendar", "trainingSelection"],
     position: "General Secretary",
     email: "rafiq.hasan@example.com",
     phone: "+8801711-401018",
@@ -239,7 +241,7 @@ const dummyMembers = [
   {
     id: 10,
     full_name: "Farid Khan Chowdhury",
-    category:["calendar", "inventory", "media", "trainingSelection", "evaluation", "futurePlanning"],
+    category: ["calendar", "inventory", "media", "trainingSelection", "evaluation", "futurePlanning"],
     position: "Member",
     email: "khadija.jahan@example.com",
     phone: "+8801671-930327",
@@ -287,7 +289,7 @@ const dummyMembers = [
   {
     id: 14,
     full_name: "Shirin Akhter",
-    category: ["media","evaluation"],
+    category: ["media", "evaluation"],
     position: "Member",
     email: "tania.akhter@example.com",
     phone: "+8801711000013",
@@ -355,7 +357,7 @@ const dummyMembers = [
     image: ekramul_haque,
     bio: "Leads marketing campaigns and brand development.",
     achievements: ["Secured national sponsorship deal", "Increased brand engagement by 45%"],
-  },  
+  },
 ];
 
 export default function BoardMembers() {
@@ -363,9 +365,9 @@ export default function BoardMembers() {
 
   const filteredMembers =
     activeCategory === "all" ? dummyMembers : dummyMembers.filter((m) => m.category.includes(activeCategory));
-    // activeCategory === "all" ? dummyMembers : dummyMembers.filter((m) => m.category === activeCategory);
+  // activeCategory === "all" ? dummyMembers : dummyMembers.filter((m) => m.category === activeCategory);
 
-  console.log({activeCategory})
+  console.log({ activeCategory })
 
   return (
     <div className="pt-40 bg-gradient-to-br from-[#F8F6F3] to-white ">
@@ -384,6 +386,11 @@ export default function BoardMembers() {
             growth.
           </p>
         </div>
+
+        {/* <Suspense fallback={<div>Loading organization chart...</div>}>
+          <OrgChart />
+        </Suspense> */}
+         <Organogram2 {...defaultOrganogramData} />
 
         {/* Tabs */}
         <Tabs value={activeCategory} onValueChange={setActiveCategory} className="mb-12 p-2 md:w-fit">
@@ -444,9 +451,8 @@ export default function BoardMembers() {
                   ) : (
                     <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200">
                       <div
-                        className={`w-28 h-28 rounded-full bg-gradient-to-br ${
-                          categoryInfo[member.category[index]].color
-                        } flex items-center justify-center shadow-md`}
+                        className={`w-28 h-28 rounded-full bg-gradient-to-br ${categoryInfo[member.category[index]].color
+                          } flex items-center justify-center shadow-md`}
                       >
                         <span className="text-4xl font-semibold text-white">{member.full_name.charAt(0)}</span>
                       </div>
@@ -456,9 +462,8 @@ export default function BoardMembers() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   <div className="absolute bottom-4 left-4 right-4">
                     <Badge
-                      className={`bg-gradient-to-r ${
-                        categoryInfo[member.category[index]]?.color
-                      } text-white border-none px-2 py-1 rounded-2xl`}
+                      className={`bg-gradient-to-r ${categoryInfo[member.category[index]]?.color
+                        } text-white border-none px-2 py-1 rounded-2xl`}
                     >
                       {member.position}
                     </Badge>
