@@ -14,6 +14,7 @@ import UpcomingEvents from "@/components/Home/UpcommingEvents";
 import QuickLinks from "@/components/Home/QuickLinks";
 import FetchDataComp from "@/components/fetch-data-comp";
 import RunningNotice from "@/components/news/RunningNotice";
+import AthleteSpotlight2 from "@/components/Home/AthleteSpotlight2";
 
 
 const sponsors = [
@@ -67,7 +68,8 @@ const HomePage = () => {
       <OurMission />
       <LatestNews   />
       <UpcomingEvents />
-      <AthleteSpotlight />
+      {/* <AthleteSpotlight /> */}
+      <AthleteSpotlight2 />
 
       {/* <SponsorsSection sponsors={sponsors} page="home" /> */}
       <QuickLinks />
