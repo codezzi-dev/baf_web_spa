@@ -873,7 +873,7 @@ export default function EventsPage() {
         {/* 📜 View Archive */}
         <div className="mt-12 text-center">
           <Button
-            variant="default"
+            variant="outline"
             onClick={() => router.push("/events/archive")}
             className="border-2 border-[#00704A] text-[#00704A] hover:bg-[#00704A] hover:text-white"
           >

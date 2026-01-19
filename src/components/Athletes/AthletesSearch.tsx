@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Users, Search, Filter, Trophy, MapPin, Calendar, Award, X } from "lucide-react";
-import Button from "../ui/Button";
+import {Button} from "../ui/Button";
 import AthleteCard, { IAthlete } from "./AthletsCard";
 import CustomSelect from "../ui/CustomSelect";
 import imranur_rahman from '@/assets/images/athletes/Imranur-Rahman.png'
@@ -154,7 +154,7 @@ const AthletesSearch = () => {
           <div className="w-full flex justify-start">
             <Button
               type="button"
-              variant="black"
+              variant="default"
               onClick={() => setShowFilters((prev) => !prev)}
               className="flex items-center justify-center gap-2 w-full md:w-auto px-6 py-3 bg-[#00704A] text-white font-medium rounded-lg shadow hover:bg-[#005f3b] transition-all"
             >
@@ -184,7 +184,7 @@ const AthletesSearch = () => {
             />
 
             <Button
-              variant="white"
+              variant='outline'
               type="button"
               className="text-red-500 flex items-center gap-2"
               onClick={clearFilters}

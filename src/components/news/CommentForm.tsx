@@ -4,7 +4,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import z from "zod";
 import InputForm from "../ui/InputForm";
-import Button from "../ui/Button";
+import {Button} from "../ui/Button";
 import { BsPeople } from "react-icons/bs";
 
 const schema = z.object({
@@ -45,7 +45,7 @@ const CommentForm = () => {
        
 
 
-       <Button type="submit" variant="orange" size="medium" className="px-10 md:px-14 lg:px-20" >Submit</Button>
+       <Button type="submit" variant="default" size="lg" className="px-10 md:px-14 lg:px-20" >Submit</Button>
     </form>
   );
 };

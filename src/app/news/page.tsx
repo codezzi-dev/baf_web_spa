@@ -1,7 +1,6 @@
 import { ArticleGrid } from '@/components/news/ArticleGrid';
 import { Sidebar } from '@/components/news/Sidebar';
 import AllPageTopBannar from '@/components/ui/AllPageTopBanner';
-import React from 'react'
 
 const NewsPage = () => {
 

@@ -3,7 +3,7 @@
 import React from "react";
 import InputForm from "../ui/InputForm";
 import { BsPeople } from "react-icons/bs";
-import Button from "../ui/Button";
+import {Button} from "../ui/Button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
@@ -86,8 +86,8 @@ const ContactForm = () => {
 
           <Button
             type="submit"
-            variant="orange"
-            size="medium"
+            variant="default"
+            size="lg"
             className="px-10 md:px-14 lg:px-20 cursor-pointer lg:mt-12"
           >
             Submit

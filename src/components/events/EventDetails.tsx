@@ -3,7 +3,7 @@ import Image from "next/image";
 import eventImg from "@/assets/images/event/overview.jpg";
 import fs1 from "@/assets/images/event/fs1.jpg";
 import fs2 from "@/assets/images/event/fs2.jpg";
-import Button from "../ui/Button";
+import {Button} from "../ui/Button";
 
 export default function EventDetails() {
   return (
@@ -227,10 +227,10 @@ export default function EventDetails() {
             {/* Action Buttons */}
 
             <div className="flex flex-col gap-3">
-              <Button type="button" variant="orange" className="w-full">
+              <Button type="button" variant="default" className="w-full">
                 book your seat
               </Button>
-              <Button type="button" variant="black" className="w-full bg-[#e41b23] border-none">
+              <Button type="button" variant="default" className="w-full bg-[#e41b23] border-none">
                 add to calander
               </Button>
             </div>
