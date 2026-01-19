@@ -391,6 +391,7 @@ export default function BoardMembers() {
           <OrgChart />
         </Suspense> */}
          <Organogram2 {...defaultOrganogramData} />
+         {/* <OrgChart /> */}
 
         {/* Tabs */}
         <Tabs value={activeCategory} onValueChange={setActiveCategory} className="mb-12 p-2 md:w-fit">
