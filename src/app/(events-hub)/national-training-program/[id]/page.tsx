@@ -32,7 +32,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import Button from "@/components/ui/Button";
+import {Button} from "@/components/ui/Button"
 import { Badge } from "@/components/ui/Badge";
 import { useRouter } from "next/navigation";
 

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Shield, FileText, CheckCircle, XCircle, Globe, Flag, ArrowRight } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
-import Button from "@/components/ui/Button";
+import {Button} from "@/components/ui/Button"
 
 export default function AntiDopingPage() {
   const sections = [

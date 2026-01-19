@@ -19,7 +19,7 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import Button from "@/components/ui/Button";
+import {Button} from "@/components/ui/Button"
 import { Badge } from "@/components/ui/Badge";
 
 const certificationColors: Record<string, string> = {

@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import { FileText, Download, ExternalLink, BookOpen, Globe, ArrowLeft, Shield } from "lucide-react";
 import Link from "next/link";
-import Button from "@/components/ui/Button";
+import {Button} from "@/components/ui/Button"
 import { Badge } from "@/components/ui/Badge";
 
 export default function WadaGuidelinesPage() {

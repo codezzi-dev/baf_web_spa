@@ -21,7 +21,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { format } from "date-fns";
-import Button from "@/components/ui/Button";
+import {Button} from "@/components/ui/Button"
 import { Badge } from "@/components/ui/Badge";
 
 // ---------- ICON + COLOR MAPPINGS ----------

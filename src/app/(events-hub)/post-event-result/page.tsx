@@ -9,7 +9,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Trophy, Calendar, MapPin, Search, Medal, X, Download, Eye } from "lucide-react";
 import { format } from "date-fns";
 import { Badge } from "@/components/ui/Badge";
-import Button from "@/components/ui/Button";
+import {Button} from "@/components/ui/Button"
 
 export default function EventResultsPage() {
   const router = useRouter();

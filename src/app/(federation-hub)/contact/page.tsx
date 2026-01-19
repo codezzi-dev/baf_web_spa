@@ -3,7 +3,7 @@
 import { ContactAddress } from "@/components/contact/ContactAddress";
 import ContactForm from "@/components/contact/ContactForm";
 import AllPageTopBannar from "@/components/ui/AllPageTopBanner";
-import Button from "@/components/ui/Button";
+import {Button} from "@/components/ui/Button"
 import React, { useState } from "react";
 import { Mail, Phone, MapPin, Clock, Send } from "lucide-react";
 import DynamicHeading from "@/components/Home/HeadingComponent";

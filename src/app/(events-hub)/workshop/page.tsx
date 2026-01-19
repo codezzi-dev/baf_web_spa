@@ -7,7 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/Badge";
-import Button from "@/components/ui/Button";
+import {Button} from "@/components/ui/Button"
 import DynamicHeading from "@/components/Home/HeadingComponent";
 
 // ---------- MOCK DATA ----------

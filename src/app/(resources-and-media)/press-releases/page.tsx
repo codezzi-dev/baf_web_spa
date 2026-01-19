@@ -19,7 +19,7 @@ import {
 } from "lucide-react";
 import { format } from "date-fns";
 import { Badge } from "@/components/ui/Badge";
-import Button from "@/components/ui/Button";
+import {Button} from "@/components/ui/Button"
 import Link from "next/link";
 import DynamicHeading from "@/components/Home/HeadingComponent";
 

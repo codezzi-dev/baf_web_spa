@@ -8,7 +8,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Search, CheckCircle, Info, ArrowLeft, Filter } from "lucide-react";
 import Link from "next/link";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import Button from "@/components/ui/Button";
+import {Button} from "@/components/ui/Button"
 import { Badge } from "@/components/ui/Badge";
 
 export default function ApprovedSupplementsPage() {

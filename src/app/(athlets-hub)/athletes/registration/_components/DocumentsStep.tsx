@@ -4,7 +4,7 @@ import { FileText, Plus, Trash2, AlertCircle } from "lucide-react";
 import type { FormData } from "./FormSchema";
 import { FormInputField, FormSelectField } from "./FormFields";
 import { FileUploadField } from "./FileUploadField";
-import Button from "@/components/ui/Button";
+import {Button} from "@/components/ui/Button"
 
 const docCategories = [
   { id: "1", value: "National ID" },
@@ -107,7 +107,7 @@ export function DocumentsStep() {
         </div>
       )}
 
-      <Button type="button" onClick={addNewDocument} variant="black" className="w-full bg-transparent">
+      <Button type="button" onClick={addNewDocument} variant="default" className="w-full bg-transparent">
         <Plus size={18} />
         Add Another Document
       </Button>

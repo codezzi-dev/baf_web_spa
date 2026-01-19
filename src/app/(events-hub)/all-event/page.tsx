@@ -21,7 +21,7 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
-import Button from "@/components/ui/Button";
+import {Button} from "@/components/ui/Button"
 import { Badge } from "@/components/ui/Badge";
 import DynamicHeading from "@/components/Home/HeadingComponent";
 
@@ -640,7 +640,7 @@ export default function EventsPage() {
                   </div>
                 </div>
                 <Button
-                  variant="black"
+                  variant="default"
                   type="button"
                   className="bg-white text-[#C1272D] hover:bg-gray-100"
                   //   onClick={() => window.open(liveEvents[0].live_stream_url, "_blank")}
@@ -830,7 +830,7 @@ export default function EventsPage() {
                       {event.status === "completed" && (
                         <Button
                           onClick={() => router.push(`/all-event/${event.id}`)}
-                          variant="black"
+                          variant="default"
                           className="flex-1"
                         >
                           View Results
@@ -838,7 +838,7 @@ export default function EventsPage() {
                       )}
                       <Button
                         onClick={() => router.push(`/all-event/${event.id}`)}
-                        variant="black"
+                        variant="default"
                         className={`${event.status !== "completed" && "flex-1 w-full"}`}
                       >
                         Details
@@ -873,7 +873,7 @@ export default function EventsPage() {
         {/* 📜 View Archive */}
         <div className="mt-12 text-center">
           <Button
-            variant="black"
+            variant="default"
             onClick={() => router.push("/events/archive")}
             className="border-2 border-[#00704A] text-[#00704A] hover:bg-[#00704A] hover:text-white"
           >

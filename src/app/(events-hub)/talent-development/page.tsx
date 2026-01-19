@@ -30,7 +30,7 @@ import {
 } from "lucide-react";
 import { format } from "date-fns";
 import { Badge } from "@/components/ui/Badge";
-import Button from "@/components/ui/Button";
+import {Button} from "@/components/ui/Button"
 
 const programTypeColors: Record<string, string> = {
   talent_scouting: "bg-purple-100 text-purple-800",

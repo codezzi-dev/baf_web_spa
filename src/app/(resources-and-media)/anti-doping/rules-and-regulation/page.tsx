@@ -6,7 +6,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 
 import { BookOpen, Scale, AlertCircle, FileText, ArrowLeft, Shield } from "lucide-react";
 import Link from "next/link";
-import Button from "@/components/ui/Button";
+import {Button} from "@/components/ui/Button"
 import { Badge } from "@/components/ui/Badge";
 
 export default function AntiDopingRulesPage() {
@@ -109,7 +109,7 @@ export default function AntiDopingRulesPage() {
         </div>
         <div className="main_container mx-auto relative z-10">
           <Link href="/anti-doping">
-            <Button variant="black" className="text-white hover:bg-white/20 mb-6">
+            <Button variant="default" className="text-white hover:bg-white/20 mb-6">
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Anti-Doping
             </Button>

@@ -21,7 +21,7 @@ import { Input } from "@/components/ui/input";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/Badge";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
-import Button from "@/components/ui/Button";
+import {Button} from "@/components/ui/Button"
 import Image from "next/image";
 
 // 🟢 Category definitions

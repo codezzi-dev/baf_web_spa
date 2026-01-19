@@ -6,7 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Trophy, Award, Medal, Star, Crown, Sparkles, Target, TrendingUp, Heart, Quote } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
-import Button from "@/components/ui/Button";
+import {Button} from "@/components/ui/Button"
 
 export default function HallOfFame() {
   const [selectedAthlete, setSelectedAthlete] = useState<any>(null);
@@ -166,7 +166,7 @@ export default function HallOfFame() {
                     <p className="text-gray-600 line-clamp-3 mb-4">{legend.biography}</p>
 
                     <Button
-                      variant="black"
+                      variant="default"
                       onClick={() => setSelectedAthlete(legend)}
                       className="w-full bg-gradient-to-r from-[#D4AF37] to-[#B8941F] hover:from-[#B8941F] hover:to-[#D4AF37] text-white"
                     >

@@ -24,7 +24,7 @@ import { DocumentsStep } from "./_components/DocumentsStep";
 import { ReviewStep } from "./_components/ReviewStep";
 
 import { Checkbox } from "@/components/ui/checkbox";
-import Button from "@/components/ui/Button";
+import {Button} from "@/components/ui/Button"
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
@@ -179,7 +179,7 @@ const AthleteRegistrationForm = () => {
                 setCurrentStep(0);
                 methods.reset();
               }}
-              variant="black"
+              variant="default"
               className="w-full"
             >
               Start New Application
@@ -192,7 +192,7 @@ const AthleteRegistrationForm = () => {
 
                 router.push("/");
               }}
-              variant="black"
+              variant="default"
               className="w-full"
             >
               Goto Home
@@ -306,7 +306,7 @@ const AthleteRegistrationForm = () => {
                 type="button"
                 onClick={handlePrevious}
                 disabled={currentStep === 0}
-                variant="black"
+                variant="default"
                 className="flex items-center gap-2 bg-transparent"
               >
                 <ChevronLeft size={18} />
@@ -322,7 +322,7 @@ const AthleteRegistrationForm = () => {
                 onClick={currentStep === 5 ? undefined : handleNext}
                 // disabled={currentStep === 5 ? !declaration.infoAccurate || !declaration.termsAccepted : !canProceed}
                 className="flex items-center gap-2"
-                variant="black"
+                variant="default"
               >
                 {currentStep === 5 ? (
                   <>

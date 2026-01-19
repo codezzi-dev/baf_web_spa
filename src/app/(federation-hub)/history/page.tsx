@@ -1,6 +1,6 @@
 "use client";
 
-import Button from "@/components/ui/Button";
+import {Button} from "@/components/ui/Button"
 import Link from "next/link";
 import React from "react";
 import { Trophy, Calendar, Award, TrendingUp, Flag, Users, Target, Star, Zap, ArrowRight } from "lucide-react";

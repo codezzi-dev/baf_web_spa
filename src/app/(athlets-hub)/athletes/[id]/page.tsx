@@ -24,7 +24,7 @@ import {
 } from "lucide-react";
 import { format } from "date-fns";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import Button from "@/components/ui/Button";
+import {Button} from "@/components/ui/Button"
 import { Badge } from "@/components/ui/Badge";
 import { useRouter } from "next/navigation";
 
@@ -100,7 +100,7 @@ export default function AthleteDetails() {
     <div className="min-h-screen bg-gradient-to-br from-[#F8F6F3] to-white py-12 px-4">
       <div className="main_container mx-auto pt-40">
         {/* Back Button */}
-        <Button variant="white" type="button" onClick={() => navigate.push("/athletes")} className="mb-6">
+        <Button variant="outline" type="button" onClick={() => navigate.push("/athletes")} className="mb-6">
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back to All Athletes
         </Button>

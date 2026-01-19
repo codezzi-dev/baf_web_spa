@@ -24,7 +24,7 @@ import {
   TrendingUp,
   Sparkles,
 } from "lucide-react";
-import Button from "@/components/ui/Button";
+import {Button} from "@/components/ui/Button"
 import { Badge } from "@/components/ui/Badge";
 
 const sponsorshipTiers = {

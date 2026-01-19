@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Search, XCircle, AlertTriangle, ArrowLeft } from "lucide-react";
-import Button from "@/components/ui/Button";
+import {Button} from "@/components/ui/Button"
 import { Badge } from "@/components/ui/Badge";
 
 export default function BannedSubstancesPage() {

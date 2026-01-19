@@ -27,7 +27,7 @@ import {
   Share2,
 } from "lucide-react";
 
-import Button from "@/components/ui/Button";
+import {Button} from "@/components/ui/Button"
 import { cn } from "@/lib/utils";
 import DynamicHeading from "@/components/Home/HeadingComponent";
 

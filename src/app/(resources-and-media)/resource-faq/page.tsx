@@ -18,7 +18,7 @@ import {
   ArrowRight,
   MessageCircle,
 } from "lucide-react";
-import Button from "@/components/ui/Button";
+import {Button} from "@/components/ui/Button"
 import { Badge } from "@/components/ui/Badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
@@ -103,7 +103,7 @@ export default function FAQ() {
                     className="border-0 bg-transparent text-lg focus-visible:ring-0 focus-visible:ring-offset-0 relative z-10"
                   />
                   {searchQuery && (
-                    <Button variant="black" onClick={() => setSearchQuery("")} className="relative z-10">
+                    <Button variant="default" onClick={() => setSearchQuery("")} className="relative z-10">
                       Clear
                     </Button>
                   )}

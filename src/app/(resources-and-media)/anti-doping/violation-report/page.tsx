@@ -12,7 +12,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Shield, Lock, Send, CheckCircle, ArrowLeft, AlertTriangle } from "lucide-react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
-import Button from "@/components/ui/Button";
+import {Button} from "@/components/ui/Button"
 
 export default function ReportViolationPage() {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -66,7 +66,7 @@ export default function ReportViolationPage() {
         <div className="bg-gradient-to-br from-[#36A365] to-[#0E7C3F] text-white py-12 pt-40 px-6">
           <div className="max-w-3xl mx-auto">
             <Link href="/anti-doping">
-              <Button variant="black" className="text-white hover:bg-white/20 mb-6">
+              <Button variant="default" className="text-white hover:bg-white/20 mb-6">
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to Anti-Doping
               </Button>
@@ -94,14 +94,14 @@ export default function ReportViolationPage() {
                 <Button
                   onClick={handleNewReport}
                   type="button"
-                  variant="black"
+                  variant="default"
                   className="w-full md:w-auto bg-[#36A365] hover:bg-[#0E7C3F]"
                 >
                   Submit Another Report
                 </Button>
                 <br />
                 <Link href="/anti-doping">
-                  <Button variant="black" type="button" className="w-full md:w-auto">
+                  <Button variant="default" type="button" className="w-full md:w-auto">
                     Return to Anti-Doping Page
                   </Button>
                 </Link>
@@ -119,7 +119,7 @@ export default function ReportViolationPage() {
       <div className="bg-gradient-to-br from-[#36A365] to-[#0E7C3F] text-white pt-44 pb-10 px-6">
         <div className="main_container mx-auto">
           <Link href="/anti-doping">
-            <Button variant="black" type="button" className="text-white hover:bg-white/20 mb-6">
+            <Button variant="default" type="button" className="text-white hover:bg-white/20 mb-6">
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Anti-Doping
             </Button>
@@ -311,11 +311,11 @@ export default function ReportViolationPage() {
 
           <div className="flex flex-col md:flex-row gap-4 justify-end">
             <Link href="/anti-doping">
-              <Button type="button" variant="black" className="w-full md:w-auto">
+              <Button type="button" variant="default" className="w-full md:w-auto">
                 Cancel
               </Button>
             </Link>
-            <Button type="submit" variant="black" className="w-full md:w-auto bg-[#36A365] hover:bg-[#0E7C3F] gap-2">
+            <Button type="submit" variant="default" className="w-full md:w-auto bg-[#36A365] hover:bg-[#0E7C3F] gap-2">
               <Send className="w-5 h-5" />
               Submit Confidential Report
             </Button>

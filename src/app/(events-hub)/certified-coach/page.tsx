@@ -13,7 +13,7 @@ import { SelectItem } from "@/components/ui/select";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/Badge";
 import { CardContent } from "@/components/ui/card";
-import Button from "@/components/ui/Button";
+import {Button} from "@/components/ui/Button"
 
 // --- Types ---
 interface Coach {
