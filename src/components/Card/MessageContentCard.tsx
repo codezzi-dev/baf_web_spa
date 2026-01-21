@@ -21,18 +21,15 @@ const MessageContentCard: FC<Employee> = (president) => {
                   </p>
                 ))}
 
-                
                 {/* Vision Box */}
-                <div className="border-l-4 border-primary bg-secondary/5 p-6">
+                <Card className="border-l-4 border-success bg-secondary/5 p-6">
                   <h3 className="mb-3 font-playfair text-lg font-bold text-foreground">
                     Our Vision for the Future
                   </h3>
                   <p className="text-muted-foreground">
-                    We are committed to creating a comprehensive ecosystem that identifies talent
-                    from the grassroots level, provides world-class training facilities, and ensures our
-                    athletes have every opportunity to compete and succeed on the global stage.
+                    {president.vission}
                   </p>
-                </div>
+                </Card>
 
                 {/* Part 2 */}
                 {president.message.secondPart.map((paragraph, index) => (
@@ -44,8 +41,8 @@ const MessageContentCard: FC<Employee> = (president) => {
                 {/* Value Cards */}
                 <div className="grid gap-4 py-4 sm:grid-cols-3">
                   <Card className="p-6 text-center">
-                    <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-                      <Globe className="h-6 w-6 text-primary" />
+                    <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-success/80">
+                      <Globe className="h-6 w-6 text-primary-foreground" />
                     </div>
                     <h4 className="font-playfair font-bold text-foreground">Excellence</h4>
                     <p className="mt-1 text-xs text-muted-foreground">
@@ -53,8 +50,8 @@ const MessageContentCard: FC<Employee> = (president) => {
                     </p>
                   </Card>
                   <Card className="p-6 text-center">
-                    <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-                      <Heart className="h-6 w-6 text-primary" />
+                    <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-destructive/80">
+                      <Heart className="h-6 w-6 text-primary-foreground" />
                     </div>
                     <h4 className="font-playfair font-bold text-foreground">Dedication</h4>
                     <p className="mt-1 text-xs text-muted-foreground">
@@ -62,8 +59,8 @@ const MessageContentCard: FC<Employee> = (president) => {
                     </p>
                   </Card>
                   <Card className="p-6 text-center">
-                    <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-                      <TrendingUp className="h-6 w-6 text-primary" />
+                    <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-warning/80">
+                      <TrendingUp className="h-6 w-6 text-primary-foreground" />
                     </div>
                     <h4 className="font-playfair font-bold text-foreground">Growth</h4>
                     <p className="mt-1 text-xs text-muted-foreground">

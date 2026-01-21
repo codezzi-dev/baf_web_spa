@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Card } from '../ui/card'
-import { Award, Target, User, Users } from 'lucide-react'
+import { Award, Target, Users } from 'lucide-react'
 import { Employee } from '../data/introduction'
 import Image from 'next/image'
 import { Separator } from '../ui/Separator'
@@ -9,9 +9,12 @@ import { Separator } from '../ui/Separator'
 const EmployeeDetailsCard: FC<Employee> = (president) => {
     return (
         <div className="lg:col-span-1">
-            <Card className="overflow-hidden border-none shadow-lg bg-gradient-to-r from-white to-[#F8F6F3]">
-                <div className="flex py-8 items-center justify-center">
-                    <Image src={president.image} alt={president.name} className="h-48 w-48" />
+            <Card className="border-none shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden group">
+                <div className="h-80 bg-gradient-to-br from-white-100 to-white-200 relative overflow-hidden">
+                    <Image 
+                    src={president.image} 
+                    alt={president.name} 
+                    className="w-full h-full object-contain transition-transform duration-500 ease-out group-hover:scale-110" />
                 </div>
                 <div className="p-6 text-center">
                     <h2 className="font-playfair text-xl font-bold text-foreground">
