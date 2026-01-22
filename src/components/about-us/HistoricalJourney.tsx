@@ -2,17 +2,20 @@ import { Award, Flag, Star, Target, TrendingUp, Trophy, Users, Zap } from 'lucid
 import React from 'react'
 import DynamicHeading from '../Home/HeadingComponent';
 import { HistoryMilestone } from '@/api/types/the-federation/history.type';
+import { useTranslations } from "next-intl";
+
 interface HistoricalJourneyProps {
   historyMilestones: HistoryMilestone[];
 }
 const HistoricalJourney: React.FC<HistoricalJourneyProps> = ({ historyMilestones }) => {
+  const tHistory = useTranslations("history");
   return (
     <div className="mb-16">
       <div className="text-center mb-12">
         {/* <h2 className="text-3xl md:text-4xl font-bold text-[#2D3436] mb-4">
               Historical <span className="text-[#C1272D]">Milestones</span>
             </h2> */}
-        <DynamicHeading title="Historical Milestones" />
+        <DynamicHeading title={tHistory("historicalMilestones")} />
         <div className="h-1 w-24 bg-gradient-to-r from-[#00704A] to-[#C1272D] mx-auto rounded-full" />
       </div>
 

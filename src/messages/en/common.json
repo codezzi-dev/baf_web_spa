@@ -1,0 +1,13 @@
+{
+    "welcome": "Welcome",
+    "login": "Login",
+    "logout": "Logout",
+    "search": "Search",
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "success": "Success",
+    "readMore": "Read More",
+    "viewAll": "View All",
+    "registerNow": "Register Now",
+    "learnMore": "Learn More"
+}

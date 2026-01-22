@@ -1,24 +1,28 @@
+"use client";
 import React from "react";
 import { FaUser, FaFacebook, FaTwitter, FaInstagram, FaYoutube } from "react-icons/fa";
 import logo from "@/assets/images/logo_title_white.png";
 import Link from "next/link";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 const Footer: React.FC = () => {
+    const tFooter = useTranslations("footer");
+  
   const quickLinks = [
-    { name: "About Us", href: "#about" },
-    { name: "Events", href: "#events" },
-    { name: "Rankings", href: "#rankings" },
-    { name: "Training", href: "#training" },
-    { name: "Media Gallery", href: "#media" },
+    { name: tFooter("about-us"), href: "#about" },
+    { name: tFooter("events"), href: "#events" },
+    { name: tFooter("rankings"), href: "#rankings" },
+    { name: tFooter("training"), href: "#training" },
+    { name: tFooter("media-gallery"), href: "#media" },
   ];
 
   const athleteLinks = [
-    { name: "Register", href: "#register" },
-    { name: "Athlete Portal", href: "#portal" },
-    { name: "Find a Coach", href: "#coaches" },
-    { name: "Anti-Doping", href: "#antidoping" },
-    { name: "Records", href: "#records" },
+    { name: tFooter("register"), href: "#register" },
+    { name: tFooter("athlete-portal"), href: "#portal" },
+    { name: tFooter("find-a-coach"), href: "#coaches" },
+    { name: tFooter("anti-doping"), href: "#antidoping" },
+    { name: tFooter("records"), href: "#records" },
   ];
 
   const socialLinks = [
@@ -45,7 +49,7 @@ const Footer: React.FC = () => {
                     className="w-32 md:w-44 lg:w-48 h-auto py-2 lg:py-3"
                     width={200}
                     height={400}
-                    alt="logo-title"
+                    alt={tFooter("logo-title")}
                   />
                 </Link>
               </div>
@@ -55,8 +59,7 @@ const Footer: React.FC = () => {
               </div>
             </div>
             <p className="text-gray-400 leading-relaxed text-center sm:text-left mb-6">
-              The official governing body for athletics in Bangladesh, dedicated to developing and promoting track and
-              field sports nationwide.
+              {tFooter("logo-title")}
             </p>
             <div className="flex justify-center sm:justify-start space-x-3">
               {socialLinks.map((social, index) => (
@@ -75,7 +78,7 @@ const Footer: React.FC = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
             {/* Quick Links */}
             <div className="text-center sm:text-left">
-              <h4 className="text-lg font-bold mb-6 text-green-500">Quick Links</h4>
+              <h4 className="text-lg font-bold mb-6 text-green-500">{tFooter("quick-links")}</h4>
               <ul className="space-y-3">
                 {quickLinks.map((link) => (
                   <li key={link.name}>
@@ -89,7 +92,7 @@ const Footer: React.FC = () => {
 
             {/* For Athletes */}
             <div className="text-center sm:text-left">
-              <h4 className="text-lg font-bold mb-6 text-green-500">For Athletes</h4>
+              <h4 className="text-lg font-bold mb-6 text-green-500">{tFooter("for-athletes")}</h4>
               <ul className="space-y-3">
                 {athleteLinks.map((link) => (
                   <li key={link.name}>
@@ -103,24 +106,20 @@ const Footer: React.FC = () => {
 
             {/* Contact */}
             <div className="text-center sm:text-left sm:col-span-2">
-              <h4 className="text-lg font-bold mb-6 text-green-500">Contact</h4>
+              <h4 className="text-lg font-bold mb-6 text-green-500">{tFooter("contact")}</h4>
               <ul className="space-y-3 text-gray-400">
                 <li>
                   <a href="mailto:info@baf.gov.bd" className="hover:text-green-400 transition-colors duration-200">
-                    baf.ban@gmail.com
+                    {tFooter("email")}
                   </a>
                 </li>
                 <li>
                   <a href="tel:+880123456789" className="hover:text-green-400 transition-colors duration-200">
-                    +880 1746-629655dd
+                   {tFooter("phone")}
                   </a>
                 </li>
                 <li>
-                 Bangladesh Athletics Federation
-                  <br />
-                  National Stadium
-                  <br />
-                  Dhaka 1000, Bangladesh
+                  {tFooter("address")}
                 </li>
               </ul>
             </div>
@@ -145,10 +144,7 @@ const Footer: React.FC = () => {
               </Link>
               {/* </div> */}
             </div>
-            <p className="text-gray-400 leading-relaxed mb-6">
-              The official governing body for athletics in Bangladesh, dedicated to developing and promoting track and
-              field sports across the nation.
-            </p>
+            <p className="text-gray-400 leading-relaxed mb-6">{tFooter("logo-title")}</p>
             <div className="flex space-x-3">
               {socialLinks.map((social, index) => (
                 <a
@@ -164,7 +160,7 @@ const Footer: React.FC = () => {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-lg font-bold mb-6 text-white">Quick Links</h4>
+            <h4 className="text-lg font-bold mb-6 text-white">{tFooter("quick-links")}</h4>
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.name}>
@@ -178,7 +174,7 @@ const Footer: React.FC = () => {
 
           {/* For Athletes */}
           <div>
-            <h4 className="text-lg font-bold mb-6 text-white">For Athletes</h4>
+            <h4 className="text-lg font-bold mb-6 text-white">{tFooter("for-athletes")}</h4>
             <ul className="space-y-3">
               {athleteLinks.map((link) => (
                 <li key={link.name}>
@@ -192,24 +188,20 @@ const Footer: React.FC = () => {
 
           {/* Contact */}
           <div>
-            <h4 className="text-lg font-bold mb-6 text-white">Contact</h4>
+            <h4 className="text-lg font-bold mb-6 text-white">{tFooter("contact")}</h4>
             <ul className="space-y-3 text-gray-400">
               <li>
                 <a href="mailto:info@baf.gov.bd" className="hover:text-[#00916e] transition-colors duration-200">
-                  baf.ban@gmail.com
+                   {tFooter("email")}
                 </a>
               </li>
               <li>
                 <a href="tel:+880123456789" className="hover:text-[#00916e] transition-colors duration-200">
-                   +880 1711-401018
+                   {tFooter("phone")}
                 </a>
               </li>
               <li>
-                 Bangladesh Athletics Federation
-                <br />
-                 National Stadium
-                 <br />
-                 Dhaka 1000, Bangladesh
+                {tFooter("address")}
               </li>
             </ul>
           </div>
@@ -220,7 +212,7 @@ const Footer: React.FC = () => {
       <div className="border-t border-gray-800">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 py-6 text-center">
           <p className="text-gray-400 text-sm">
-            &copy; {new Date().getFullYear()} Bangladesh Athletics Federation. All rights reserved.
+            &copy; {new Date().getFullYear()}  {tFooter("copy-right")}
           </p>
         </div>
       </div>

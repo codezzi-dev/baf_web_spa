@@ -14,7 +14,6 @@ import { useLocale, useTranslations } from "next-intl";
 export default function Header() {
   // Translations
   const tNav = useTranslations("nav");
-  const tCommon = useTranslations("common");
   const tFederation = useTranslations("federation");
   const tAthletes = useTranslations("athletes");
   const tEvents = useTranslations("events");
