@@ -1,5 +1,6 @@
 import { StaticImageData } from "next/image";
 import presidentImage from "@/assets/images/organizational-people/nayeem.jpg";
+import safeguardingOfficerImage from "@/assets/images/organizational-people/shirin-akter.png";
 export interface Employee {
     id: number;
     image: StaticImageData;
@@ -18,6 +19,7 @@ export interface Employee {
         thirdPart: string[],
     };
 }
+
 export const president: Employee = {
     id: 1,
     image: presidentImage,
@@ -56,4 +58,22 @@ export const president: Employee = {
         ]
     },
     vission: "We are committed to creating a comprehensive ecosystem that identifies talent from the grassroots level, provides world-class training facilities, and ensures our athletes have every opportunity to compete and succeed on the global stage."
+}
+
+
+export interface Officer {
+    id: number;
+    image: StaticImageData;
+    name: string;
+    position: string;
+    organization: string;
+
+}
+
+export const safeguardingOfficer: Officer = {
+    id: 1,
+    image: safeguardingOfficerImage,
+    name: "Dr. Nasrin Sultana",
+    position: "Chief Safeguarding Officer",
+    organization: "Bangladesh Athletics Federation",
 }

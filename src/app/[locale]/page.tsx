@@ -70,7 +70,6 @@ const HomePage = () => {
       <UpcomingEvents />
       {/* <AthleteSpotlight /> */}
       <AthleteSpotlight2 />
-
       {/* <SponsorsSection sponsors={sponsors} page="home" /> */}
       <QuickLinks />
     </div>

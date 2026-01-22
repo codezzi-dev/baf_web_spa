@@ -33,10 +33,10 @@ const HistoryStatistics: React.FC<HistoryStatisticsProps> = ({historyContent})  
                   : key === "historyNumbersOfNationalChampion" ? Trophy
                     : key === "historyNumbersOfInternationalMedals" ? Award
                         : Users;
-            const color = key === "historyYearsOfExcellence" ? "from-[#00704A] to-[#005239]"
-                  : key === "historyNumbersOfNationalChampion" ? "from-[#C1272D] to-[#A01F25]"
-                  : key === "historyNumbersOfInternationalMedals" ? "from-[#D4AF37] to-[#B8941F]"
-                  : "from-[#00704A] to-[#005239]";
+            const color = key === "historyYearsOfExcellence" ? "bg-tag-green"
+                  : key === "historyNumbersOfNationalChampion" ? "bg-tag-red"
+                  : key === "historyNumbersOfInternationalMedals" ? "bg-tag-yellow"
+                  : "bg-[#00704A]";
 
             return (
               <div
@@ -45,7 +45,7 @@ const HistoryStatistics: React.FC<HistoryStatisticsProps> = ({historyContent})  
               >
                 <div className="p-8 text-center">
                   <div
-                    className={`w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br ${color} flex items-center justify-center shadow-lg`}
+                    className={`w-16 h-16 mx-auto mb-4 rounded-2xl ${color} flex items-center justify-center shadow-lg`}
                   >
                   <Icon className="w-8 h-8 text-white" />
                   </div>

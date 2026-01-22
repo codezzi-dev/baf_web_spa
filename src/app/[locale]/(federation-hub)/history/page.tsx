@@ -10,7 +10,6 @@ import Error from "@/components/common/Error";
 
 const History = () => {
   const { data, error, isLoading } = useGetAllHistories();
-  
   if (isLoading) {
     return <Loading/>;
   }

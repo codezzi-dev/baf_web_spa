@@ -4,10 +4,11 @@ import request from "../../api";
 
 // API calls
 const historyApi = {
-  getAllHistories: () =>
-    request<ApiResponse<HistoryContentWrapperDto>>(
-      "/HistoryContent/GetHistoryContent/1"
-    ),
+  getAllHistories: () =>{
+    const lang = localStorage.getItem('language')
+    return request<ApiResponse<HistoryContentWrapperDto>>(
+      `/HistoryContent/GetHistoryContent/${lang}`
+    )}
 };
 
 export default historyApi;

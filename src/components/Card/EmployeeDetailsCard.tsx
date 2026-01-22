@@ -25,7 +25,7 @@ const EmployeeDetailsCard: FC<Employee> = (president) => {
                     </p>
                     <Separator className="my-4" />
                     <div className="mt-6 space-y-3 text-left">
-                        {president.responsibilities.map((responsibility, index) => (
+                        {president.responsibilities?.map((responsibility, index) => (
                             <div key={index} className="flex items-center gap-3 text-sm text-muted-foreground">
                                 {responsibility.icon === "Award" && <Award className="h-4 w-4 text-warning" />}
                                 {responsibility.icon === "Target" && <Target className="h-4 w-4 text-success" />}
