@@ -1,3 +1,4 @@
+"use client";
 import { Award, Flag, Star, Target, TrendingUp, Trophy, Users, Zap } from 'lucide-react';
 import React from 'react'
 import DynamicHeading from '../Home/HeadingComponent';
@@ -12,9 +13,6 @@ const HistoricalJourney: React.FC<HistoricalJourneyProps> = ({ historyMilestones
   return (
     <div className="mb-16">
       <div className="text-center mb-12">
-        {/* <h2 className="text-3xl md:text-4xl font-bold text-[#2D3436] mb-4">
-              Historical <span className="text-[#C1272D]">Milestones</span>
-            </h2> */}
         <DynamicHeading title={tHistory("historicalMilestones")} />
         <div className="h-1 w-24 bg-gradient-to-r from-[#00704A] to-[#C1272D] mx-auto rounded-full" />
       </div>
@@ -44,7 +42,7 @@ const HistoricalJourney: React.FC<HistoricalJourneyProps> = ({ historyMilestones
 
             return (
               <div
-                key={milestone.milestoneYear}
+                key={`${milestone.milestoneYear}-${index}`}  // ← Changed here
                 className={`flex flex-col md:flex-row items-center gap-8  ${isEven ? "md:flex-row" : "md:flex-row-reverse"
                   } `}
               >

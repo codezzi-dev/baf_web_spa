@@ -128,7 +128,7 @@ export default function PartnershipPrograms() {
 
             <Link href="/apply-for-partnership">
               <Button
-                variant="black"
+                variant="default"
                 className="h-14 px-8 text-bold bg-gradient-to-r from-[#00704A] to-[#005239] hover:from-[#005239] hover:to-[#00704A] text-white hover:text-white text-lg font-semibold shadow-xl"
               >
                 Apply for Partnership
@@ -262,7 +262,7 @@ export default function PartnershipPrograms() {
                       <div className="flex gap-2 mt-6">
                         {p.contact_email && (
                           <Button
-                            variant="black"
+                            variant="default"
                             // size="sm"
                             className="flex-1"
                             onClick={() => (window.location.href = `mailto:${p.contact_email}`)}
@@ -309,7 +309,7 @@ export default function PartnershipPrograms() {
                       </Button>
                     </Link>
                     <Button
-                      variant="black"
+                      variant="default"
                       className="h-14 px-8 text-lg font-semibold border-2 border-white text-white hover:bg-white/10"
                     >
                       Download Brochure

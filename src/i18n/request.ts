@@ -13,6 +13,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
     nav: (await import(`../messages/${locale}/nav.json`)).default,
     home: (await import(`../messages/${locale}/home.json`)).default,
     athletes: (await import(`../messages/${locale}/athletes.json`)).default,
+    coachesAndjudges: (await import(`../messages/${locale}/coaches-and-judges.json`)).default,
     events: (await import(`../messages/${locale}/events.json`)).default,
     federation: (await import(`../messages/${locale}/federation.json`)).default,
     resources: (await import(`../messages/${locale}/resources.json`)).default,

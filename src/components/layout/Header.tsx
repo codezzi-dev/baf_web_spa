@@ -18,6 +18,7 @@ export default function Header() {
   const tAthletes = useTranslations("athletes");
   const tEvents = useTranslations("events");
   const tResources = useTranslations("resources");
+  const tCoachesAndJudges = useTranslations("coachesAndjudges");
 
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [show, setShow] = useState<boolean>(false);
@@ -35,10 +36,11 @@ export default function Header() {
   const [selectedSection, setSelectedSection] = useState<MegamenuSection | null>(null);
 
   const menus: MenuItem[] = [
-    { name: tNav("theFederation"), href: "/gallery", hasMegamenu: true, key: "The Federation" },
-    { name: tNav("athletesHub"), href: "/athletes", hasMegamenu: true, key: "Athletes Hub" },
-    { name: tNav("eventsHub"), href: "/events", hasMegamenu: true, key: "Events Hub" },
-    { name: tNav("resourcesMedia"), href: "/news", hasMegamenu: true, key: "Resources & Media" },
+    { name: tNav("the_federation"), href: "/gallery", hasMegamenu: true, key: "The Federation" },
+    { name: tNav("athletes"), href: "/athletes", hasMegamenu: true, key: "Athletes Hub" },
+    { name: tNav("coaches_and_judges"), href: "/athletes", hasMegamenu: true, key: "Coaches And Judges" },
+    { name: tNav("events"), href: "/events", hasMegamenu: true, key: "Events Hub" },
+    { name: tNav("resources_media"), href: "/news", hasMegamenu: true, key: "Resources & Media" },
   ];
 
   // Megamenu content with translations
@@ -67,24 +69,54 @@ export default function Header() {
         },
       ],
     },
+    ["Coaches And Judges"]: {
+      sections: [
+        {
+          title: tCoachesAndJudges("coach-title"),
+          links: [
+            { name: tCoachesAndJudges("bangladesh-coach-association"), href: "/athletes/registration" },
+            { name: tCoachesAndJudges("qualified-coaches"), href: "/athletes/registration" },
+          ],
+        },
+        {
+          title: tCoachesAndJudges("judge-title"),
+          links: [
+            { name: tCoachesAndJudges("bangladesh-judge-association"), href: "/athletes/registration" },
+            { name: tCoachesAndJudges("qualified-judges"), href: "/athletes/registration" },
+          ],
+        },
+      ],
+    },
     ["Events Hub"]: {
       sections: [
         {
           title: tEvents("competitions"),
           links: [
-            { name: tEvents("allEvents"), href: "/all-event" },
-            { name: tEvents("upcoming"), href: "/events/all" },
-            { name: tEvents("pastResults"), href: "/post-event-result" },
-            { name: tEvents("liveUpdates"), href: "/events/live" },
+            { name: tEvents("domestic"), href: "/events/domestic" },
+            { name: tEvents("international"), href: "/events/international" },
           ],
         },
         {
-          title: tEvents("training"),
+          title: tEvents("athletes_training"),
           links: [
-            { name: tEvents("nationalPrograms"), href: "/national-training-program" },
-            { name: tEvents("certifiedCoaches"), href: "/certified-coach" },
-            { name: tEvents("talentDev"), href: "/talent-development" },
-            { name: tEvents("workshops"), href: "/workshop" },
+            { name: tEvents("junior_camp"), href: "/junior_camp" },
+            { name: tEvents("coaches_training"), href: "/coaches-training" },
+            { name: tEvents("camp_for_international_event"), href: "/camp-for-international-event" },
+          ],
+        },
+        {
+          title: tEvents("coaches-and-judges"),
+          links: [
+            { name: tEvents("coaches_training"), href: "/junior_camp" },
+            { name: tEvents("coaches_refreshers"), href: "/coaches-training" },
+            { name: tEvents("judges_training"), href: "/camp-for-international-event" },
+            { name: tEvents("judges_refreshers"), href: "/camp-for-international-event" },
+          ],
+        },
+        {
+          title: tEvents("others"),
+          links: [
+            { name: tEvents("awareness_training"), href: "/awareness-training" },
           ],
         },
       ],
@@ -92,28 +124,26 @@ export default function Header() {
     ["Resources & Media"]: {
       sections: [
         {
-          title: tResources("antiDoping"),
+          title: tResources("rules_and_policies"),  // "RULES AND POLICIES" / "নিয়মাবলী ও নীতিমালা"
           links: [
-            { name: tResources("antiDopingMain"), href: "/anti-doping" },
-            { name: tResources("rules"), href: "/anti-doping/rules-and-regulation" },
-            { name: tResources("approved"), href: "/anti-doping/approved-supplements" },
-            { name: tResources("banned"), href: "/anti-doping/banned-supplements" },
-            { name: tResources("wada"), href: "/anti-doping/wada-guidelines" },
-            { name: tResources("violations"), href: "/anti-doping/violation-report" },
+            { name: tResources("world_athletics"), href: "https://worldathletics.org/" },  // World Athletics (external link)
+            { name: tResources("bangladesh_athletics_federation"), href: "/rules/baf" },    // Bangladesh Athletics Federation (internal rules/policies)
+            { name: tResources("report_violations"), href: "/report-violations" },          // Report Violations / লঙ্ঘন রিপোর্ট করুন
           ],
         },
         {
-          title: tResources("media"),
+          title: tResources("media_and_publications"),  // "MEDIA & PUBLICATIONS" / "মিডিয়া ও প্রকাশনা"
           links: [
-            { name: tResources("gallery"), href: "/photo-gallery" },
-            { name: tResources("press"), href: "/press-releases" },
-            { name: tResources("accreditation"), href: "/media-inquire" },
+            { name: tResources("photo_and_video_gallery"), href: "/media/gallery" },       // Photo & Video Gallery / ছবি ও ভিডিও গ্যালারি
+            { name: tResources("press_releases"), href: "/media/press-releases" },         // Press Releases / প্রেস রিলিজ
+            { name: tResources("media_accreditation"), href: "/media/accreditation" },     // Media Accreditation / মিডিয়া অ্যাক্রেডিটেশন
+            { name: tResources("archives"), href: "/media/archives" },                     // Archives / আর্কাইভস
           ],
         },
         {
-          title: tResources("support"),
+          title: tResources("support_and_faqs"),  // "SUPPORT & FAQs" / "সাপোর্ট ও প্রায়শ্চিত্ত প্রশ্ন"
           links: [
-            { name: tResources("faq"), href: "/resource-faq" },
+            { name: tResources("frequently_asked_questions"), href: "/faqs" },             // Frequently Asked Questions / প্রায়শ্চিত্ত প্রশ্নসমূহ
           ],
         },
       ],
@@ -121,25 +151,37 @@ export default function Header() {
     ["The Federation"]: {
       sections: [
         {
-          title: tFederation("aboutBaf"),
+          title: tFederation("about_baf"),  // "About BAF" / "বিএএফ সম্পর্কে"
           links: [
-            { name: tFederation("ourHistory"), href: "/history" },
-            { name: tFederation("missionVision"), href: "/mission-and-vision" },
-            { name: tFederation("organizationalStructure"), href: "/organizational-structure" },
+            { name: tFederation("our_history"), href: "/history" },                    // Our History / আমাদের ইতিহাস
+            { name: tFederation("mission_vision"), href: "/mission-and-vision" },      // Mission & Vision / মিশন ও ভিশন
+            { name: tFederation("president_message"), href: "/message-from-president" },    // Message from President / সভাপতির বার্তা
+            { name: tFederation("organizational_structure"), href: "/organizational-structure" },  // Organizational Structure / সাংগঠনিক কাঠামো
           ],
         },
         {
-          title: tFederation("partnerships"),
+          title: tFederation("partnerships_sponsors"),  // "Partnerships & Sponsors" / "অংশীদারিত্ব ও স্পনসর"
           links: [
-            { name: tFederation("ourPartners"), href: "/our-sponsors" },
-            { name: tFederation("becomeSponsor"), href: "/our-sponsors/apply-for-sponsorship" },
-            { name: tFederation("partnershipPrograms"), href: "/partnership-program" },
+            { name: tFederation("affiliated_organizations"), href: "/affiliated-organizations" },  // Affiliated Organizations / সহযোগী সংগঠনসমূহ
+            { name: tFederation("our_partners_sponsors"), href: "/our-sponsors" },                 // Our Partners & Sponsors / আমাদের অংশীদার ও স্পনসর
+            { name: tFederation("become_sponsor"), href: "/our-sponsors/apply-for-sponsorship" },  // Become a Sponsor / স্পনসর হোন
+            { name: tFederation("partnership_programs"), href: "/partnership-program" },           // Partnership Programs / অংশীদারিত্ব প্রোগ্রাম
           ],
         },
         {
-          title: tFederation("governance"),
+          title: tFederation("global_hierarchy"),    // Global Hierarchy / গ্লোবাল হায়ারার্কি (as a section or intro page)
           links: [
-            { name: tFederation("contact"), href: "/contact" },
+            { name: tFederation("world_athletics"), href: "/global/world-athletics" },        // World Athletics
+            { name: tFederation("asian_athletics_association"), href: "/global/asian-athletics" },  // Asian Athletics Association
+            { name: tFederation("south_asian_athletics_federation"), href: "/global/south-asian" }, // South Asian Athletics Federation
+            { name: tFederation("international_olympic_committee"), href: "/global/ioc" },    // International Olympic Committee
+          ],
+        },
+        {
+          title: tFederation("governance_contact"),  // "Governance & Contact" / "গভর্ন্যান্স ও যোগাযোগ"
+          links: [
+            { name: tFederation("contact_information_baf"), href: "/contact" },               // Contact Information BAF / যোগাযোগের তথ্য
+            { name: tFederation("safeguarding_officer_baf"), href: "/safeguarding-officer" },         // Safeguarding Officer (SO-BAF)
           ],
         },
       ],
@@ -282,7 +324,7 @@ export default function Header() {
               <div className="flex items-center gap-4 pl-7">
                 {/* Login Button */}
                 <button className="bg-gradient-to-r from-[#C1272D] to-[#A01F25] hover:bg-red-700 cursor-pointer text-white px-5 py-2 md:py-[10px] rounded-md text-sm font-medium transition-colors">
-                  LOGIN
+                  {tNav("login")}
                 </button>
 
                 {/* Language Dropdown */}

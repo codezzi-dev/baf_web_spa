@@ -1,16 +1,14 @@
 {
-    "title": "রিসোর্স ও মিডিয়া",
-    "antiDoping": "অ্যান্টি-ডোপিং ও ফেয়ার প্লে",
-    "antiDopingMain": "অ্যান্টি-ডোপিং",
-    "rules": "অ্যান্টি-ডোপিং নিয়মাবলী",
-    "approved": "অনুমোদিত পদার্থ",
-    "banned": "নিষিদ্ধ পদার্থ",
-    "wada": "ওয়াডা নির্দেশিকা",
-    "violations": "লঙ্ঘন রিপোর্ট করুন",
-    "media": "মিডিয়া ও প্রকাশনা",
-    "gallery": "ফটো ও ভিডিও গ্যালারি",
-    "press": "প্রেস রিলিজ",
-    "accreditation": "মিডিয়া অ্যাক্রেডিটেশন",
-    "support": "সাপোর্ট ও এফএকিউ",
-    "faq": "সচরাচর জিজ্ঞাসা"
+  "resources_and_media": "সম্পদ ও মিডিয়া",
+  "rules_and_policies": "নিয়মাবলী ও নীতিমালা",
+  "world_athletics": "ওয়ার্ল্ড অ্যাথলেটিক্স",
+  "bangladesh_athletics_federation": "বাংলাদেশ অ্যাথলেটিক্স ফেডারেশন",
+  "report_violations": "লঙ্ঘন রিপোর্ট করুন",
+  "media_and_publications": "মিডিয়া ও প্রকাশনা",
+  "photo_and_video_gallery": "ছবি ও ভিডিও গ্যালারি",
+  "press_releases": "প্রেস রিলিজ",
+  "media_accreditation": "মিডিয়া অ্যাক্রেডিটেশন",
+  "archives": "আর্কাইভস",
+  "support_and_faqs": "সাপোর্ট ও প্রায়শ্চিত্ত প্রশ্ন",
+  "frequently_asked_questions": "প্রায়শ্চিত্ত প্রশ্নসমূহ"
 }

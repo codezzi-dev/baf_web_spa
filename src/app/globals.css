@@ -38,9 +38,20 @@
   --color-popover-foreground: var(--popover-foreground);
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
-  --color-tag-red:var(--tag-red);
-  --color-tag-green:var(--tag-green);
-  --color-tag-yellow:var(--tag-yellow);
+
+  /* Custom colors */
+  --color-maroon: var(--maroon);
+  --color-maroon-foreground: var(--maroon-foreground);
+  --color-yellow: var(--yellow);
+  --color-yellow-foreground: var(--yellow-foreground);
+  --color-green-light: var(--green-light);
+  --color-green-dark: var(--green-dark);
+  --color-tag-red: var(--tag-red);
+  --color-tag-green: var(--tag-green);
+  --color-tag-yellow: var(--tag-yellow);
+  --color-tag-blue: var(--tag-blue);
+
+
   --color-card: var(--card);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -76,9 +87,27 @@ body {
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
+
+  /* Custom colors */
+  --maroon: oklch(52% 0.22 25);
+  /* ≈ hsl(0 50% 35%) – deep red/maroon */
+  --maroon-foreground: oklch(98% 0.01 0);
+  /* ≈ pure white, high lightness for contrast on maroon */
+
+  --yellow: oklch(78% 0.18 85);
+  /* ≈ hsl(45 90% 50%) – bright vivid yellow */
+  --yellow-foreground: oklch(20% 0.12 80);
+  /* dark olive-yellow tone for text on bright yellow */
+
+  --green-light: oklch(96% 0.04 150);
+  /* very light pastel green ≈ hsl(150 40% 95%) */
+  --green-dark: oklch(28% 0.13 145);
+  /* deep forest green ≈ hsl(150 70% 20%) */
   --tag-red: oklch(0.54 0.19 25);
-  --tag-green:oklch(0.52 0.11 164);
-  --tag-yellow:oklch(0.75 0.16 95);
+  --tag-green: oklch(0.52 0.11 164);
+  --tag-yellow: oklch(0.75 0.16 95);
+  --tag-blue: oklch(52.3% 0.313 264.1);
+
   --chart-1: oklch(67.432% 0.20018 39.935);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -132,10 +161,12 @@ body {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
 }
+
 /* app/globals.css */
 * {
   /* font-family: "Inter", sans-serif; */
@@ -158,7 +189,8 @@ body {
   max-width: 80rem;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 0.75rem; /* px-3 = 0.75rem = 12px */
+  padding-left: 0.75rem;
+  /* px-3 = 0.75rem = 12px */
   padding-right: 0.75rem;
 }
 
@@ -218,13 +250,18 @@ body {
 /* Infinite left-to-right animation for shapes */
 @keyframes floatHorizontal {
   0% {
-    transform: translateX(0); /* start */
+    transform: translateX(0);
+    /* start */
   }
+
   50% {
-    transform: translateX(-20px); /* move left */
+    transform: translateX(-20px);
+    /* move left */
   }
+
   100% {
-    transform: translateX(0); /* back to start */
+    transform: translateX(0);
+    /* back to start */
   }
 }
 
@@ -236,8 +273,10 @@ body {
 @keyframes fadeUp {
   0% {
     opacity: 0;
-    transform: translateY(40px); /* aro niche theke asbe */
+    transform: translateY(40px);
+    /* aro niche theke asbe */
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -247,8 +286,10 @@ body {
 @keyframes fadeDown {
   0% {
     opacity: 0;
-    transform: translateY(-40px); /* upore theke niche asbe */
+    transform: translateY(-40px);
+    /* upore theke niche asbe */
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -349,6 +390,7 @@ body {
     transform: scale(1.4);
     opacity: 1;
   }
+
   100% {
     transform: scale(1.6);
     opacity: 0;
@@ -376,69 +418,107 @@ body {
     opacity: 0;
     transform: translateY(-8px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
+
 @keyframes marquee {
-  from { transform: translateX(0);    }
-  to   { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
 }
+
 .animate-fadeIn {
   animation: fadeIn 0.2s ease-in-out;
 }
+
 /* Marquee Animation */
 .marquee-container {
   position: relative;
   background-color: transparent;
   overflow: hidden;
-  mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    black    8%,   
-    black   92%,     
-    transparent 100%
-  );
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    black    8%,
-    black   92%,
-    transparent 100%
-  );
+  mask-image: linear-gradient(to right,
+      transparent 0%,
+      black 8%,
+      black 92%,
+      transparent 100%);
+  -webkit-mask-image: linear-gradient(to right,
+      transparent 0%,
+      black 8%,
+      black 92%,
+      transparent 100%);
 }
+
 .marquee-content {
   display: flex;
   flex-wrap: nowrap;
-  animation: marquee 35s linear infinite;   
-  will-change: transform;          
+  animation: marquee 35s linear infinite;
+  will-change: transform;
 }
-.marquee-container:hover .marquee-content{
+
+.marquee-container:hover .marquee-content {
   animation-play-state: paused;
 }
 
+.card {
+  --tw-shadow: 0 25px 50px -12px var(--tw-shadow-color, rgb(0 0 0 / 0.25));
+  box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  border: 0;
+}
+
+.card-header {
+  border-bottom-style: var(--tw-border-style);
+  border-bottom-width: 1px;
+  padding-top: 24px;
+  padding-bottom: 16px;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+.card-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  font-size: large;
+}
+
+.card-content {
+  padding-bottom: 16px;
+}
+
+.gradient-light-gray{ 
+    background: linear-gradient(to right, #f2f2f2 0%, #ffffff 100%);
+}
+
+.gradient-light-red {
+  background: linear-gradient(to right, #fae8e8 0%, #ffffff 100%);
+}
+
+.gradient-light-green{ 
+  background: linear-gradient(to right, #f7fffa 0%, #ffffff 100%);
+}
+
+.gradient-light-yellow{ 
+  background: linear-gradient(to right, #fbf5d0 0%, #ffffff 100%);
+}
+
+.list-green {
+  background-color: #0d542b;
+  opacity: 5%;
+  padding: 16px;
+  border-radius: 4px;
+}
+.list-text {
+  color: var(--tag-green);
+  opacity: 100%;
+}
 
 
-/* @layer components {
-  .tag {
-    @apply inline-flex items-center gap-1.5;
-    @apply px-3 py-1 text-sm font-medium rounded-full shadow-sm transition-colors;
-    @apply text-white;
-  }
-
-  .tag-green {
-    @apply tag;
-    @apply bg-gradient-to-r from-[#00704A] to-[#005239]
-  }
-
-  .tag-red {
-    @apply tag;
-    @apply bg-gradient-to-r from-[#C1272D] to-[#A01F25]
-  }
-
-  .tag-yellow {
-    @apply tag;
-    @apply bg-gradient-to-r from-[#D4AF37] to-[#B8941F]
-  }
-} */

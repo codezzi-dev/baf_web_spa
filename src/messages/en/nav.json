@@ -1,7 +1,9 @@
 {
   "home": "Home",
-  "theFederation": "The Federation",
-  "athletesHub": "Athletes Hub",
-  "eventsHub": "Events Hub",
-  "resourcesMedia": "Resources & Media"
+  "the_federation": "The Federation",
+  "athletes": "Athletes",
+  "coaches_and_judges":"Coaches & Judges",
+  "events": "Events",
+  "resources_media": "Resources & Media",
+  "login": "Login"
 }

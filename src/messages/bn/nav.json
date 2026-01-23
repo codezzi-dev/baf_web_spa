@@ -1,7 +1,9 @@
 {
   "home": "হোম",
-  "theFederation": "ফেডারেশন",
-  "athletesHub": "অ্যাথলেটস হাব",
-  "eventsHub": "ইভেন্টস হাব",
-  "resourcesMedia": "রিসোর্স ও মিডিয়া"
+  "the_federation": "ফেডারেশন",
+  "athletes": "অ্যাথলিটস",
+  "coaches_and_judges": "কোচ ও বিচারক",
+  "events": "ইভেন্টস",
+  "resources_media": "সম্পদ ও মিডিয়া",
+  "login": "লগইন"
 }
