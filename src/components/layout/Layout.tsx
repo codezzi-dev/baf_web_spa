@@ -1,6 +1,7 @@
 "use client";
 
 import React, { ReactNode } from "react";
+import { useTranslations } from "next-intl";
 import ToastProvider from "../ui/ToastProvider";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -12,7 +13,7 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const hideLayout = useHideLayout();
-
+  const t = useTranslations("common");
   return (
     <>
       <ToastProvider />

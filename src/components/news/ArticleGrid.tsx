@@ -53,6 +53,7 @@ export function ArticleGrid() {
   return (
     <div className="space-y-8 lg:mr-12">
       <div className="grid grid-cols-1 gap-6">
+        
         {articles.map((article) => (
           <div key={article.id} className="group cursor-pointer  ">
             <div className="relative">

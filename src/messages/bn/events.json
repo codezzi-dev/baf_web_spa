@@ -1,0 +1,16 @@
+{
+  "competitions": "প্রতিযোগিতা",
+  "domestic": "দেশীয়",
+  "international": "আন্তর্জাতিক",
+  "athletes_training": "অ্যাথলিট প্রশিক্ষণ",
+  "junior_camp": "জুনিয়র ক্যাম্প",
+  "national_camp": "জাতীয় ক্যাম্প",
+  "camp_for_international_event": "আন্তর্জাতিক ইভেন্টের জন্য ক্যাম্প",
+  "coaches-and-judges": "কোচ ও বিচারক",
+  "coaches_training": "কোচ প্রশিক্ষণ",
+  "coaches_refreshers": "কোচ রিফ্রেশার কোর্স",
+  "judges_training": "বিচারক প্রশিক্ষণ",
+  "judges_refreshers": "বিচারক রিফ্রেশার কোর্স",
+  "others": "অন্যান্য",
+  "awareness_training": "সচেতনতা প্রশিক্ষণ"
+}

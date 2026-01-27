@@ -5,7 +5,7 @@ import baseballCourt2 from "@/assets/images/home/upcoming-match/baseball-court2.
 import baseballLogo1 from "@/assets/images/home/upcoming-match/baseball1.png";
 import baseballLogo2 from "@/assets/images/home/upcoming-match/baseball2.png";
 import Text from "../ui/Text";
-import Button from "../ui/Button";
+import {Button} from "../ui/Button";
 
 export default function UpcomingMatch() {
   return (
@@ -63,7 +63,7 @@ export default function UpcomingMatch() {
           </div>
 
           <div className="mt-10 mb-16">
-            <Button type="submit" variant="orange" className="cursor-pointer">
+            <Button type="submit" variant="default" className="cursor-pointer">
               get ticket
             </Button>
           </div>

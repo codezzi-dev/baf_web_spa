@@ -1,16 +1,22 @@
-'use client';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactNode , useState} from 'react';
-interface QueryProviderProps {
-    children: ReactNode;
-}
+"use client";
 
+import { ReactNode } from "react";
+import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
+import { queryClient, persister } from "@/api/lib/query-client";
 
-export default function QueryProvider({ children }: QueryProviderProps) {
-    const [queryClient] = useState(() => new QueryClient());
-    return (
-        <QueryClientProvider client={queryClient}>
-            {children}
-        </QueryClientProvider>
-    );
+export function QueryProvider({ children }: { children: ReactNode }) {
+  return (
+    <PersistQueryClientProvider
+      client={queryClient}
+      persistOptions={{
+        persister,
+        maxAge: 1000 * 60 * 60 * 24,
+        dehydrateOptions: {
+          shouldDehydrateQuery: (query) => query.state.status === "success",
+        },
+      }}
+    >
+      {children}
+    </PersistQueryClientProvider>
+  );
 }

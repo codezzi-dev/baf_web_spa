@@ -1,9 +1,17 @@
+"use client";
 import React from "react";
 import { FaMapMarkerAlt, FaClock, FaUsers } from "react-icons/fa";
 import DynamicHeading from "./HeadingComponent";
+import { useRouter } from 'next/navigation';
+import { Button } from "../ui/Button";
 
 
 const UpcomingEvents: React.FC = () => {
+    const router = useRouter();
+
+  const handleClick = () => {
+    router.push('/all-event');
+  };
   const events = [
     {
       id: 1,
@@ -92,9 +100,10 @@ const UpcomingEvents: React.FC = () => {
 
         {/* View More Button */}
         <div className="flex justify-center mt-12">
-          <button className="px-8 py-3 bg-[#00916e] text-white rounded-lg font-semibold hover:bg-teal-700 transition-colors duration-200 shadow-md hover:shadow-lg cursor-pointer">
+      
+          <Button onClick={handleClick} className="px-8 py-3 bg-[#00916e] text-white rounded-lg font-semibold hover:bg-teal-700 transition-colors duration-200 shadow-md hover:shadow-lg cursor-pointer">
             View More
-          </button>
+          </Button>
         </div>
       </div>
     </section>

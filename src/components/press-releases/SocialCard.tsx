@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Facebook, Link as LinkIcon, Share2 } from 'lucide-react';
 import { BsLinkedin, BsTwitterX } from 'react-icons/bs';
-import Button from '../ui/Button'; // ← assuming this is your custom Button
+import {Button} from '../ui/Button'; // ← assuming this is your custom Button
 import { StorySocialLinks } from '@/types/press-realease/story';
 
 interface SocialCardProps {
@@ -42,8 +42,8 @@ const SocialCard = ({ socialLinks = [] }: SocialCardProps) => {
               return (
                 <Button
                   key={platform}
-                  variant="black"
-                  size="medium"
+                  variant="default"
+                  size="default"
                   className="border h-10 flex flex-col items-center justify-center rounded-md transition-colors hover:bg-gray-800/50"
                   onClick={handleCopyLink}
                 >

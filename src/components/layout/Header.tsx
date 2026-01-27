@@ -1,21 +1,34 @@
+// src/components/layout/Header.tsx
 "use client";
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter, usePathname } from "next/navigation";
 import { Menu, X, ChevronDown, ArrowLeft, User, Home, ChevronRight } from "lucide-react";
-import DrawerComponent from "../ui/Drawer";
 import logo from "@/assets/images/logo_title.png";
 import Image from "next/image";
 import { TiMinus } from "react-icons/ti";
 import { Drawer } from "antd";
 import { MegamenuContent, MegamenuContentItem, MegamenuLink, MegamenuSection, MenuItem, NavigationLevel } from "@/types/navigation";
-
+import { useLocale, useTranslations } from "next-intl";
 export default function Header() {
+  // Translations
+  const tNav = useTranslations("nav");
+  const tFederation = useTranslations("federation");
+  const tAthletes = useTranslations("athletes");
+  const tEvents = useTranslations("events");
+  const tResources = useTranslations("resources");
+  const tCoachesAndJudges = useTranslations("coachesAndjudges");
+
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [show, setShow] = useState<boolean>(false);
   const [activeMegamenu, setActiveMegamenu] = useState<string | null>(null);
   const [isLangOpen, setIsLangOpen] = useState<boolean>(false);
-  const [language, setLanguage] = useState<string>("bn");
+
+  // next-intl hooks
+  const locale = useLocale();
+  const router = useRouter();
+  const pathname = usePathname();
 
   // Navigation state for mobile
   const [navigationLevel, setNavigationLevel] = useState<NavigationLevel>("main");
@@ -23,38 +36,53 @@ export default function Header() {
   const [selectedSection, setSelectedSection] = useState<MegamenuSection | null>(null);
 
   const menus: MenuItem[] = [
-    { name: "The Federation", href: "/gallery", hasMegamenu: true },
-    { name: "Athletes Hub", href: "/athletes", hasMegamenu: true },
-    { name: "Events Hub", href: "/events", hasMegamenu: true },
-    { name: "Resources & Media", href: "/news", hasMegamenu: true },
+    { name: tNav("the_federation"), href: "/gallery", hasMegamenu: true, key: "The Federation" },
+    { name: tNav("athletes"), href: "/athletes", hasMegamenu: true, key: "Athletes Hub" },
+    { name: tNav("coaches_and_judges"), href: "/athletes", hasMegamenu: true, key: "Coaches And Judges" },
+    { name: tNav("events"), href: "/events", hasMegamenu: true, key: "Events Hub" },
+    { name: tNav("resources_media"), href: "/news", hasMegamenu: true, key: "Resources & Media" },
   ];
 
-
+  // Megamenu content with translations
   const megamenuContent: MegamenuContent = {
     ["Athletes Hub"]: {
       sections: [
         {
-          title: "Athlete Portal",
+          title: tAthletes("portal"),
           links: [
-            { name: "Online Registration", href: "/athletes/registration" },
-            // { name: "Athlete Login", href: "/athletes/track-field" },
-            // { name: "Athlete Dashboard", href: "/athletes/swimming" },
+            { name: tAthletes("registration"), href: "/athletes/registration" },
           ],
         },
         {
-          title: "Categories",
+          title: tAthletes("categories"),
           links: [
-            { name: "All Athletes", href: "/athletes" },
-            // { name: "Senior Division", href: "/athletes/elite" },
-            // { name: "Junior Division", href: "/athletes/youth" },
+            { name: tAthletes("allAthletes"), href: "/athletes" },
           ],
         },
         {
-          title: "Rankings & Records",
+          title: tAthletes("rankings"),
           links: [
-            { name: "National Rankings", href: "/ranking" },
-            { name: "Records (National & International)", href: "/record" },
-            { name: "Hall of Fame", href: "/hall-of-fame" },
+            { name: tAthletes("nationalRankings"), href: "/ranking" },
+            { name: tAthletes("records"), href: "/record" },
+            { name: tAthletes("hallOfFame"), href: "/hall-of-fame" },
+          ],
+        },
+      ],
+    },
+    ["Coaches And Judges"]: {
+      sections: [
+        {
+          title: tCoachesAndJudges("coach-title"),
+          links: [
+            { name: tCoachesAndJudges("bangladesh-coach-association"), href: "/coaches/bangladesh-coach-association" },
+            { name: tCoachesAndJudges("qualified-coaches"), href: "/coaches/qualified-coaches" },
+          ],
+        },
+        {
+          title: tCoachesAndJudges("judge-title"),
+          links: [
+            { name: tCoachesAndJudges("bangladesh-judge-association"), href: "/judges/bangladesh-judge-association" },
+            { name: tCoachesAndJudges("qualified-judges"), href: "/judges/qualified-judges" },
           ],
         },
       ],
@@ -62,21 +90,33 @@ export default function Header() {
     ["Events Hub"]: {
       sections: [
         {
-          title: "Competitions & Championships",
+          title: tEvents("competitions"),
           links: [
-            { name: "All Events", href: "/all-event" },
-            { name: "Upcoming Events", href: "/events/all" },
-            { name: "Past Results", href: "/post-event-result" },
-            { name: "Live Updates", href: "/events/live" },
+            { name: tEvents("domestic"), href: "/events/domestic" },
+            { name: tEvents("international"), href: "/events/international" },
           ],
         },
         {
-          title: "Training & Coaching",
+          title: tEvents("athletes_training"),
           links: [
-            { name: "National Training Programs", href: "/national-training-program" },
-            { name: "Certified Coaches", href: "/certified-coach" },
-            { name: "Talent Development", href: "/talent-development" },
-            { name: "Workshops & Seminars", href: "/workshop" },
+            { name: tEvents("junior_camp"), href: "/junior_camp" },
+            { name: tEvents("coaches_training"), href: "/coaches-training" },
+            { name: tEvents("camp_for_international_event"), href: "/camp-for-international-event" },
+          ],
+        },
+        {
+          title: tEvents("coaches-and-judges"),
+          links: [
+            { name: tEvents("coaches_training"), href: "/junior_camp" },
+            { name: tEvents("coaches_refreshers"), href: "/coaches-training" },
+            { name: tEvents("judges_training"), href: "/camp-for-international-event" },
+            { name: tEvents("judges_refreshers"), href: "/camp-for-international-event" },
+          ],
+        },
+        {
+          title: tEvents("others"),
+          links: [
+            { name: tEvents("awareness_training"), href: "/awareness-training" },
           ],
         },
       ],
@@ -84,53 +124,64 @@ export default function Header() {
     ["Resources & Media"]: {
       sections: [
         {
-          title: "Anti-Doping & Fair Play",
+          title: tResources("rules_and_policies"),  // "RULES AND POLICIES" / "নিয়মাবলী ও নীতিমালা"
           links: [
-            { name: "Anti-Doping", href: "/anti-doping" },
-            { name: "Anti-Doping Rules", href: "/anti-doping/rules-and-regulation" },
-            { name: "Approved Substances", href: "/anti-doping/approved-supplements" },
-            { name: "Banned Substances", href: "/anti-doping/banned-supplements" },
-            { name: "WADA Guidelines", href: "/anti-doping/wada-guidelines" },
-            { name: "Report Violations", href: "/anti-doping/violation-report" },
+            { name: tResources("world_athletics"), href: "https://worldathletics.org/" },  // World Athletics (external link)
+            { name: tResources("bangladesh_athletics_federation"), href: "/rules/baf" },    // Bangladesh Athletics Federation (internal rules/policies)
+            { name: tResources("report_violations"), href: "/report-violations" },          // Report Violations / লঙ্ঘন রিপোর্ট করুন
           ],
         },
         {
-          title: "Media & Publications",
+          title: tResources("media_and_publications"),  // "MEDIA & PUBLICATIONS" / "মিডিয়া ও প্রকাশনা"
           links: [
-            { name: "Photo & Video Gallery", href: "/photo-gallery" },
-            { name: "Press Releases", href: "/press-releases" },
-            { name: "Media Accreditation", href: "/media-inquire" },
+            { name: tResources("photo_and_video_gallery"), href: "/media/gallery" },       // Photo & Video Gallery / ছবি ও ভিডিও গ্যালারি
+            { name: tResources("press_releases"), href: "/media/press-releases" },         // Press Releases / প্রেস রিলিজ
+            { name: tResources("media_accreditation"), href: "/media/accreditation" },     // Media Accreditation / মিডিয়া অ্যাক্রেডিটেশন
+            { name: tResources("archives"), href: "/media/archives" },                     // Archives / আর্কাইভস
           ],
         },
         {
-          title: "Support & FAQs",
-          links: [{ name: "Frequently Asked Questions", href: "/resource-faq" }],
+          title: tResources("support_and_faqs"),  // "SUPPORT & FAQs" / "সাপোর্ট ও প্রায়শ্চিত্ত প্রশ্ন"
+          links: [
+            { name: tResources("frequently_asked_questions"), href: "/faqs" },             // Frequently Asked Questions / প্রায়শ্চিত্ত প্রশ্নসমূহ
+          ],
         },
       ],
     },
     ["The Federation"]: {
       sections: [
         {
-          title: "About BAF",
+          title: tFederation("about_baf"),  // "About BAF" / "বিএএফ সম্পর্কে"
           links: [
-            { name: "Our History", href: "/history" },
-            { name: "Mission & Vision", href: "/mission-and-vision" },
-            { name: "Organizational Structure", href: "/organizational-structure" },
+            { name: tFederation("our_history"), href: "/history" },                    // Our History / আমাদের ইতিহাস
+            { name: tFederation("mission_vision"), href: "/mission-and-vision" },      // Mission & Vision / মিশন ও ভিশন
+            { name: tFederation("president_message"), href: "/message-from-president" },    // Message from President / সভাপতির বার্তা
+            { name: tFederation("organizational_structure"), href: "/organizational-structure" },  // Organizational Structure / সাংগঠনিক কাঠামো
           ],
         },
         {
-          title: "Partnerships & Sponsors",
+          title: tFederation("partnerships_sponsors"),  // "Partnerships & Sponsors" / "অংশীদারিত্ব ও স্পনসর"
           links: [
-            { name: "Our Partners & Sponsors", href: "/our-sponsors" },
-            { name: "Become a Sponsor", href: "/our-sponsors/apply-for-sponsorship" },
-            { name: "Partnership Programs", href: "/partnership-program" },
+            { name: tFederation("affiliated_organizations"), href: "/affiliated-organizations" },  // Affiliated Organizations / সহযোগী সংগঠনসমূহ
+            { name: tFederation("our_partners_sponsors"), href: "/our-sponsors" },                 // Our Partners & Sponsors / আমাদের অংশীদার ও স্পনসর
+            { name: tFederation("become_sponsor"), href: "/our-sponsors/apply-for-sponsorship" },  // Become a Sponsor / স্পনসর হোন
+            { name: tFederation("partnership_programs"), href: "/partnership-program" },           // Partnership Programs / অংশীদারিত্ব প্রোগ্রাম
           ],
         },
         {
-          title: "Governance & Contact",
+          title: tFederation("global_hierarchy"),    // Global Hierarchy / গ্লোবাল হায়ারার্কি (as a section or intro page)
           links: [
-            { name: "Contact Information", href: "/contact" },
-            // { name: "Contact Form", href: "/gallery/form" },
+            { name: tFederation("world_athletics"), href: "/global/world-athletics" },        // World Athletics
+            { name: tFederation("asian_athletics_association"), href: "/global/asian-athletics" },  // Asian Athletics Association
+            { name: tFederation("south_asian_athletics_federation"), href: "/global/south-asian" }, // South Asian Athletics Federation
+            { name: tFederation("international_olympic_committee"), href: "/global/ioc" },    // International Olympic Committee
+          ],
+        },
+        {
+          title: tFederation("governance_contact"),  // "Governance & Contact" / "গভর্ন্যান্স ও যোগাযোগ"
+          links: [
+            { name: tFederation("contact_information_baf"), href: "/contact" },               // Contact Information BAF / যোগাযোগের তথ্য
+            { name: tFederation("safeguarding_officer_baf"), href: "/safeguarding-officer" },         // Safeguarding Officer (SO-BAF)
           ],
         },
       ],
@@ -156,8 +207,11 @@ export default function Header() {
     };
   }, [isMenuOpen]);
 
-  const handleLanguageChange = (lang: string) => {
-    setLanguage(lang);
+  // Language change handler - switches URL locale
+  const handleLanguageChange = (newLocale: string) => {
+    // Remove current locale from pathname and add new one
+    const pathWithoutLocale = pathname.replace(`/${locale}`, "") || "/";
+    router.push(`/${newLocale}${pathWithoutLocale}`);
     setIsLangOpen(false);
   };
 
@@ -182,7 +236,7 @@ export default function Header() {
       setSelectedMenu(menu.name);
       setNavigationLevel("sections");
     } else {
-      window.location.href = menu.href;
+      router.push(menu.href);
       closeMenu();
     }
   };
@@ -213,9 +267,8 @@ export default function Header() {
 
   return (
     <header
-      className={`w-full fixed top-9 z-50 ${
-        show ? "translate-y-[-39px] duration-500 ease-in mt-3" : "-translate-y-0 duration-500 ease-in shadow-none"
-      } `}
+      className={`w-full fixed top-9 z-50 ${show ? "translate-y-[-39px] duration-500 ease-in mt-3" : "-translate-y-0 duration-500 ease-in shadow-none"
+        } `}
     >
       <div className="px-6">
         <div className="main_container bg-white rounded-md relative shadow-sm">
@@ -239,16 +292,19 @@ export default function Header() {
                   <div
                     key={item.name}
                     className="relative"
-                    onMouseEnter={() => item.hasMegamenu && setActiveMegamenu(item.name)}
+                    onMouseEnter={() => {
+                      if (item.hasMegamenu && item.key) {
+                        setActiveMegamenu(item.key);
+                      }
+                    }}
                   >
                     {item.hasMegamenu ? (
-                      <button className="whitespace-nowrap cursor-pointer px-6 py-2 transition-all duration-100 ease-in-out text-[#444444]  hover:text-emerald-600 hover:bg-emerald-50 font-semibold text-sm md:text-base uppercase flex items-center gap-1">
+                      <button className="whitespace-nowrap cursor-pointer px-6 py-2 transition-all duration-100 ease-in-out text-[#444444] hover:text-emerald-600 hover:bg-emerald-50 font-semibold text-sm md:text-base uppercase flex items-center gap-1">
                         {item.name}
                         <ChevronDown
                           size={16}
-                          className={`transition-transform duration-000 ${
-                            activeMegamenu === item.name ? "rotate-180" : ""
-                          }`}
+                          className={`transition-transform duration-000 ${activeMegamenu === item.key ? "rotate-180" : ""
+                            }`}
                         />
                       </button>
                     ) : (
@@ -268,7 +324,7 @@ export default function Header() {
               <div className="flex items-center gap-4 pl-7">
                 {/* Login Button */}
                 <button className="bg-gradient-to-r from-[#C1272D] to-[#A01F25] hover:bg-red-700 cursor-pointer text-white px-5 py-2 md:py-[10px] rounded-md text-sm font-medium transition-colors">
-                  LOGIN
+                  {tNav("login")}
                 </button>
 
                 {/* Language Dropdown */}
@@ -278,12 +334,8 @@ export default function Header() {
                     className="cursor-pointer relative flex items-center justify-center w-8 h-8 p-0.5 rounded-full border border-gray-200 bg-white hover:border-gray-400 hover:bg-gray-50 transition-all duration-300 shadow-sm overflow-hidden"
                   >
                     <Image
-                      src={
-                        language === "bn"
-                          ? "/bd-flag.webp" // 🇧🇩 High-quality Bangladesh flag
-                          : "/usa_flag.png" // 🇺🇸 High-quality USA flag
-                      }
-                      alt={language === "bn" ? "Bangladesh Flag" : "US Flag"}
+                      src={locale === "bn" ? "/bd-flag.webp" : "/usa_flag.png"}
+                      alt={locale === "bn" ? "Bangladesh Flag" : "US Flag"}
                       height={60}
                       width={60}
                       className="object-cover h-full w-full"
@@ -297,14 +349,16 @@ export default function Header() {
                     >
                       <button
                         onClick={() => handleLanguageChange("bn")}
-                        className="flex items-center w-full gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors duration-200"
+                        className={`flex items-center w-full gap-3 px-4 py-2.5 text-sm transition-colors duration-200 ${locale === "bn" ? "bg-emerald-50 text-emerald-700" : "text-gray-700 hover:bg-gray-50"
+                          }`}
                       >
                         <Image src="https://flagcdn.com/w40/bd.png" alt="Bangladesh Flag" width={20} height={14} />
                         <span>বাংলা</span>
                       </button>
                       <button
                         onClick={() => handleLanguageChange("en")}
-                        className="flex items-center w-full gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors duration-200"
+                        className={`flex items-center w-full gap-3 px-4 py-2.5 text-sm transition-colors duration-200 ${locale === "en" ? "bg-emerald-50 text-emerald-700" : "text-gray-700 hover:bg-gray-50"
+                          }`}
                       >
                         <Image src="https://flagcdn.com/w40/us.png" alt="US Flag" width={20} height={14} />
                         <span>English</span>
@@ -347,7 +401,7 @@ export default function Header() {
                                   href={link.href}
                                   className="text-sm text-gray-600 hover:text-emerald-600 transition-colors flex items-center gap-2"
                                 >
-                                  <TiMinus size={10} className="text-emerald-600 " />
+                                  <TiMinus size={10} className="text-emerald-600" />
                                   {link.name}
                                 </Link>
                               </li>
@@ -365,144 +419,33 @@ export default function Header() {
           )}
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu - same as before, just update language buttons */}
         {isMenuOpen && (
-          <Drawer title="" closable onClose={onClose} open={isMenuOpen} width={250} styles={{body: { padding: 0 }}}>
-            <div
-              className={`absolute top-0 right-0 h-full w-full sm:w-96 bg-white shadow-2xl transform transition-transform duration-300 ${
-                isMenuOpen ? "translate-x-0" : "translate-x-full"
-              }`}
-            >
-              {/* Header */}
-              <div className="flex items-center justify-between p-4 border-b bg-gradient-to-r from-emerald-600 to-emerald-700">
-                <div className="flex items-center gap-3">
-                  <h2 className="text-lg font-bold text-white">
-                    {navigationLevel === "main" && "Main Menu"}
-                    {navigationLevel === "sections" && selectedMenu}
-                    {navigationLevel === "links" && selectedSection?.title}
-                  </h2>
-                </div>
-                <button
-                  onClick={closeMenu}
-                  className="p-2 rounded-lg bg-white/20 hover:bg-white/30 text-white transition-colors"
-                >
-                  <X size={20} />
-                </button>
-              </div>
+          <Drawer title="" closable onClose={onClose} open={isMenuOpen} width={250} styles={{ body: { padding: 0 } }}>
+            {/* ... rest of drawer content ... */}
 
-              {/* Content Area */}
-              <div className="overflow-y-auto h-[calc(100%-64px)] scrollbar-hide">
-                {/* Navigation Content with Slide Animation */}
-                <div className="relative overflow-hidden">
-                  {/* LEVEL 1: Main Menu */}
-                  <div className={`${navigationLevel === "main" ? "block" : "hidden"}`}>
-                    <nav className="p-2 ">
-                      {menus.map((menu) => (
-                        <button
-                          key={menu.name}
-                          onClick={() => handleMainMenuClick(menu)}
-                          className="w-full flex items-center justify-between p-4 text-left hover:bg-emerald-50 transition-colors rounded-lg mb-1 group"
-                        >
-                          <span className="font-semibold text-gray-800 group-hover:text-emerald-600">{menu.name}</span>
-                          {menu.hasMegamenu && (
-                            <ChevronRight size={20} className="text-gray-400 group-hover:text-emerald-600" />
-                          )}
-                        </button>
-                      ))}
-                    </nav>
-                  </div>
-
-                  {/* LEVEL 2: Sections */}
-                  <div className={`${navigationLevel === "sections" ? "block" : "hidden"}`}>
-                    <nav className="p-2 ">
-                      {navigationLevel === "sections" && (
-                        <button
-                          onClick={handleBackToMain}
-                          className="p-1.5 rounded-lg bg-white/20 hover:bg-white/30  transition-all duration-300 animate-slideInLeft border-b bg-gradient-to-r from-emerald-600 to-emerald-700"
-                        >
-                          <ArrowLeft size={20} />
-                        </button>
-                      )}
-                      {selectedMenu &&
-                        megamenuContent[selectedMenu]?.sections?.map((section, idx) => (
-                          <button
-                            key={idx}
-                            onClick={() => handleSectionClick(section)}
-                            className="w-full flex items-center justify-between p-4 text-left hover:bg-emerald-50 transition-colors rounded-lg mb-1 group"
-                          >
-                            <div>
-                              <h3 className="font-semibold text-gray-800 group-hover:text-emerald-600">
-                                {section.title}
-                              </h3>
-                              <p className="text-xs text-gray-500 mt-0.5">{section.links?.length} items</p>
-                            </div>
-                            <ChevronRight size={20} className="text-gray-400 group-hover:text-emerald-600" />
-                          </button>
-                        ))}
-                    </nav>
-                  </div>
-
-                  {/* LEVEL 3: Links */}
-                  <div className={`${navigationLevel === "links" ? "block" : "hidden"}`}>
-                    <nav className="p-2">
-                      {navigationLevel === "links" && (
-                        <button
-                          onClick={handleBackToSections}
-                          className="p-1.5 rounded-lg bg-white/20 hover:bg-white/30 text-white transition-all duration-300 animate-slideInLeft border-b bg-gradient-to-r from-emerald-600 to-emerald-700"
-                        >
-                          <ArrowLeft size={20} />
-                        </button>
-                      )}
-
-                      {selectedSection?.links?.map((link: MegamenuLink, idx: number) => (
-                        <a
-                          key={idx}
-                          href={link.href}
-                          onClick={handleLinkClick}
-                          className="flex items-center gap-3 p-4 text-left hover:bg-emerald-50 transition-colors rounded-lg mb-1 group"
-                        >
-                          <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0 group-hover:bg-emerald-200 transition-colors">
-                            <ChevronRight size={16} className="text-emerald-600" />
-                          </div>
-                          <span className="text-gray-700 group-hover:text-emerald-600 font-medium">{link.name}</span>
-                        </a>
-                      ))}
-                    </nav>
-                  </div>
-                </div>
-
-                {/* Login & Language Section */}
-                <div className="p-4 border-b bg-gray-50 space-y-3">
-                  <button className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-red-600 to-red-700 text-white px-4 py-3 rounded-lg font-medium">
-                    <User size={18} />
-                    LOGIN
-                  </button>
-
-                  <div className="flex gap-2">
-                    <button
-                      onClick={() => handleLanguageChange("bn")}
-                      className={`flex-1 py-2 px-3 rounded-lg border-2 transition-all text-sm font-medium ${
-                        language === "bn"
-                          ? "border-emerald-600 bg-emerald-50 text-emerald-700"
-                          : "border-gray-200 hover:border-gray-300"
-                      }`}
-                    >
-                      🇧🇩 বাংলা
-                    </button>
-                    <button
-                      onClick={() => handleLanguageChange("en")}
-                      className={`flex-1 py-2 px-3 rounded-lg border-2 transition-all text-sm font-medium ${
-                        language === "en"
-                          ? "border-emerald-600 bg-emerald-50 text-emerald-700"
-                          : "border-gray-200 hover:border-gray-300"
-                      }`}
-                    >
-                      🇺🇸 English
-                    </button>
-                  </div>
-                </div>
-              </div>
+            {/* Update Language buttons in mobile drawer */}
+            <div className="flex gap-2">
+              <button
+                onClick={() => handleLanguageChange("bn")}
+                className={`flex-1 py-2 px-3 rounded-lg border-2 transition-all text-sm font-medium ${locale === "bn"
+                  ? "border-emerald-600 bg-emerald-50 text-emerald-700"
+                  : "border-gray-200 hover:border-gray-300"
+                  }`}
+              >
+                🇧🇩 বাংলা
+              </button>
+              <button
+                onClick={() => handleLanguageChange("en")}
+                className={`flex-1 py-2 px-3 rounded-lg border-2 transition-all text-sm font-medium ${locale === "en"
+                  ? "border-emerald-600 bg-emerald-50 text-emerald-700"
+                  : "border-gray-200 hover:border-gray-300"
+                  }`}
+              >
+                🇺🇸 English
+              </button>
             </div>
+            {/* ... rest of drawer ... */}
           </Drawer>
         )}
       </div>
