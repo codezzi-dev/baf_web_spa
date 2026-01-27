@@ -74,15 +74,15 @@ export default function Header() {
         {
           title: tCoachesAndJudges("coach-title"),
           links: [
-            { name: tCoachesAndJudges("bangladesh-coach-association"), href: "/athletes/registration" },
-            { name: tCoachesAndJudges("qualified-coaches"), href: "/athletes/registration" },
+            { name: tCoachesAndJudges("bangladesh-coach-association"), href: "/coaches/bangladesh-coach-association" },
+            { name: tCoachesAndJudges("qualified-coaches"), href: "/coaches/qualified-coaches" },
           ],
         },
         {
           title: tCoachesAndJudges("judge-title"),
           links: [
-            { name: tCoachesAndJudges("bangladesh-judge-association"), href: "/athletes/registration" },
-            { name: tCoachesAndJudges("qualified-judges"), href: "/athletes/registration" },
+            { name: tCoachesAndJudges("bangladesh-judge-association"), href: "/judges/bangladesh-judge-association" },
+            { name: tCoachesAndJudges("qualified-judges"), href: "/judges/qualified-judges" },
           ],
         },
       ],
