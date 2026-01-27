@@ -1,47 +1,42 @@
 import { GenericElement } from "../common/generic.type";
 
 // ──────────────────────────────────────────────
-// History summary counters
+// Mission/Vision: Item under a step (bullet/list)
 // ──────────────────────────────────────────────
-
-export type HistoryContent = {
-  readonly historyYearsOfExcellence: number;
-  readonly historyNumbersOfNationalChampion: number;
-  readonly historyNumbersOfInternationalMedals: number;
-  readonly historyNumbersOfActiveAthletes: number;
-};
-
-
-// ──────────────────────────────────────────────
-// Milestone icons (restrict for UI safety)
-// ──────────────────────────────────────────────
-
-export type MilestoneIconTag =
-  | "foundation"
-  | "award"
-  | "championship"
-  | "success"
-  | "goal"
-  | "talent"
-  | "growth";
-
-// ──────────────────────────────────────────────
-// Individual milestone
-// ──────────────────────────────────────────────
-
-export type HistoryMilestone = {
-  readonly milestoneYear: number;
-  readonly milestoneTitle: string;
-  readonly milestoneDescription: string;
-  readonly milestoneIconTag: MilestoneIconTag;
+export type MissionVisionStepItem = {
+  readonly stepItemId: number;    
+  readonly stepItemName: string;
+  readonly stepItemOrder?: number;  
 };
 
 // ──────────────────────────────────────────────
-// API data wrapper (inside `data`)
+// Mission/Vision: Step inside a group
 // ──────────────────────────────────────────────
+export type MissionVisionStep = {
+  readonly stepId: number;         
+  readonly stepTitle?: string;
+  readonly stepDescription?: string;
+  readonly stepIcon?: string;
+  readonly stepTags?: string;
+  readonly stepOrder?: number;       
+  readonly elementStepItems?: MissionVisionStepItem[];
+};
 
-export type HistoryContentWrapperDto = {
-  readonly historyContent: HistoryContent;
-  readonly historyMilestones: HistoryMilestone[];
-  readonly pageGenericElements: GenericElement;
+// ──────────────────────────────────────────────
+// Mission/Vision: Group (Mission, Vision, Values, etc.)
+// ──────────────────────────────────────────────
+export type MissionVisionStepGroup = {
+  readonly stepGroupId: number;    
+  readonly stepGroupTitle?: string;
+  readonly stepGroupSummary?: string;
+  readonly stepGroupOrder?: number;  
+  readonly elementSteps?: MissionVisionStep[];
+};
+
+// ──────────────────────────────────────────────
+// API wrapper (same as C# MissionVisionContentWrapperDto)
+// ──────────────────────────────────────────────
+export type MissionVisionContentWrapperDto = {
+  readonly elementStepGroups?: MissionVisionStepGroup[];
+  readonly pageGenericElements?: GenericElement;
 };

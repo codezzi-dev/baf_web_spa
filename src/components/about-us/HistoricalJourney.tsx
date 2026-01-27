@@ -1,5 +1,6 @@
 "use client";
 import { Award, Flag, Star, Target, TrendingUp, Trophy, Users, Zap } from 'lucide-react';
+import { icons } from 'lucide-react';
 import React from 'react'
 import DynamicHeading from '../Home/HeadingComponent';
 import { HistoryMilestone } from '@/api/types/the-federation/history.type';
@@ -23,14 +24,16 @@ const HistoricalJourney: React.FC<HistoricalJourneyProps> = ({ historyMilestones
 
         <div className="space-y-12">
           {historyMilestones?.map((milestone, index) => {
-            const Icon = milestone.milestoneIconTag === "foundation" ? Flag
-              : milestone.milestoneIconTag === "award" ? Award
-                : milestone.milestoneIconTag === "championship" ? Trophy
-                  : milestone.milestoneIconTag === "success" ? Star
-                    : milestone.milestoneIconTag === "goal" ? Target
-                      : milestone.milestoneIconTag === "talent" ? Users
-                        : milestone.milestoneIconTag === "growth" ? TrendingUp
-                          : Zap;
+            // const Icon = milestone.milestoneIconTag === "foundation" ? Flag
+            //   : milestone.milestoneIconTag === "award" ? Award
+            //     : milestone.milestoneIconTag === "championship" ? Trophy
+            //       : milestone.milestoneIconTag === "success" ? Star
+            //         : milestone.milestoneIconTag === "goal" ? Target
+            //           : milestone.milestoneIconTag === "talent" ? Users
+            //             : milestone.milestoneIconTag === "growth" ? TrendingUp
+            //               : Zap;
+            const Icon = icons["Award" as keyof typeof icons] ?? icons.Zap;
+
             const colors = ["green", "red", "yellow"];
             const TAG_CLASSES: Record<string, string> = {
               green: "tag-green",
@@ -42,7 +45,7 @@ const HistoricalJourney: React.FC<HistoricalJourneyProps> = ({ historyMilestones
 
             return (
               <div
-                key={`${milestone.milestoneYear}-${index}`}  // ← Changed here
+                key={`${milestone.milestoneYear}-${index}`}
                 className={`flex flex-col md:flex-row items-center gap-8  ${isEven ? "md:flex-row" : "md:flex-row-reverse"
                   } `}
               >

@@ -2,15 +2,16 @@ import { QueryClient } from "@tanstack/react-query";
 import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persister";
 
 export const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      gcTime: 1000 * 60 * 60 * 24,
-      staleTime: 1000 * 60 * 5,
+    defaultOptions: {
+        queries: {
+            gcTime: 1000 * 60 * 60 * 24,
+            staleTime: 1000 * 60 * 5,
+            retry: 2,
+        },
     },
-  },
 });
 
 export const persister = createSyncStoragePersister({
-  storage: typeof window !== "undefined" ? window.localStorage : undefined,
-  key: "baf-query-cache",
+    storage: typeof window !== "undefined" ? window.localStorage : undefined,
+    key: "baf-query-cache",
 });

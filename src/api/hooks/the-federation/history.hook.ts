@@ -11,8 +11,5 @@ export const useGetAllHistories = () => {
   return useQuery<ApiResponse<HistoryContentWrapperDto>>({
     queryKey: ["history-content", locale],
     queryFn: () => historyApi.getAllHistories(locale),
-    staleTime: 1000 * 60 * 5,     // 5 minutes
-    gcTime: 1000 * 60 * 60 * 24,  // 24 hours (must be >= persister maxAge)
-    retry: 2,                     // Retry failed requests twice
   });
 };
