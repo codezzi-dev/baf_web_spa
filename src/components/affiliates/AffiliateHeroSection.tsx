@@ -1,11 +1,12 @@
 import { Building2 } from "lucide-react";
+import StatisticsSection from "../common/StatisticsSection";
 
 const AffiliateHeroSection = () => {
   const stats = [
-    { value: "27", label: "Total Organizations", bgColor: "bg-tag-green" },
-    { value: "11", label: "Divisions", bgColor: "bg-tag-red" },
-    { value: "5", label: "Federations", bgColor: "bg-tag-yellow" },
-    { value: "11910+", label: "Total Areas", bgColor: "bg-tag-blue" },
+    { value: "27", label: "Total Organizations", color: "bg-tag-green" },
+    { value: "11", label: "Divisions", color: "bg-tag-red" },
+    { value: "5", label: "Federations", color: "bg-tag-yellow" },
+    { value: "11910+", label: "Total Areas", color: "bg-tag-blue" },
   ];
 
   return (
@@ -23,17 +24,7 @@ const AffiliateHeroSection = () => {
         Our network of affiliated organizations working together to promote athletics across Bangladesh
       </p>
 
-      <div className="flex flex-wrap justify-center gap-4">
-        {stats.map((stat, index) => (
-          <div
-            key={index}
-            className={`${stat.bgColor} text-white px-6 py-3 rounded-lg min-w-[120px]`}
-          >
-            <div className="text-2xl font-bold">{stat.value}</div>
-            <div className="text-xs opacity-90">{stat.label}</div>
-          </div>
-        ))}
-      </div>
+       <StatisticsSection stats={stats} />
     </div>
   );
 };

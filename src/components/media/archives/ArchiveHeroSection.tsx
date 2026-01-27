@@ -1,3 +1,4 @@
+import StatisticsSection from "@/components/common/StatisticsSection";
 import { Archive } from "lucide-react";
 
 const stats = [
@@ -9,7 +10,7 @@ const stats = [
 
 const ArchiveHeroSection = () => {
   return (
-    <section className="text-center py-12">
+    <section className="text-center py-12 pt-40">
       <div className="inline-flex items-center gap-2 bg-[hsl(var(--yellow))]/20 text-[hsl(var(--green-dark))] px-4 py-2 rounded-full text-sm font-medium mb-6">
         <Archive className="w-4 h-4" />
         Preserving Our Legacy
@@ -24,17 +25,7 @@ const ArchiveHeroSection = () => {
         memorable moments spanning over five decades
       </p>
       
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-        {stats.map((stat, index) => (
-          <div
-            key={index}
-            className={`${stat.color} text-white rounded-xl py-4 px-6`}
-          >
-            <div className="text-2xl md:text-3xl font-bold">{stat.value}</div>
-            <div className="text-sm opacity-90">{stat.label}</div>
-          </div>
-        ))}
-      </div>
+      <StatisticsSection stats={stats} />
     </section>
   );
 };

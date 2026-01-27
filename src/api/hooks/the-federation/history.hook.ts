@@ -7,10 +7,12 @@ import { useLocale } from "next-intl";
 // Hook
 export const useGetAllHistories = () => {
   const locale = useLocale();
-  
-  return useQuery<ApiResponse<HistoryContentWrapperDto>>({  // ← Add return
+
+  return useQuery<ApiResponse<HistoryContentWrapperDto>>({
     queryKey: ["history-content", locale],
-    queryFn: () => historyApi.getAllHistories(locale),      // ← Add arrow function
-    staleTime: 1000 * 60 * 5,
+    queryFn: () => historyApi.getAllHistories(locale),
+    staleTime: 1000 * 60 * 5,     // 5 minutes
+    gcTime: 1000 * 60 * 60 * 24,  // 24 hours (must be >= persister maxAge)
+    retry: 2,                     // Retry failed requests twice
   });
 };

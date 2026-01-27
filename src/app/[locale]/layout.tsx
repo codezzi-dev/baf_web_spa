@@ -4,7 +4,7 @@ import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import Layout from "@/components/layout/Layout";
-import QueryProvider from "./providers/QueryProvider";
+import {QueryProvider} from "../providers/QueryProvider";
 
 type Locale = (typeof routing.locales)[number];
 

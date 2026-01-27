@@ -2,7 +2,11 @@ import { MapPin, Phone, Mail, ExternalLink, Building2, Users } from "lucide-reac
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/Badge";
 
-export interface Organization {
+export type OrganizationCategory = "Division" | "University" | "Board" | "PE College";
+type OrganizationStatus = "active" | "verified" | "online";
+export type OrganizationDivition = "Dhaka" | "Chittagong" | "Rajshahi" | "Khulna" | "Barishal" | "Sylhet" | "Rangpur" | "Mymensingh";
+
+type OrganizationBase = {
   id: string;
   name: string;
   description: string;
@@ -10,9 +14,18 @@ export interface Organization {
   phone?: string;
   email?: string;
   website?: string;
-  category: string;
-  status: "active" | "verified" | "online";
-}
+  status: OrganizationStatus;
+};
+
+export type Organization =
+  | (OrganizationBase & {
+    category: "Division";
+    division: OrganizationDivition;
+  })
+  | (OrganizationBase & {
+    category: Exclude<OrganizationCategory, "Division">;
+    division?: OrganizationDivition;
+  });
 
 interface AffiliateCardProps {
   organization: Organization;
@@ -31,8 +44,9 @@ const AffiliateCard = ({ organization }: AffiliateCardProps) => {
         <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
           <Building2 className="w-8 h-8 text-white" />
         </div>
-        <Badge className={`absolute top-2 right-2 ${statusColors[organization.status]}`}>
-          {organization.status}
+
+        <Badge className={`absolute bottom-2 left-4 ${statusColors[organization.status]}`}>
+          {organization.category === "Division" && organization.division} {organization.category}
         </Badge>
       </CardHeader>
 
@@ -71,8 +85,8 @@ const AffiliateCard = ({ organization }: AffiliateCardProps) => {
           <div className="flex w-full justify-between gap-2">
             <div className="flex gap-2 text-xs items-center text-gray-400">
 
-            <Users className="h-4 w-4 font-extralight "/>
-            <span>220 Athletes</span>
+              <Users className="h-4 w-4 font-extralight " />
+              <span>220 Athletes</span>
             </div>
             <Badge variant="outline" className="text-xs">
               {organization.status === "active" ? "Active" : organization.status === "verified" ? "Verified" : "Online"}

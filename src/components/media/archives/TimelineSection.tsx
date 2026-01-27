@@ -77,7 +77,7 @@ const TimelineSection = () => {
                     <span className="relative z-10 text-sm text-foreground flex-1">
                       {event.title}
                     </span>
-                    <span className="relative z-10 bg-background border-2 rounded-md text-xs border-tag-yellow/10 text-tag-yellow font-medium px-2">
+                    <span className="relative z-10 bg-background border-2 rounded-md text-xs border-gray-200 font-medium px-2">
                       {event.year}
                     </span>
                   </div>

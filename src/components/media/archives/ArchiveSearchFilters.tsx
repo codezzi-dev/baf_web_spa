@@ -8,6 +8,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import CategorySection from "@/components/common/CategorySection";
+import SearchBarSection from "@/components/common/SearchBarSection";
 
 interface ArchiveSearchFiltersProps {
   activeTab: string;
@@ -41,25 +43,32 @@ const ArchiveSearchFilters = ({
   return (
     <section className="space-y-6 mb-8">
       {/* Search Bar */}
-      <div className="relative max-w-2xl mx-auto">
-        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-        <Input
-          type="text"
-          placeholder="Search archives by title, description, or year..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="pl-12 py-6 text-base border-border rounded-xl"
-        />
-      </div>
+      <SearchBarSection 
+      searchQuery={searchQuery}
+      setSearchQuery={setSearchQuery}
+      placeholder="Search archives by title, description, or year..."
+      />
 
       {/* Tabs and Year Filter */}
-      <div className="flex flex-wrap items-center justify-center gap-4">
-        <div className="flex items-center bg-muted rounded-full p-1">
+      <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="flex items-center justify-between bg-muted rounded-full p-1 w-full md:w-auto md:flex-1">
+          <Button
+            variant={activeTab === "all" ? "default" : "ghost"}
+            size="sm"
+            onClick={() => setActiveTab("all")}
+            className={`rounded-full px-6 w-1/3 ${
+              activeTab === "all"
+                ? "bg-tag-green text-white hover:bg-tag-green/90"
+                : ""
+            }`}
+          >
+            All
+          </Button>
           <Button
             variant={activeTab === "historic" ? "default" : "ghost"}
             size="sm"
             onClick={() => setActiveTab("historic")}
-            className={`rounded-full px-6 ${
+            className={`rounded-full px-6 w-1/3 ${
               activeTab === "historic"
                 ? "bg-tag-green text-white hover:bg-tag-green/90"
                 : ""
@@ -71,7 +80,7 @@ const ArchiveSearchFilters = ({
             variant={activeTab === "photo" ? "default" : "ghost"}
             size="sm"
             onClick={() => setActiveTab("photo")}
-            className={`rounded-full px-6 ${
+            className={`rounded-full px-6 w-1/3 ${
               activeTab === "photo"
                 ? "bg-tag-green text-white hover:bg-tag-green/90"
                 : ""
@@ -82,7 +91,7 @@ const ArchiveSearchFilters = ({
         </div>
 
         <Select value={selectedYear} onValueChange={setSelectedYear}>
-          <SelectTrigger className="w-40 rounded-lg">
+          <SelectTrigger className="w-full md:w-[180px] rounded-lg">
             <SelectValue placeholder="All Years" />
           </SelectTrigger>
           <SelectContent>
@@ -96,25 +105,11 @@ const ArchiveSearchFilters = ({
       </div>
 
       {/* Category Icons */}
-      <div className="flex items-center justify-center gap-8">
-        {categories.map((category) => {
-          const Icon = category.icon;
-          return (
-            <button
-              key={category.id}
-              onClick={() => setActiveCategory(category.id === activeCategory ? "" : category.id)}
-              className={`flex flex-col items-center gap-2 p-4 rounded-xl transition-colors ${
-                activeCategory === category.id
-                  ? "bg-[hsl(var(--green-dark))]/10 text-[hsl(var(--green-dark))]"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              <Icon className="w-6 h-6" />
-              <span className="text-sm font-medium">{category.label}</span>
-            </button>
-          );
-        })}
-      </div>
+      <CategorySection
+        categories={categories}
+        activeCategory={activeCategory}
+        setActiveCategory={setActiveCategory}
+      />
     </section>
   );
 };

@@ -3,6 +3,7 @@ import AffiliateCard, { Organization } from "./AffiliateCard";
 interface AffiliateGridProps {
   searchQuery: string;
   activeCategory: string;
+  activeSubCategory: string;
 }
 
 const organizations: Organization[] = [
@@ -14,7 +15,7 @@ const organizations: Organization[] = [
     phone: "+880 721-750123",
     email: "info@gpecrajshahi.edu.bd",
     website: "https://gpecrajshahi.edu.bd",
-    category: "universities",
+    category: "PE College",
     status: "active",
   },
   {
@@ -23,7 +24,7 @@ const organizations: Organization[] = [
     description: "Leading physical education institution serving the Chittagong division.",
     location: "Chittagong, Bangladesh",
     phone: "+880 31-2856789",
-    category: "universities",
+    category: "PE College",
     status: "verified",
   },
   {
@@ -33,7 +34,7 @@ const organizations: Organization[] = [
     location: "Sreepur, Khulna, Bangladesh",
     phone: "+880 41-720456",
     website: "https://kdgpec.edu.bd",
-    category: "universities",
+    category: "PE College",
     status: "active",
   },
   {
@@ -43,7 +44,9 @@ const organizations: Organization[] = [
     location: "Sylhet, Bangladesh",
     phone: "+880 821-714567",
     email: "sylhetdsa@gmail.com",
-    category: "secondary",
+    category: "Division",
+    division: "Sylhet",
+
     status: "online",
   },
   {
@@ -52,7 +55,8 @@ const organizations: Organization[] = [
     description: "Coordinating athletics and sports development across Rangpur division.",
     location: "Rangpur, Bangladesh",
     phone: "+880 521-62890",
-    category: "secondary",
+    category: "Division",
+    division: "Rangpur",
     status: "active",
   },
   {
@@ -62,7 +66,8 @@ const organizations: Organization[] = [
     location: "Mymensingh, Bangladesh",
     phone: "+880 91-67234",
     email: "mdsa.mymensingh@gmail.com",
-    category: "secondary",
+    category: "Division",
+    division: "Mymensingh",
     status: "verified",
   },
   {
@@ -73,7 +78,7 @@ const organizations: Organization[] = [
     phone: "+880 2-9661920",
     email: "sports@du.ac.bd",
     website: "https://du.ac.bd",
-    category: "universities",
+    category: "University",
     status: "active",
   },
   {
@@ -83,7 +88,7 @@ const organizations: Organization[] = [
     location: "Palashi, Dhaka, Bangladesh",
     phone: "+880 2-9665650",
     website: "https://buet.ac.bd",
-    category: "universities",
+    category: "University",
     status: "verified",
   },
   {
@@ -93,7 +98,7 @@ const organizations: Organization[] = [
     location: "Rajshahi University Campus, Rajshahi",
     phone: "+880 721-750041",
     email: "sports@ru.ac.bd",
-    category: "universities",
+    category: "University",
     status: "active",
   },
   {
@@ -102,7 +107,7 @@ const organizations: Organization[] = [
     description: "Prominent university fostering sports talent and athletic achievements.",
     location: "Chittagong University, Chittagong",
     phone: "+880 31-726311",
-    category: "universities",
+    category: "University",
     status: "online",
   },
   {
@@ -113,7 +118,7 @@ const organizations: Organization[] = [
     phone: "+880 2-7791045",
     email: "sports@juniv.edu",
     website: "https://juniv.edu",
-    category: "universities",
+    category: "University",
     status: "active",
   },
   {
@@ -124,7 +129,7 @@ const organizations: Organization[] = [
     phone: "+880 2-7742601",
     email: "info@bksp.gov.bd",
     website: "https://bksp.gov.bd",
-    category: "secondary",
+    category: "Board",
     status: "verified",
   },
   {
@@ -133,7 +138,7 @@ const organizations: Organization[] = [
     description: "Armed forces athletics program promoting sports excellence among personnel.",
     location: "Dhaka Cantonment, Dhaka",
     phone: "+880 2-8712345",
-    category: "police",
+    category: "Board",
     status: "active",
   },
   {
@@ -143,7 +148,7 @@ const organizations: Organization[] = [
     location: "Police Headquarters, Dhaka",
     phone: "+880 2-8315678",
     email: "sports@police.gov.bd",
-    category: "police",
+    category: "Board",
     status: "verified",
   },
   {
@@ -153,21 +158,29 @@ const organizations: Organization[] = [
     location: "Agargaon, Dhaka, Bangladesh",
     phone: "+880 2-8181234",
     website: "https://bteb.gov.bd",
-    category: "secondary",
+    category: "Board",
     status: "online",
   },
 ];
 
-const AffiliateGrid = ({ searchQuery, activeCategory }: AffiliateGridProps) => {
+const AffiliateGrid = ({ searchQuery, activeCategory, activeSubCategory }: AffiliateGridProps) => {
   const filteredOrganizations = organizations.filter((org) => {
+    // Search Filter
     const matchesSearch =
+      searchQuery === "" ||
       org.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       org.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
       org.description.toLowerCase().includes(searchQuery.toLowerCase());
 
+    // Category Filter
     const matchesCategory = !activeCategory || org.category === activeCategory;
 
-    return matchesSearch && matchesCategory;
+    // Sub-Category Filter (only for Division category)
+    const matchesSubCategory =
+      !activeSubCategory ||
+      (org.category === "Division" && org.division === activeSubCategory);
+
+    return matchesSearch && matchesCategory && matchesSubCategory; 
   });
 
   return (

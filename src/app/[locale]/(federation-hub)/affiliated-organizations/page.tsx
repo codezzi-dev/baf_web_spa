@@ -7,6 +7,7 @@ import AffiliateCTA from "@/components/affiliates/AffiliateCTA";
 
 const  Page = () => {
   const [activeCategory, setActiveCategory] = useState("");
+  const [activeSubCategory, setActiveSubCategory] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
 
   return (
@@ -17,6 +18,8 @@ const  Page = () => {
         <AffiliateSearchFilters
           activeCategory={activeCategory}
           setActiveCategory={setActiveCategory}
+          activeSubCategory={activeSubCategory}
+          setActiveSubCategory={setActiveSubCategory}
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
         />
@@ -24,6 +27,7 @@ const  Page = () => {
         <AffiliateGrid
           searchQuery={searchQuery}
           activeCategory={activeCategory}
+          activeSubCategory={activeSubCategory}
         />
         
         <AffiliateCTA />
