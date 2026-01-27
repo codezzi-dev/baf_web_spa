@@ -1,9 +1,5 @@
-// Type definitions
-export interface MenuItem {
-  name: string;
-  href: string;
-  hasMegamenu?: boolean;
-}
+// src/types/navigation.ts
+import { ReactNode } from "react";
 
 export interface MegamenuLink {
   name: string;
@@ -13,7 +9,7 @@ export interface MegamenuLink {
 export interface MegamenuSection {
   title: string;
   links?: MegamenuLink[];
-  content?: React.ReactNode;
+  content?: ReactNode;
 }
 
 export interface MegamenuContentItem {
@@ -22,6 +18,13 @@ export interface MegamenuContentItem {
 
 export interface MegamenuContent {
   [key: string]: MegamenuContentItem;
+}
+
+export interface MenuItem {
+  name: string;
+  href: string;
+  hasMegamenu?: boolean;
+  key: string;
 }
 
 export type NavigationLevel = "main" | "sections" | "links";

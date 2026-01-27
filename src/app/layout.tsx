@@ -1,9 +1,7 @@
+// src/app/layout.tsx
 import type { Metadata } from "next";
 import { Inter, Roboto, Poppins, Lato, Nunito, Noto_Sans } from "next/font/google";
-
-import Layout from "@/components/layout/Layout";
 import "./globals.css";
-import QueryProvider from "./providers/QueryProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -52,15 +50,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${inter.variable} ${roboto.variable} ${poppins.variable} ${lato.variable} ${nunito.variable} ${notoSans.variable} font-sans antialiased`}
       >
-        <Layout>
-          <QueryProvider>
-            {children}
-          </QueryProvider>
-        </Layout>
+        {children}
       </body>
     </html>
   );

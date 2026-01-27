@@ -1,26 +1,34 @@
-const API_BASE_URL = process.env.REACT_APP_API_URL || "https://jsonplaceholder.typicode.com";
+const API_BASE_URL =
+  process.env.REACT_APP_API_URL ??
+  "http://musnadcodezzi-001-site1.rtempurl.com/api";
 
 async function request<T>(
   url: string,
   options: RequestInit = {}
 ): Promise<T> {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
 
   const res = await fetch(`${API_BASE_URL}${url}`, {
+    ...options,
     headers: {
-      'Content-Type': 'application/json',
-      ...(token && { Authorization: `Bearer ${token}` }),
+      "Content-Type": "application/json",
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
       ...options.headers,
     },
-    ...options,
   });
 
+  // Try to parse JSON safely
+  const responseBody = await res.json().catch(() => null);
+
   if (!res.ok) {
-    const error = await res.text();
-    throw new Error(error || 'API Error');
+    throw new Error(
+      responseBody?.message ||
+      responseBody?.error ||
+      "Something went wrong"
+    );
   }
 
-  return res.json();
+  return responseBody as T;
 }
 
 export default request;
