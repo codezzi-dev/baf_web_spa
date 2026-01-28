@@ -119,7 +119,7 @@ export default function SponsorsPage() {
             <Link href="/our-sponsors/apply-for-sponsorship">
               <Button
                 type="button"
-                variant="black"
+                variant="default"
                 className="h-14 px-8 bg-gradient-to-r from-[#D4AF37] to-[#B8941F] hover:from-[#B8941F] hover:to-[#D4AF37] text-white text-lg font-semibold shadow-xl"
               >
                 Become a Sponsor
@@ -249,7 +249,7 @@ export default function SponsorsPage() {
                     <div className="flex gap-2 mt-auto">
                       {sponsor.website && (
                         <Button
-                          variant="black"
+                          variant="default"
                           className="flex-1 rounded-2xl"
                           onClick={() => window.open(sponsor.website, "_blank")}
                         >
@@ -259,7 +259,7 @@ export default function SponsorsPage() {
                       )}
                       {sponsor.contact_email && (
                         <Button
-                          variant="black"
+                          variant="default"
                           className="rounded-2xl"
                           onClick={() => (window.location.href = `mailto:${sponsor.contact_email}`)}
                         >
@@ -304,7 +304,7 @@ export default function SponsorsPage() {
                   </p>
                   <Link href="/become-a-sponsor">
                     <Button
-                      variant="white"
+                      variant="default"
                       className="h-14 px-8 bg-white text-[#00704A] hover:bg-gray-100 text-lg font-semibold"
                     >
                       Become a Sponsor

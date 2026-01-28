@@ -298,7 +298,7 @@ export default function MediaInquiries() {
 
                 {/* Submit */}
                 <Button
-                  variant="black"
+                  variant="default"
                   type="submit"
                   className="w-full h-14 bg-gradient-to-r from-[#00704A] to-[#005239] hover:from-[#005239] hover:to-[#00704A] text-white text-lg font-semibold"
                 >
@@ -344,7 +344,7 @@ export default function MediaInquiries() {
                 </p>
                 <Button
                   type="button"
-                  variant="white"
+                  variant="default"
                   className="w-full bg-white text-[#C1272D] hover:bg-gray-100 hover:text-black"
                 >
                   Download Guidelines

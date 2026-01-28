@@ -156,7 +156,7 @@ export default function TrainingProgramDetails() {
           <CardContent className="p-12 text-center">
             <Target className="w-16 h-16 text-gray-300 mx-auto mb-4" />
             <p className="text-gray-600 text-lg mb-4">Program not found</p>
-            <Button type="button" variant="black" onClick={() => {}}>
+            <Button type="button" variant="default" onClick={() => {}}>
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Programs
             </Button>
@@ -215,7 +215,7 @@ export default function TrainingProgramDetails() {
     <div className="min-h-screen bg-gradient-to-br from-[#F8F6F3] to-white py-12 px-4 pt-40">
       <div className="main_container mx-auto">
         <Button
-          variant="black"
+          variant="default"
           type="button"
           onClick={() => {
             router.push("/national-training-program");
@@ -466,7 +466,7 @@ export default function TrainingProgramDetails() {
 
                 <Button
                   type="button"
-                  variant="orange"
+                  variant="default"
                   className="w-full rounded-xl h-14 bg-gradient-to-r from-[#00704A] to-[#005239] hover:from-[#005239] hover:to-[#00704A] text-white text-lg font-semibold mb-4"
                   onClick={handleEnrollClick}
                 >
@@ -570,13 +570,13 @@ export default function TrainingProgramDetails() {
             </div>
 
             <DialogFooter>
-              <Button variant="black" type="button" onClick={() => setShowEnrollDialog(false)}>
+              <Button variant="default" type="button" onClick={() => setShowEnrollDialog(false)}>
                 Cancel
               </Button>
 
               <Button
                 type="button"
-                variant="black"
+                variant="default"
                 onClick={handleEnrollSubmit}
                 className="bg-gradient-to-r from-[#00704A] to-[#005239] hover:from-[#005239] hover:to-[#00704A] text-white"
               >
@@ -769,7 +769,7 @@ export default function TrainingProgramDetails() {
 
             <DialogFooter>
               <Button
-                variant="black"
+                variant="default"
                 type="button"
                 onClick={() => setShowPaymentDialog(false)}
                 className="bg-gray-200 hover:bg-gradient-to-r from-[#00704A] to-[#005239] hover:from-[#005239] hover:to-[#00704A]"
@@ -778,7 +778,7 @@ export default function TrainingProgramDetails() {
               </Button>
               <Button
                 type="button"
-                variant="black"
+                variant="default"
                 onClick={handlePaymentSubmit}
                 disabled={!paymentMethod || isProcessingPayment}
                 className="bg-gradient-to-r from-[#00704A] to-[#005239] hover:from-[#005239] hover:to-[#00704A] text-white"

@@ -138,7 +138,7 @@ export default function BannedSubstancesPage() {
         </div>
         <div className="main_container mx-auto relative z-10">
           <Link href="/anti-doping">
-            <Button variant="black" type="button" className="text-white hover:bg-white/20 mb-6">
+            <Button variant="default" type="button" className="text-white hover:bg-white/20 mb-6">
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Anti-Doping
             </Button>

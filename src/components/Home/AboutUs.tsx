@@ -4,7 +4,7 @@ import { FiCheck } from "react-icons/fi";
 import about1 from "@/assets/images/home/about/about1.jpg";
 import about2 from "@/assets/images/home/about/about2.jpg";
 import Text from "../ui/Text";
-import Button from "../ui/Button";
+import {Button} from "../ui/Button";
 import shape1 from "@/assets/images/home/about/shape1.png";
 
 export default function AboutUs({ page = "home" }: { page: string }) {
@@ -118,8 +118,8 @@ export default function AboutUs({ page = "home" }: { page: string }) {
 
             <Button
               type="submit"
-              variant="orange"
-              buttonEvent={handleEploreEvent}
+              variant="default"
+              onClick={handleEploreEvent}
               className="px-2 cursor-pointer"
             >
               Our team
@@ -234,8 +234,8 @@ export default function AboutUs({ page = "home" }: { page: string }) {
 
             <Button
               type="submit"
-              variant="orange"
-              buttonEvent={handleEploreEvent}
+              variant="default"
+              onClick={handleEploreEvent}
               className="lg:mt-14 px-2 cursor-pointer"
             >
               Our team
@@ -348,7 +348,7 @@ export default function AboutUs({ page = "home" }: { page: string }) {
   //             </div>
   //           </div>
 
-  //           <Button type="submit" variant="orange" buttonEvent={handleEploreEvent}>
+  //           <Button type="submit" variant="default" buttonEvent={handleEploreEvent}>
   //             Our team
   //           </Button>
 

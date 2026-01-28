@@ -20,7 +20,7 @@ import athlete_banner_3 from "@/assets/images/home/banner/athlete-banner-3.jpg"
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/effect-fade";
-import Button from "../ui/Button";
+import {Button} from "../ui/Button";
 
 const heroSlides = [
   {

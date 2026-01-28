@@ -134,7 +134,7 @@ export default function AntiDopingPage() {
                 <CardContent className="px-6 py-3">
                   <Link href={section.href}>
                     <Button
-                      variant="black"
+                      variant="default"
                       type="button"
                       className={`w-full bg-gradient-to-r ${section.color} text-white hover:opacity-90 transition-all group-hover:gap-3`}
                     >
@@ -164,7 +164,7 @@ export default function AntiDopingPage() {
               </p>
               <Link href="/anti-doping/violation-report">
                 <Button
-                  variant="black"
+                  variant="default"
                   type="button"
                   className="bg-white text-[#C1272D] hover:bg-gray-100 font-semibold px-8"
                 >

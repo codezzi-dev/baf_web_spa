@@ -346,7 +346,7 @@ export default function EventResultsPage() {
 
                     <div className="flex gap-2 pt-4 border-t border-gray-100">
                       <Button
-                        variant="black"
+                        variant="default"
                         type="button"
                         onClick={() => router.push(`/events/${event.id}`)}
                         className="flex-1 bg-gradient-to-r from-[#00704A] to-[#005239] text-white"
@@ -355,7 +355,7 @@ export default function EventResultsPage() {
                         View Details
                       </Button>
                       {hasResults && event.results_url && (
-                        <Button variant="black">
+                        <Button variant="default">
                           <Download className="w-4 h-4" />
                         </Button>
                       )}

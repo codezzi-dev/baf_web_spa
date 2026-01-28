@@ -83,7 +83,7 @@ export default function WadaGuidelinesPage() {
       <div className="bg-gradient-to-br from-[#D4AF37] to-[#B8941F] text-white pt-52 pb-10 px-6">
         <div className="main_container mx-auto">
           <Link href="/anti-doping">
-            <Button variant="black" className="text-white hover:bg-white/20 mb-6">
+            <Button variant="default" className="text-white hover:bg-white/20 mb-6">
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Anti-Doping
             </Button>
@@ -116,7 +116,7 @@ export default function WadaGuidelinesPage() {
                   the fight against doping in sport. It develops and harmonizes anti-doping rules and policies
                   worldwide, ensuring consistency across all sports and countries.
                 </p>
-                <Button variant="black" className="bg-[#D4AF37] hover:bg-[#B8941F] gap-2 text-white">
+                <Button variant="default" className="bg-[#D4AF37] hover:bg-[#B8941F] gap-2 text-white">
                   <ExternalLink className="w-4 h-4" />
                   Visit WADA Official Website
                 </Button>
@@ -171,7 +171,7 @@ export default function WadaGuidelinesPage() {
                 </CardHeader>
                 <CardContent className="p-0">
                   <Button
-                    variant="black"
+                    variant="default"
                     className="w-full gap-2 hover:bg-yellow-50 hover:text-yellow-800 hover:border-yellow-300"
                   >
                     <Download className="w-4 h-4" />
@@ -235,7 +235,7 @@ export default function WadaGuidelinesPage() {
           </CardHeader>
           <CardContent>
             <div className="grid md:grid-cols-2 gap-4 pb-7">
-              <Button variant="black" className="w-full justify-start gap-3 h-auto py-4 bg-white hover:border-blue-300">
+              <Button variant="default" className="w-full justify-start gap-3 h-auto py-4 bg-white hover:border-blue-300">
                 <FileText className="w-5 h-5 text-blue-600" />
                 <div className="text-left">
                   <div className="font-semibold">WADA E-Learning Platform (ADEL)</div>
@@ -243,7 +243,7 @@ export default function WadaGuidelinesPage() {
                 </div>
               </Button>
               <Button
-                variant="black"
+                variant="default"
                 className="w-full justify-start gap-3 h-auto py-4 bg-white hover:border-green-300"
               >
                 <BookOpen className="w-5 h-5 text-green-600" />
@@ -253,7 +253,7 @@ export default function WadaGuidelinesPage() {
                 </div>
               </Button>
               <Button
-                variant="black"
+                variant="default"
                 className="w-full justify-start gap-3 h-auto py-4 bg-white hover:border-purple-300"
               >
                 <Globe className="w-5 h-5 text-purple-600" />
@@ -263,7 +263,7 @@ export default function WadaGuidelinesPage() {
                 </div>
               </Button>
               <Button
-                variant="black"
+                variant="default"
                 className="w-full justify-start gap-3 h-auto py-4 bg-white hover:border-orange-300"
               >
                 <FileText className="w-5 h-5 text-orange-600" />

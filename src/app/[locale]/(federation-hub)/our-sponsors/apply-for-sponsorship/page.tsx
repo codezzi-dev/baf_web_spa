@@ -195,7 +195,7 @@ export default function BecomeASponsor() {
               </p>
             </div>
             <div className="flex gap-4 justify-center">
-              <Button type="button" variant="black" onClick={() => router.push("/sponsors")}>
+              <Button type="button" variant="default" onClick={() => router.push("/sponsors")}>
                 View Current Sponsors
               </Button>
               <Button
@@ -500,7 +500,7 @@ export default function BecomeASponsor() {
 
                   {/* Submit Button */}
                   <Button
-                    variant="black"
+                    variant="default"
                     type="submit"
                     // disabled={
                     //   submitMutation.isPending ||

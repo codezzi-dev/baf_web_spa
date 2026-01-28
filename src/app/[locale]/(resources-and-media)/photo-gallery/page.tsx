@@ -373,12 +373,12 @@ export default function PhotoGallery() {
                   <div className="flex flex-col md:flex-row gap-3 mt-6">
                     <Button
                       type="button"
-                      variant="black"
+                      variant="default"
                       className="flex-1 bg-emerald-700 hover:bg-emerald-800 text-white"
                     >
                       <Download className="w-4 h-4 mr-2" /> Download
                     </Button>
-                    <Button type="button" variant="white" className="flex-1 border-2 hover:text-white">
+                    <Button type="button" variant="default" className="flex-1 border-2 hover:text-white">
                       <Share2 className="w-4 h-4 mr-2" /> Share
                     </Button>
                   </div>

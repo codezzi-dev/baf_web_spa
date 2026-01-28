@@ -83,7 +83,7 @@ export default function CoachDetailsPage() {
       <div className="main_container mx-auto">
         <Button
           type="button"
-          variant="black"
+          variant="default"
           onClick={() => router.push("/certified-coach")}
           className="mb-6 hover:bg-gradient-to-br from-[#00704A] to-[#005239]"
         >
@@ -328,7 +328,7 @@ export default function CoachDetailsPage() {
               </Button>
               <Button
                 type="button"
-                variant="black"
+                variant="default"
                 className="h-14 px-8 border-2 border-white text-white hover:bg-white/10 text-lg font-semibold"
                 onClick={() => router.push("/training-programs")}
               >

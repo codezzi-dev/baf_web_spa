@@ -231,7 +231,7 @@ export function AddressesStep() {
         </div>
       )}
 
-      {/* <Button type="button" onClick={addNewAddress} variant="black" className="w-full bg-transparent">
+      {/* <Button type="button" onClick={addNewAddress} variant="default" className="w-full bg-transparent">
         <Plus size={18} />
         Add Another Address
       </Button> */}
