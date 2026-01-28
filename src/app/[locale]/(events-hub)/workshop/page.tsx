@@ -396,7 +396,7 @@ export default function WorkshopsPage() {
                   {isUpcoming && (
                     <Button
                       //   onClick={() => router.push(`/workshop/${workshop.id}`)}
-                      variant="black"
+                      variant="default"
                       className="w-full bg-gradient-to-r from-[#00704A] to-[#005239] hover:from-[#005239] hover:to-[#00704A] text-white h-12"
                       disabled={spotsLeft <= 0}
                     >

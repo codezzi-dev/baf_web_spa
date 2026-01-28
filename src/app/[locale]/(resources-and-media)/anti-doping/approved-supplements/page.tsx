@@ -130,7 +130,7 @@ export default function ApprovedSupplementsPage() {
       <div className="bg-gradient-to-br from-[#00704A] to-[#005239] text-white pt-52 pb-10 px-6">
         <div className="main_container mx-auto">
           <Link href="/anti-doping">
-            <Button variant="black" className="text-white hover:bg-white/20 mb-6">
+            <Button variant="default" className="text-white hover:bg-white/20 mb-6">
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Anti-Doping
             </Button>

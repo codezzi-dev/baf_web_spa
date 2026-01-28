@@ -551,7 +551,7 @@ export default function TalentProgramApplication() {
     <Suspense fallback={<div>Loading...</div>}>
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white py-10 px-4 pt-40">
         <div className="max-w-4xl mx-auto">
-          <Button variant="black" onClick={() => router.back()} className="mb-6">
+          <Button variant="default" onClick={() => router.back()} className="mb-6">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back
           </Button>
@@ -611,12 +611,12 @@ export default function TalentProgramApplication() {
               {renderStepContent()}
 
               <div className="flex justify-between mt-8 pt-6 border-t">
-                <Button variant="black" disabled={currentStep === 1} onClick={() => setCurrentStep((p) => p - 1)}>
+                <Button variant="default" disabled={currentStep === 1} onClick={() => setCurrentStep((p) => p - 1)}>
                   Previous
                 </Button>
                 {currentStep < steps.length ? (
                   <Button
-                    variant="white"
+                    variant="default"
                     type="button"
                     onClick={() => setCurrentStep((p) => p + 1)}
                     className="bg-gradient-to-r from-[#00704A] to-[#005239] hover:from-[#005239] hover:to-[#00704A] "
@@ -625,7 +625,7 @@ export default function TalentProgramApplication() {
                   </Button>
                 ) : (
                   <Button
-                    variant="black"
+                    variant="default"
                     onClick={handleSubmit}
                     className="bg-red-700 hover:bg-red-800 hover:text-white"
                   >

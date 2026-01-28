@@ -235,7 +235,7 @@ export default function TrainingPrograms() {
                   </div>
 
                   <Button
-                    variant="black"
+                    variant="default"
                     type="button"
                     className="w-full rounded-xl bg-gradient-to-r from-[#00704A] to-[#005239] hover:from-[#005239] hover:to-[#00704A] text-white"
                     onClick={() => handleViewDetails(program.id)}

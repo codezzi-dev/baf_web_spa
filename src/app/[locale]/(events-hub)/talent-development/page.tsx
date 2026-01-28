@@ -378,7 +378,7 @@ export default function TalentDevelopmentPage() {
                     </div>
 
                     <Button
-                      variant="black"
+                      variant="default"
                       onClick={() => router.push(`/talent-development/application-form?id=${program.id}`)}
                       disabled={spotsLeft <= 0}
                       className="w-full h-12 bg-gradient-to-r from-[#00704A] to-[#005239] hover:from-[#005239] hover:to-[#00704A] text-white text-base font-semibold"

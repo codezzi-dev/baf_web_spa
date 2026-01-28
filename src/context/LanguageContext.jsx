@@ -1,4 +1,6 @@
 // context/LanguageContext.js
+"use client";
+
 import { createContext, useState, useContext } from "react";
 import en from "../locales/en.json";
 import bn from "../locales/bn.json";
