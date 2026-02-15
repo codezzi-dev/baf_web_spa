@@ -24,9 +24,11 @@ import { DocumentsStep } from "./_components/DocumentsStep";
 import { ReviewStep } from "./_components/ReviewStep";
 
 import { Checkbox } from "@/components/ui/checkbox";
-import {Button} from "@/components/ui/Button"
+import { Button } from "@/components/ui/Button"
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { useRegisterAthlete } from "@/api/services/athletes/online-registration.api";
+import { CreateAthleteRequest } from "@/api/schemas/athletes/online-registration.schema";
 
 const steps = [
   { id: 0, title: "Personal Info", icon: User },
@@ -45,7 +47,78 @@ const AthleteRegistrationForm = () => {
     termsAccepted: false,
   });
   const [submitted, setSubmitted] = useState(false);
+  const { mutate, isPending, isError, error } = useRegisterAthlete();
 
+  // Add this transformer function before the component
+
+  const transformFormDataToRequest = (data: FormData): CreateAthleteRequest => {
+    // Split full name into first and last name
+    const nameParts = data.athleteFullName.trim().split(/\s+/);
+    const firstName = nameParts[0] || "";
+    const lastName = nameParts.slice(1).join(" ") || "";
+
+    // Map string IDs to integers (Assumed mapping based on common patterns, to be verified)
+    const identityTypeMap: Record<string, number> = {
+      "nid": 1,
+      "passport": 2,
+      "driving_license": 3,
+      "birth_certificate": 4
+    };
+
+    return {
+      athleteGenData: {
+        athleteFirstName: firstName,
+        athleteLastName: lastName,
+        athleteFatherName: data.athleteFatherName,
+        athleteMotherName: data.athleteMotherName,
+        athleteEmail: data.athleteEmail,
+        athleteContactNo: data.athleteContactNo,
+        athleteDob: new Date(data.athleteDob).toISOString(),
+        athleteGender: data.athleteGender as "Male" | "Female" | "Other",
+        athleteAlternateContactNo: data.athleteAlternateContactNo || undefined,
+        athleteHeight: Number(data.athleteHeight),
+        athleteWeight: Number(data.athleteWeight),
+        athleteBloodGroup: data.athleteBloodGroup,
+        athleteIdentityType: identityTypeMap[data.identifierType] || 0,
+        athleteIdentificationNumber: data.identifierNumber,
+        instituteId: data.instituteId ? Number(data.instituteId) : 0,
+      },
+      athleteIdentityData: {
+        athleteIdentityDocRelatedId: data.identifierNumber,
+        athleteIdentityDocsUrl: [], // TEMPORARY FIX: Sending empty array to avoid schema error until file upload is solved
+        athleteIdentityDocCategoryId: identityTypeMap[data.identifierType] || 0,
+      },
+      athleteCoreDataInBengali: {
+        athleteFullNameInBengali: data.athleteFullNameInBengali,
+        athleteFatherNameInBengali: data.athleteFatherNameInBengali,
+        athleteMotherNameInBengali: data.athleteMotherNameInBengali,
+      },
+      athleteAddresses: data.addresses.map((addr) => ({
+        athleteAddressDistrictId: Number(addr.athleteAddressDistrictId),
+        athleteAddressSubDistrictId: Number(addr.athleteAddressSubDistrictId),
+        athleteAddressPostalCode: Number(addr.athleteAddressPostalCode),
+        athleteAddressArea: addr.athleteAddressArea,
+        athleteAddressType: getAddressTypeId(addr.athleteAddressType),
+      })),
+      athleteDocuments: data.documents
+        .filter((doc) => doc.athleteDocPhysicalPathUrl) // Only include docs with URLs (files will be filtered out)
+        .map((doc) => ({
+          athleteDocName: doc.athleteDocName,
+          athleteDocRelatedId: doc.athleteDocRelatedId,
+          athleteDocPhysicalPathUrl: doc.athleteDocPhysicalPathUrl,
+          docCategoryId: Number(doc.docCategoryId),
+        })),
+    };
+  };
+
+  // Helper to convert address type string to number
+  const getAddressTypeId = (type: string): number => {
+    const typeMap: Record<string, number> = {
+      "Present Address": 1,
+      "Permanent Address": 2,
+    };
+    return typeMap[type] || 1;
+  };
   const methods = useForm<FormData>({
     resolver: zodResolver(formSchema),
     mode: "onBlur",
@@ -58,6 +131,9 @@ const AthleteRegistrationForm = () => {
       athleteDob: "",
       athleteGender: "",
       athleteAlternateContactNo: "",
+      athleteHeight: "",
+      athleteWeight: "",
+      athleteBloodGroup: "",
       instituteId: "",
       identifierType: "",
       identifierNumber: "",
@@ -120,14 +196,24 @@ const AthleteRegistrationForm = () => {
 
   const onSubmit = async (data: FormData) => {
     if (currentStep === 5 && declaration.infoAccurate && declaration.termsAccepted) {
-      console.log("Form submitted:", data);
-      setSubmitted(true);
-      // Handle form submission here
+      const requestData = transformFormDataToRequest(data);
+
+      mutate(requestData, {
+        onSuccess: (response) => {
+          console.log("Registration successful:", response);
+          toast.success("Registration submitted successfully!");
+          setSubmitted(true);
+        },
+        onError: (error) => {
+          console.error("Registration failed:", error);
+          toast.error(error.message || "Registration failed. Please try again.");
+        },
+      });
     }
   };
 
 
-  
+
 
   const canProceed = Object.keys(errors).length === 0 && isValid;
 
@@ -227,29 +313,26 @@ const AthleteRegistrationForm = () => {
                     className={`flex flex-col items-center focus:outline-none transition-all`}
                   >
                     <div
-                      className={`w-12 h-12 rounded-full flex items-center justify-center mb-2 transition-all ${
-                        isActive
-                          ? "bg-blue-500 text-white ring-4 ring-blue-200"
-                          : isCompleted
+                      className={`w-12 h-12 rounded-full flex items-center justify-center mb-2 transition-all ${isActive
+                        ? "bg-blue-500 text-white ring-4 ring-blue-200"
+                        : isCompleted
                           ? "bg-green-500 text-white"
                           : "bg-slate-200 text-slate-400"
-                      }`}
+                        }`}
                     >
                       {isCompleted ? <Check size={20} /> : <StepIcon size={20} />}
                     </div>
                     <span
-                      className={`text-xs font-medium text-center ${
-                        isActive ? "text-blue-600" : isCompleted ? "text-green-600" : "text-slate-500"
-                      }`}
+                      className={`text-xs font-medium text-center ${isActive ? "text-blue-600" : isCompleted ? "text-green-600" : "text-slate-500"
+                        }`}
                     >
                       {step.title}
                     </span>
                   </button>
                   {index < steps.length - 1 && (
                     <div
-                      className={`flex-1 h-1 mx-2 rounded-full transition-all ${
-                        isCompleted ? "bg-green-500" : "bg-slate-200"
-                      }`}
+                      className={`flex-1 h-1 mx-2 rounded-full transition-all ${isCompleted ? "bg-green-500" : "bg-slate-200"
+                        }`}
                     />
                   )}
                 </div>

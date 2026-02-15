@@ -1,10 +1,7 @@
 // schemas/history.schema.ts  (or types/history.schema.ts)
 
 import { z } from 'zod';
-
-// ──────────────────────────────────────────────
-// Inner DTO Schemas
-// ──────────────────────────────────────────────
+import { PageGenericElementSchema } from '../generic/page-generic-element.schema';
 
 export const HistoryContentSchema = z.object({
   historyYearsOfExcellence: z.number().int().nullable().optional(),
@@ -20,14 +17,7 @@ export const MilestoneSchema = z.object({
   milestoneIconTag: z.string().nullable().optional(),
 });
 
-export const PageGenericElementSchema = z.object({
-  pageTopTag: z.string().nullable().optional(),
-  pageTopTitle: z.string().nullable().optional(),
-  pageTopSummary: z.string().nullable().optional(),
-  pageBottomTitle: z.string().nullable().optional(),
-  pageBottomSummary: z.string().nullable().optional(),
-  pageBottomTags: z.string().nullable().optional(),
-});
+
 
 // ──────────────────────────────────────────────
 // Main Wrapper Schema (what the API actually returns)

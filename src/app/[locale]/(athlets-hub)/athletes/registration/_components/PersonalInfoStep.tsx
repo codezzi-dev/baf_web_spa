@@ -4,21 +4,36 @@ import { User, Users, Mail, Phone, Calendar, Building } from "lucide-react";
 
 import { FormInputField, FormSelectField } from "./FormFields";
 import { FormData } from "./FormSchema";
+import { MdLineWeight, MdWaterDrop } from "react-icons/md";
+import { BsGenderAmbiguous } from "react-icons/bs";
+import { HeightInputField } from "./HeightInputField";
+import { useGetAllInstitutes } from "@/api/hooks/key-value/Institutes.hook";
+import { KeyValueType } from "@/api/types/common/key-value.type";
+import { useEffect, useState } from "react";
 
 const genderOptions = [
   { id: "male", value: "Male" },
   { id: "female", value: "Female" },
   { id: "other", value: "Other" },
 ];
-
-const institutes = [
-  { id: "1", value: "National Sports Academy" },
-  { id: "2", value: "Bangladesh Sports Institute" },
-  { id: "3", value: "Olympic Training Center" },
+const bloodGroupOptions = [
+  { id: "A+", value: "A+" },
+  { id: "A-", value: "A-" },
+  { id: "B+", value: "B+" },
+  { id: "B-", value: "B-" },
+  { id: "AB+", value: "AB+" },
+  { id: "AB-", value: "AB-" },
+  { id: "O+", value: "O+" },
+  { id: "O-", value: "O-" },
 ];
 
 export function PersonalInfoStep() {
   const { control } = useFormContext<FormData>();
+  const { data: institutes, isLoading: institutesLoading, error: institutesError } = useGetAllInstitutes();
+  const [instituteOptions, setInstituteOptions] = useState<KeyValueType[]>([]);
+  useEffect(() => {
+    setInstituteOptions(institutes?.data ?? []);
+  }, [institutes]);
 
   return (
     <div className="space-y-8">
@@ -97,8 +112,33 @@ export function PersonalInfoStep() {
           control={control}
           name="athleteGender"
           label="Gender"
+          icon={BsGenderAmbiguous}
           options={genderOptions}
           placeholder="Select gender"
+          required
+        />
+        <HeightInputField
+          control={control}
+          name="athleteHeight"
+          label="Height (ft in)"
+          required
+        />
+        <FormInputField
+          control={control}
+          name="athleteWeight"
+          type="number"
+          label="Weight (kg)"
+          icon={MdLineWeight}
+          placeholder="Enter weight"
+          required
+        />
+        <FormSelectField
+          control={control}
+          name="athleteBloodGroup"
+          label="Blood Group"
+          icon={MdWaterDrop}
+          options={bloodGroupOptions}
+          placeholder="Select blood group"
           required
         />
         <FormSelectField
@@ -106,8 +146,16 @@ export function PersonalInfoStep() {
           name="instituteId"
           label="Institute"
           icon={Building}
-          options={institutes}
-          placeholder="Select institute"
+          options={instituteOptions.map((item) => {
+            console.log(item);
+            return ({
+              id: item.key ?? 0,
+              value: item.value ?? "",
+            })
+          })}
+          isLoading={institutesLoading}
+          disabled={institutesLoading || !!institutesError}
+          placeholder={institutesError ? "Error loading institutes" : "Select institute"}
         />
       </div>
     </div>

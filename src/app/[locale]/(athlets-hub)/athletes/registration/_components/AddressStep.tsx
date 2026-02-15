@@ -51,15 +51,14 @@ export function AddressesStep() {
   //   } as any);
   // };
 
-  const getDistrictData = async () => {
-    const res = await httpGet(GET_DISTRICTS_URL);
+  // const getDistrictData = async () => {
+  //   const res = await httpGet(GET_DISTRICTS_URL);
+  //   console.log(res);
+  // };
 
-    console.log(res);
-  };
-
-  useEffect(() => {
-    getDistrictData();
-  }, []);
+  // useEffect(() => {
+  //   getDistrictData();
+  // }, []);
 
   const { watch, setValue } = useFormContext();
   const [sameAsPresent, setSameAsPresent] = useState(false);
@@ -210,7 +209,7 @@ export function AddressesStep() {
                 >
                   <Checkbox
                     checked={sameAsPresent}
-                    onCheckedChange={() => {}}
+                    onCheckedChange={() => { }}
                   />
                   <span className="text-sm">
                     Permanent address same as present address

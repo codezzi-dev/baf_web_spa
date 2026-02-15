@@ -10,6 +10,9 @@ export const personalInfoSchema = z.object({
   athleteDob: z.string().min(1, "Date of birth is required"),
   athleteGender: z.string().min(1, "Gender is required"),
   athleteAlternateContactNo: z.string().optional().or(z.literal("")),
+  athleteHeight: z.string().optional().or(z.literal("")),
+  athleteWeight: z.string().optional().or(z.literal("")),
+  athleteBloodGroup: z.string().optional().or(z.literal("")),
   instituteId: z.string().optional().or(z.literal("")),
 });
 

@@ -45,11 +45,9 @@ export function FormInputField<T extends FieldValues>({
               type={type}
               placeholder={placeholder}
               disabled={disabled}
-              className={`w-full ${
-                Icon ? "pl-10" : "pl-4"
-              } pr-4 py-3 bg-slate-50 border rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 disabled:bg-slate-100 disabled:text-slate-400 disabled:cursor-not-allowed ${
-                error ? "border-rose-500 focus:ring-rose-500" : "border-slate-200"
-              }`}
+              className={`w-full ${Icon ? "pl-10" : "pl-4"
+                } pr-4 py-3 bg-slate-50 border rounded-xl text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 disabled:bg-slate-100 disabled:text-slate-400 disabled:cursor-not-allowed ${error ? "border-rose-500 focus:ring-rose-500" : "border-slate-200"
+                }`}
             />
           </div>
           {error && (
@@ -72,6 +70,8 @@ interface FormSelectFieldProps<T extends FieldValues> {
   options: { id: string | number; value: string }[];
   placeholder?: string;
   required?: boolean;
+  disabled?: boolean;
+  isLoading?: boolean;
 }
 
 export function FormSelectField<T extends FieldValues>({
@@ -82,6 +82,8 @@ export function FormSelectField<T extends FieldValues>({
   options,
   placeholder,
   required,
+  disabled,
+  isLoading,
 }: FormSelectFieldProps<T>) {
   return (
     <Controller
@@ -100,18 +102,18 @@ export function FormSelectField<T extends FieldValues>({
             )}
             <select
               {...field}
-              className={`w-full ${
-                Icon ? "pl-10" : "pl-4"
-              } pr-4 py-3 bg-slate-50 border rounded-xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 appearance-none cursor-pointer ${
-                error ? "border-rose-500 focus:ring-rose-500" : "border-slate-200"
-              }`}
+              disabled={disabled || isLoading}
+              className={`w-full ${Icon ? "pl-10" : "pl-4"
+                } pr-4 py-3 bg-slate-50 border rounded-xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 appearance-none cursor-pointer disabled:bg-slate-100 disabled:text-slate-400 disabled:cursor-not-allowed ${error ? "border-rose-500 focus:ring-rose-500" : "border-slate-200"
+                }`}
             >
-              <option value="">{placeholder}</option>
-              {options.map((opt) => (
-                <option key={opt.id} value={opt.id}>
-                  {opt.value}
-                </option>
-              ))}
+              <option value="">{isLoading ? "Loading..." : placeholder}</option>
+              {!isLoading &&
+                options.map((opt) => (
+                  <option key={opt.id} value={opt.id}>
+                    {opt.value}
+                  </option>
+                ))}
             </select>
             <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
               <ChevronRight size={18} className="rotate-90" />
