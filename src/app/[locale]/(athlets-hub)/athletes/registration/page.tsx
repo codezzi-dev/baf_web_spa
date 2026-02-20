@@ -13,7 +13,6 @@ import {
   ChevronLeft,
   Check,
 } from "lucide-react";
-// import { formSchema, type FormData } from "@/lib/form-schema";
 import { FormData, formSchema, stepFieldGroups } from "./_components/FormSchema";
 
 import { PersonalInfoStep } from "./_components/PersonalInfoStep";
@@ -29,6 +28,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { useRegisterAthlete } from "@/api/services/athletes/online-registration.api";
 import { CreateAthleteRequest } from "@/api/schemas/athletes/online-registration.schema";
+import { ApiResponse } from "@/api/types/common/api-response.type";
 
 const steps = [
   { id: 0, title: "Personal Info", icon: User },
@@ -47,6 +47,7 @@ const AthleteRegistrationForm = () => {
     termsAccepted: false,
   });
   const [submitted, setSubmitted] = useState(false);
+  const [apiResponse, setApiResponse] = useState<ApiResponse<any> | null>(null);
   const { mutate, isPending, isError, error } = useRegisterAthlete();
 
   // Add this transformer function before the component
@@ -73,8 +74,10 @@ const AthleteRegistrationForm = () => {
         athleteMotherName: data.athleteMotherName,
         athleteEmail: data.athleteEmail,
         athleteContactNo: data.athleteContactNo,
-        athleteDob: new Date(data.athleteDob).toISOString(),
-        athleteGender: data.athleteGender as "Male" | "Female" | "Other",
+        athleteDob: new Date(data.athleteDob)
+          .toISOString()
+          .split("T")[0],
+        athleteGender: data.athleteGender as "M" | "F" | "O",
         athleteAlternateContactNo: data.athleteAlternateContactNo || undefined,
         athleteHeight: Number(data.athleteHeight),
         athleteWeight: Number(data.athleteWeight),
@@ -120,6 +123,7 @@ const AthleteRegistrationForm = () => {
     return typeMap[type] || 1;
   };
   const methods = useForm<FormData>({
+    shouldUnregister: false,
     resolver: zodResolver(formSchema),
     mode: "onBlur",
     defaultValues: {
@@ -202,6 +206,7 @@ const AthleteRegistrationForm = () => {
         onSuccess: (response) => {
           console.log("Registration successful:", response);
           toast.success("Registration submitted successfully!");
+          setApiResponse(response);
           setSubmitted(true);
         },
         onError: (error) => {
@@ -216,26 +221,35 @@ const AthleteRegistrationForm = () => {
 
 
   const canProceed = Object.keys(errors).length === 0 && isValid;
+  const [isStepLoading, setIsStepLoading] = useState(false);
 
   const handleNext = async () => {
-    // If this is NOT the last step
     if (currentStep < steps.length - 1) {
-      // Validate ONLY the current step fields
+      setIsStepLoading(true);
+
       const isValid = await methods.trigger(stepFieldGroups[currentStep]);
+
+      // 🚨 Extra check ONLY for Identity step
+      if (currentStep === 1) {
+        const identifierError = methods.formState.errors.identifierNumber;
+        if (identifierError) {
+          setIsStepLoading(false);
+          toast.error("Please fix identity number error before proceeding.");
+          return;
+        }
+      }
+
+      setIsStepLoading(false);
 
       if (!isValid) {
         toast.error("Please fill all required fields for this step.");
-        return; // ⛔ Stop navigation
+        return;
       }
 
-      // Move to next step
       setCurrentStep((prev) => prev + 1);
-      return;
     }
-
-    // // If this IS the last step -> submit
-    // await methods.handleSubmit(onSubmit)();
   };
+
 
   const handlePrevious = () => {
     if (currentStep > 0) {
@@ -259,6 +273,14 @@ const AthleteRegistrationForm = () => {
             <p className="text-slate-600">
               Thank you for submitting your athlete registration. We will review your application and contact you soon.
             </p>
+            <div className="flex flex-col gap-2">
+              <p className="text-slate-600 ">
+                Email ID: <span className="font-bold">{apiResponse?.data?.userId}</span>
+              </p>
+              <p className="text-slate-600 ">
+                Password: <span className="font-bold">{apiResponse?.data?.password}</span>
+              </p>
+            </div>
             <Button
               onClick={() => {
                 setSubmitted(false);
@@ -399,26 +421,33 @@ const AthleteRegistrationForm = () => {
               <div className="text-sm text-slate-600">
                 Step {currentStep + 1} of {steps.length}
               </div>
-
-              <Button
-                type={currentStep === 5 ? "submit" : "button"}
-                onClick={currentStep === 5 ? undefined : handleNext}
-                // disabled={currentStep === 5 ? !declaration.infoAccurate || !declaration.termsAccepted : !canProceed}
-                className="flex items-center gap-2"
-                variant="default"
-              >
-                {currentStep === 5 ? (
+              {currentStep === 5 ?
+                (<Button
+                  type="submit"
+                  onClick={handleNext}
+                  disabled={isStepLoading || !declaration.infoAccurate || !declaration.termsAccepted}
+                  className="flex items-center gap-2"
+                  variant="default"
+                >
                   <>
                     <Check size={18} />
                     Submit
                   </>
-                ) : (
-                  <>
-                    Next
-                    <ChevronRight size={18} />
-                  </>
-                )}
-              </Button>
+                </Button>) : (
+                  <Button
+                    type="button"
+                    onClick={handleNext}
+                    disabled={isStepLoading}
+                    className="flex items-center gap-2"
+                    variant="default"
+                  >
+                    <>
+                      Next
+                      <ChevronRight size={18} />
+                    </>
+                  </Button>)
+              }
+
             </div>
           </form>
         </FormProvider>

@@ -12,9 +12,9 @@ import { KeyValueType } from "@/api/types/common/key-value.type";
 import { useEffect, useState } from "react";
 
 const genderOptions = [
-  { id: "male", value: "Male" },
-  { id: "female", value: "Female" },
-  { id: "other", value: "Other" },
+  { id: "M", value: "Male" },
+  { id: "F", value: "Female" },
+  { id: "O", value: "Other" },
 ];
 const bloodGroupOptions = [
   { id: "A+", value: "A+" },
@@ -146,13 +146,10 @@ export function PersonalInfoStep() {
           name="instituteId"
           label="Institute"
           icon={Building}
-          options={instituteOptions.map((item) => {
-            console.log(item);
-            return ({
-              id: item.key ?? 0,
-              value: item.value ?? "",
-            })
-          })}
+          options={instituteOptions.map((item) => ({
+            id: item.key ?? 0,
+            value: item.value ?? "",
+          }))}
           isLoading={institutesLoading}
           disabled={institutesLoading || !!institutesError}
           placeholder={institutesError ? "Error loading institutes" : "Select institute"}

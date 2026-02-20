@@ -11,7 +11,7 @@ const postRegisterAthlete = async (
         {
             method: "POST",
             body: (() => {
-                const requestBody = JSON.stringify({ athleteFormDto: data });
+                const requestBody = JSON.stringify(data);
                 console.log("Request Payload:", requestBody);
                 return requestBody;
             })(),
@@ -23,12 +23,12 @@ export const useRegisterAthlete = () => {
     return useMutation({
         mutationFn: postRegisterAthlete,
 
-        onSuccess: (response) => {
-            console.log("Success:", response.data);
-        },
+        // onSuccess: (response) => {
+        //     console.log("Success:", response.data);
+        // },
 
-        onError: (error) => {
-            console.error("Error:", error.message);
-        },
+        // onError: (error) => {
+        //     console.error("Error:", error.message);
+        // },
     });
 };

@@ -20,12 +20,16 @@ async function request<T>(
   // Try to parse JSON safely
   const responseBody = await res.json().catch(() => null);
 
+  if (res.status >= 500) {
+    throw new Error(responseBody?.message || "Server error. Please try again.");
+  }
+
   if (!res.ok) {
-    console.error("API Error Response:", responseBody);
+    console.log("API Error Response:", responseBody?.errors);
     throw new Error(
       responseBody?.message ||
-      responseBody?.error ||
-      JSON.stringify(responseBody) ||
+      responseBody?.errors?.[0] ||
+      JSON.stringify(responseBody?.errors) ||
       "Something went wrong"
     );
   }

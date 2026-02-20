@@ -1,5 +1,5 @@
 export type KeyValueType = {
-    key?: number;
+    key?: string;
     value?: string;
 };
 

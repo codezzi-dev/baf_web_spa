@@ -1,11 +1,13 @@
 "use client";
 
 import type React from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFormContext, Controller } from "react-hook-form";
-import { ShieldCheck, Upload, Trash2, AlertCircle } from "lucide-react";
+import { ShieldCheck, Upload, Trash2, AlertCircle, Loader2, CheckCircle2 } from "lucide-react";
 import type { FormData } from "./FormSchema";
 import { FormInputField, FormSelectField } from "./FormFields";
+import { useGetAtheltesRegistrationExist } from "@/api/hooks/athletes/registration.hook";
+import { useDebounce } from "@/hooks/useDebounce";
 
 const identifierTypes = [
   { id: "nid", value: "National ID (NID)", placeholder: "Enter 10 or 17 digit NID number" },
@@ -26,12 +28,51 @@ export function IdentityVerificationStep() {
     control,
     watch,
     formState: { errors },
+    setError,
+    clearErrors,
+    trigger,
   } = useFormContext<FormData>();
   const identifierType = watch("identifierType");
+  const identifierNumber = watch("identifierNumber");
+  const debouncedIdentifierNumber = useDebounce(identifierNumber, 500);
   const identifierImages = watch("identifierImages");
   const [imageError, setImageError] = useState("");
-
   const selectedType = identifierTypes.find((t) => t.id === identifierType);
+
+  // Only check when we have a valid debounced value and identifier type
+  const shouldCheck = Boolean(
+    debouncedIdentifierNumber &&
+    debouncedIdentifierNumber.length >= 5 &&
+    identifierType
+  );
+
+  const {
+    data: existenceCheck,
+    isLoading: isChecking,
+    isError: checkError
+  } = useGetAtheltesRegistrationExist(
+    shouldCheck ? debouncedIdentifierNumber : ""
+  );
+
+  // Set/clear form error based on API response
+  useEffect(() => {
+    if (!shouldCheck) {
+      clearErrors("identifierNumber");
+      return;
+    }
+
+    if (existenceCheck?.data) {
+      setError("identifierNumber", {
+        type: "manual",
+        message: "This identity number is already registered",
+      });
+    } else if (existenceCheck && !existenceCheck?.data) {
+      clearErrors("identifierNumber");
+    }
+  }, [existenceCheck, shouldCheck, setError, clearErrors]);
+
+
+
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>, field: any) => {
     const files = e.target.files;
@@ -99,21 +140,28 @@ export function IdentityVerificationStep() {
         />
       </div>
 
-      {identifierType && (
-        <div className="p-4 bg-slate-50 rounded-xl border border-slate-200">
-          <div className="flex items-start gap-3">
-            <div className="p-2 bg-white rounded-lg border border-slate-200">
-              <ShieldCheck className="text-cyan-500" size={18} />
-            </div>
-            <div>
-              <h4 className="font-medium text-slate-800">{selectedType?.value}</h4>
-              <p className="text-sm text-slate-500 mt-1">
-                {identifierDescriptions[identifierType as keyof typeof identifierDescriptions]}
-              </p>
-            </div>
-          </div>
+      {identifierNumber && identifierNumber.length >= 5 && (
+        <div className="absolute right-3 top-9">
+          {isChecking ? (
+            <Loader2 className="w-5 h-5 text-slate-400 animate-spin" />
+          ) : existenceCheck?.data ? (
+            <AlertCircle className="w-5 h-5 text-rose-500" />
+          ) : existenceCheck && !existenceCheck?.data ? (
+            <CheckCircle2 className="w-5 h-5 text-green-500" />
+          ) : null}
         </div>
       )}
+
+      {/* Show error message if already registered */}
+      {existenceCheck?.data && (
+        <div className="flex items-center gap-2 p-3 bg-rose-50 border border-rose-200 rounded-lg">
+          <AlertCircle className="text-rose-600 flex-shrink-0" size={18} />
+          <span className="text-sm text-rose-700">
+            This identity number is already registered. Please use a different ID or contact support if this is an error.
+          </span>
+        </div>
+      )}
+
 
       <div className="space-y-4">
         <Controller

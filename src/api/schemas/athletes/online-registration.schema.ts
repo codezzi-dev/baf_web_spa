@@ -16,7 +16,7 @@ export const AthleteGenDataSchema = z.object({
 
     athleteDob: z.string().datetime(),
 
-    athleteGender: z.enum(["Male", "Female", "Other"]),
+    athleteGender: z.enum(["M", "F", "O"]),
 
     athleteAlternateContactNo: z.string().optional(),
 
