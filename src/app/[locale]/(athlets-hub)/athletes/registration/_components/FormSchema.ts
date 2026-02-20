@@ -10,6 +10,9 @@ export const personalInfoSchema = z.object({
   athleteDob: z.string().min(1, "Date of birth is required"),
   athleteGender: z.string().min(1, "Gender is required"),
   athleteAlternateContactNo: z.string().optional().or(z.literal("")),
+  athleteHeight: z.number().optional().or(z.literal("")),
+  athleteWeight: z.number().optional().or(z.literal("")),
+  athleteBloodGroup: z.string().optional().or(z.literal("")),
   instituteId: z.string().optional().or(z.literal("")),
 });
 
@@ -81,6 +84,9 @@ export const stepFieldGroups: (keyof FormData)[][] = [
     "athleteContactNo",
     "athleteDob",
     "athleteGender",
+    "athleteHeight",
+    "athleteWeight",
+    "athleteBloodGroup",
     "athleteAlternateContactNo",
     "instituteId",
   ],

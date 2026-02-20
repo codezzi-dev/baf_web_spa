@@ -4,6 +4,10 @@ import type React from "react";
 import { useFormContext } from "react-hook-form";
 import { ClipboardCheck, Edit3 } from "lucide-react";
 import type { FormData } from "./FormSchema";
+import { useGetAllDistricts, useGetAllSubDistricts } from "@/api/hooks/key-value/location.hook";
+import { useMemo } from "react";
+import type { KeyValueType } from "@/api/types/common/key-value.type";
+import { useGetAllInstitutes } from "@/api/hooks/key-value/Institutes.hook";
 
 interface ReviewStepProps {
   onEdit: (stepIndex: number) => void;
@@ -12,6 +16,43 @@ interface ReviewStepProps {
 export function ReviewStep({ onEdit }: ReviewStepProps) {
   const { watch } = useFormContext<FormData>();
   const formData = watch();
+
+  // Fetch shared data
+  const { data: institutes } = useGetAllInstitutes();
+  const { data: districts } = useGetAllDistricts();
+
+  // Fetch sub-districts for BOTH addresses
+  const presentDistrictId = formData.addresses?.[0]?.athleteAddressDistrictId || "";
+  const permanentDistrictId = formData.addresses?.[1]?.athleteAddressDistrictId || "";
+
+  const { data: presentSubDistricts } = useGetAllSubDistricts(presentDistrictId);
+  const { data: permanentSubDistricts } = useGetAllSubDistricts(permanentDistrictId);
+
+  // Helper to get district name
+  const getDistrictName = useMemo(() => {
+    return (districtId: string) => {
+      return districts?.data?.find(
+        (d: KeyValueType) => String(d.key) === String(districtId)
+      )?.value || "—";
+    };
+  }, [districts]);
+
+  // Helper to get sub-district name based on address index
+  const getSubDistrictName = useMemo(() => {
+    return (addressIndex: number, subDistrictId: string) => {
+      const subDistrictData = addressIndex === 0 ? presentSubDistricts : permanentSubDistricts;
+      return subDistrictData?.data?.find(
+        (s: KeyValueType) => String(s.key) === String(subDistrictId)
+      )?.value || "—";
+    };
+  }, [presentSubDistricts, permanentSubDistricts]);
+
+  // Get institute name
+  const instituteName = useMemo(() => {
+    return institutes?.data?.find(
+      (i: KeyValueType) => String(i.key) === String(formData.instituteId)
+    )?.value;
+  }, [institutes, formData.instituteId]);
 
   const ReviewItem = ({ label, value }: { label: string; value: string | React.ReactNode }) => (
     <div className="flex flex-col sm:flex-row sm:justify-between py-3 border-b border-slate-100 last:border-0">
@@ -50,6 +91,13 @@ export function ReviewStep({ onEdit }: ReviewStepProps) {
     </div>
   );
 
+  const getFeetAndInches = (cm: number) => {
+    const totalInches = cm / 2.54;
+    const feet = Math.floor(totalInches / 12);
+    const inches = Math.round(totalInches % 12);
+    return `${feet} feet ${inches} inches`;
+  };
+
   return (
     <div className="space-y-8">
       <div className="flex items-center gap-3 pb-4 border-b border-slate-200">
@@ -69,7 +117,11 @@ export function ReviewStep({ onEdit }: ReviewStepProps) {
         <ReviewItem label="Email" value={formData.athleteEmail} />
         <ReviewItem label="Contact Number" value={formData.athleteContactNo} />
         <ReviewItem label="Gender" value={formData.athleteGender} />
+        <ReviewItem label="Height" value={`${formData.athleteHeight} cm / ${getFeetAndInches(formData.athleteHeight as number || 0)}`} />
+        <ReviewItem label="Weight" value={`${formData.athleteWeight} kg`} />
+        <ReviewItem label="Blood Group" value={formData.athleteBloodGroup} />
         <ReviewItem label="Date of Birth" value={formData.athleteDob} />
+        <ReviewItem label="Institute" value={instituteName} />
       </ReviewSection>
 
       <ReviewSection title="Identity Verification" icon={ClipboardCheck} stepIndex={1}>
@@ -88,8 +140,9 @@ export function ReviewStep({ onEdit }: ReviewStepProps) {
         {formData.addresses?.map((addr, idx) => (
           <div key={idx} className="mb-4 pb-4 border-b border-slate-100 last:border-0 last:mb-0 last:pb-0">
             <ReviewItem label={`Address ${idx + 1} Type`} value={addr.athleteAddressType} />
-            <ReviewItem label="District" value={addr.athleteAddressDistrictId} />
-            <ReviewItem label="Sub-District" value={addr.athleteAddressSubDistrictId} />
+            {/* ✅ Use helper functions instead of useMemo inside map */}
+            <ReviewItem label="District" value={getDistrictName(addr.athleteAddressDistrictId)} />
+            <ReviewItem label="Sub-District" value={getSubDistrictName(idx, addr.athleteAddressSubDistrictId)} />
             <ReviewItem label="Postal Code" value={addr.athleteAddressPostalCode} />
             <ReviewItem label="Area" value={addr.athleteAddressArea} />
           </div>
@@ -102,7 +155,7 @@ export function ReviewStep({ onEdit }: ReviewStepProps) {
             <ReviewItem label={`Document ${idx + 1} Category`} value={doc.docCategoryId} />
             <ReviewItem label="Document Name" value={doc.athleteDocName} />
             <ReviewItem label="Document ID" value={doc.athleteDocRelatedId} />
-            <ReviewItem label="File Path" value={doc.athleteDocPhysicalPathUrl} />
+            <ReviewItem label="File" value={<img className="w-10 h-10 border border-slate-200 rounded-lg" src={doc.athleteDocPhysicalPathUrl}></img>} />
           </div>
         ))}
       </ReviewSection>

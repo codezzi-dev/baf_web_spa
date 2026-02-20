@@ -126,7 +126,7 @@ export default function EventDetailsPage({ params }: { params?: { id?: string } 
   const [registrationData, setRegistrationData] = useState({
     athlete_name: user?.full_name || "",
     athlete_email: user?.email || "",
-    athlete_phone: user?.phone || "",
+    athleteContactNo: user?.phone || "",
     date_of_birth: user?.date_of_birth || "",
     gender: user?.gender || "",
     team: user?.team || "",
@@ -143,7 +143,7 @@ export default function EventDetailsPage({ params }: { params?: { id?: string } 
         ...prev,
         athlete_name: user.full_name || prev.athlete_name,
         athlete_email: user.email || prev.athlete_email,
-        athlete_phone: user.phone || prev.athlete_phone,
+        athleteContactNo: user.phone || prev.athleteContactNo,
         date_of_birth: user.date_of_birth || prev.date_of_birth,
         gender: user.gender || prev.gender,
         team: user.team || prev.team,
@@ -263,11 +263,10 @@ export default function EventDetailsPage({ params }: { params?: { id?: string } 
         {/* Hero Banner */}
         <div className="border-none shadow-2xl overflow-hidden mb-8 rounded-xl">
           <div
-            className={`h-80 relative ${
-              event.status === "ongoing"
+            className={`h-80 relative ${event.status === "ongoing"
                 ? "bg-gradient-to-br from-[#C1272D] to-[#A01F25]"
                 : "bg-gradient-to-br from-[#00704A] to-[#005239]"
-            }`}
+              }`}
           >
             {event.image_url ? (
               <>
@@ -550,26 +549,24 @@ export default function EventDetailsPage({ params }: { params?: { id?: string } 
                                 .map((result, index) => (
                                   <div
                                     key={index}
-                                    className={`flex items-center gap-4 p-4 rounded-xl ${
-                                      result.position === 1
+                                    className={`flex items-center gap-4 p-4 rounded-xl ${result.position === 1
                                         ? "bg-gradient-to-r from-[#D4AF37]/20 to-transparent border-2 border-[#D4AF37]"
                                         : result.position === 2
-                                        ? "bg-gradient-to-r from-gray-300/20 to-transparent border-2 border-gray-300"
-                                        : result.position === 3
-                                        ? "bg-gradient-to-r from-orange-300/20 to-transparent border-2 border-orange-300"
-                                        : "bg-gray-50 border border-gray-200"
-                                    }`}
+                                          ? "bg-gradient-to-r from-gray-300/20 to-transparent border-2 border-gray-300"
+                                          : result.position === 3
+                                            ? "bg-gradient-to-r from-orange-300/20 to-transparent border-2 border-orange-300"
+                                            : "bg-gray-50 border border-gray-200"
+                                      }`}
                                   >
                                     <div
-                                      className={`w-10 h-10 rounded-full flex items-center justify-center font-bold shadow ${
-                                        result.position === 1
+                                      className={`w-10 h-10 rounded-full flex items-center justify-center font-bold shadow ${result.position === 1
                                           ? "bg-[#D4AF37] text-white"
                                           : result.position === 2
-                                          ? "bg-gray-400 text-white"
-                                          : result.position === 3
-                                          ? "bg-orange-400 text-white"
-                                          : "bg-white text-[#2D3436]"
-                                      }`}
+                                            ? "bg-gray-400 text-white"
+                                            : result.position === 3
+                                              ? "bg-orange-400 text-white"
+                                              : "bg-white text-[#2D3436]"
+                                        }`}
                                     >
                                       {result.position}
                                     </div>
@@ -583,13 +580,12 @@ export default function EventDetailsPage({ params }: { params?: { id?: string } 
                                     </div>
                                     {result.position <= 3 && (
                                       <Award
-                                        className={`w-6 h-6 ${
-                                          result.position === 1
+                                        className={`w-6 h-6 ${result.position === 1
                                             ? "text-[#D4AF37]"
                                             : result.position === 2
-                                            ? "text-gray-400"
-                                            : "text-orange-400"
-                                        }`}
+                                              ? "text-gray-400"
+                                              : "text-orange-400"
+                                          }`}
                                       />
                                     )}
                                   </div>
@@ -781,8 +777,8 @@ export default function EventDetailsPage({ params }: { params?: { id?: string } 
                     <div className="space-y-2">
                       <label className="text-sm">Phone *</label>
                       <input
-                        value={registrationData.athlete_phone}
-                        onChange={(e) => setRegistrationData({ ...registrationData, athlete_phone: e.target.value })}
+                        value={registrationData.athleteContactNo}
+                        onChange={(e) => setRegistrationData({ ...registrationData, athleteContactNo: e.target.value })}
                         className="w-full h-10 px-3 border-2 border-gray-200 rounded-md focus:border-[#00704A]"
                       />
                     </div>
@@ -939,7 +935,7 @@ export default function EventDetailsPage({ params }: { params?: { id?: string } 
 }
 
 // Local simple tab state for this single-file page
-const tabStateHolder = { value: "overview", set: (v: string) => {} } as any;
+const tabStateHolder = { value: "overview", set: (v: string) => { } } as any;
 function setTab(v: string) {
   tabStateHolder.set(v);
 }

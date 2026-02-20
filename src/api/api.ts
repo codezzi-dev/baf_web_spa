@@ -1,5 +1,5 @@
 const API_BASE_URL =
-  process.env.REACT_APP_API_URL ??
+  process.env.NEXT_PUBLIC_API_URL ??
   "http://musnadcodezzi-001-site1.rtempurl.com/api";
 
 async function request<T>(
@@ -20,10 +20,16 @@ async function request<T>(
   // Try to parse JSON safely
   const responseBody = await res.json().catch(() => null);
 
+  if (res.status >= 500) {
+    throw new Error(responseBody?.message || "Server error. Please try again.");
+  }
+
   if (!res.ok) {
+    console.log("API Error Response:", responseBody?.errors);
     throw new Error(
       responseBody?.message ||
-      responseBody?.error ||
+      responseBody?.errors?.[0] ||
+      JSON.stringify(responseBody?.errors) ||
       "Something went wrong"
     );
   }

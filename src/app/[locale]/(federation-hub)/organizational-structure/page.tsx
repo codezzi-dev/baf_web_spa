@@ -28,8 +28,6 @@ import riajul_islam from '@/assets/images/organizational-people/md-riajul-islam.
 import touhidul_islam from '@/assets/images/organizational-people/colonel-md-touhidul-islam.png'
 import nadiruzamman from '@/assets/images/organizational-people/commander-nadiruzzaman.png'
 import ekramul_haque from '@/assets/images/organizational-people/wing-commander-md-ekramul-haque.png'
-import OrgChart from "@/components/FederationHub/Organogram";
-import Organogram2, { defaultOrganogramData } from "@/components/FederationHub/Organogram-2";
 
 
 
@@ -386,13 +384,6 @@ export default function BoardMembers() {
             growth.
           </p>
         </div>
-
-        {/* <Suspense fallback={<div>Loading organization chart...</div>}>
-          <OrgChart />
-        </Suspense> */}
-         <Organogram2 {...defaultOrganogramData} />
-         {/* <OrgChart /> */}
-
         {/* Tabs */}
         <Tabs value={activeCategory} onValueChange={setActiveCategory} className="mb-12 p-2 md:w-fit">
           <TabsList className="flex flex-row items-center gap-4 bg-white border border-gray-200 p-1 rounded-xl overflow-auto">
