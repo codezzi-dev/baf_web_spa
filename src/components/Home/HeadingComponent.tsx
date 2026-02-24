@@ -6,15 +6,26 @@ interface HeadingProps {
 }
 
 export default function DynamicHeading({ title, className }: HeadingProps) {
-  // Split the title into words
   const words = title.trim().split(" ");
-  const lastWord = words.pop(); // Remove the last word
-  const rest = words.join(" "); // Join the rest
+
+  const mid = Math.ceil(words.length / 2);
+
+  const firstPart = words.slice(0, mid).join(" ");
+  const secondPart = words.slice(mid).join(" ");
 
   return (
-    <h2 className={cn("text-3xl lg:text-4xl font-bold text-gray-900 mb-4", className ? className : "")}>
-      {rest}{" "}
-      <span className={`bg-gradient-to-r from-[#C1272D] to-[#A01F25] bg-clip-text text-transparent`}>{lastWord}</span>
+    <h2
+      className={cn(
+        "text-3xl lg:text-4xl font-bold text-gray-900 mb-4",
+        className,
+      )}
+    >
+      {firstPart}{" "}
+      {secondPart && (
+        <span className="bg-gradient-to-r from-[#00704A] to-[#005239] bg-clip-text text-transparent">
+          {secondPart}
+        </span>
+      )}
     </h2>
   );
 }
