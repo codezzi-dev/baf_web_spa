@@ -6,10 +6,10 @@ interface PageHeroProps {
 }
 const PageHero: React.FC<PageHeroProps> = ({ pageGenericElements }) => {
   return (
-    <div className="text-center mb-16 pt-48">
-      <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#00704A]/10 to-[#C1272D]/10 rounded-full mb-6">
-        <Calendar className="w-4 h-4 text-[#00704A]" />
-        <span className="text-sm font-semibold text-[#00704A]">
+    <div className="text-center mb-16 pt-40">
+      <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#00704A]/10 to-[#C1272D]/10 rounded-full mb-10">
+        <Calendar className="w-4 h-4 text-tag-green" />
+        <span className="text-sm font-semibold text-tag-green">
           {pageGenericElements?.pageTopTag}
         </span>
       </div>
@@ -23,7 +23,7 @@ const PageHero: React.FC<PageHeroProps> = ({ pageGenericElements }) => {
           return (
             <>
               {words.slice(0, half).join(" ")}{" "}
-              <span className="bg-gradient-to-r from-[#00704A] to-[#005239] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-tag-green to-tag-greenDark bg-clip-text text-transparent">
                 {words.slice(half).join(" ")}
               </span>
             </>

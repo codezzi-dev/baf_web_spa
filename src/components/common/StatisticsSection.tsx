@@ -10,10 +10,10 @@ interface StatisticsSectionProps {
 }
 
 const gradients = [
-  "bg-gradient-to-b from-[#00704A] to-[#005239]",
-  "bg-gradient-to-b from-[#C1272D] to-[#A01F25]",
-  "bg-gradient-to-b from-[#D4AF37] to-[#B8941F]",
-  "bg-gradient-to-b from-[#9333ea] to-[#7e22ce]",
+  "bg-gradient-to-b from-tag-green to-tag-greenDark",
+  "bg-gradient-to-b from-tag-red to-tag-redDark",
+  "bg-gradient-to-b from-tag-yellow to-tag-yellowDark",
+  "bg-gradient-to-b from-tag-purple to-tag-purpleDark",
 ];
 
 const StatisticsSection = ({ stats }: StatisticsSectionProps) => {

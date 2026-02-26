@@ -3,14 +3,12 @@
 import PageHero from "@/components/common/PageHero";
 import Contact from "@/components/common/Contact";
 import StatisticsSection from "@/components/common/StatisticsSection";
-import MissionCard from "@/components/common/MissionCard";
-import FeatureCard from "@/components/common/FeatureCard";
+import StatCard from "@/components/Card/StatCard";
+import MissionCard from "@/components/Card/MissionCard";
+import FeatureCard from "@/components/Card/FeatureCard";
 import Footer from "@/components/common/PageFooter2";
+import ChampCard from "@/components/Card/ChampionshipCard";
 import Region from "@/components/common/RegionCard";
-import CoreValuesSection, {
-  CoreValues,
-} from "@/components/about-us/mission-vision/CoreValuesSection";
-
 import {
   Globe,
   MapPin,
@@ -49,106 +47,66 @@ export default function EventsPage() {
     },
   ];
 
-  const coreValues: CoreValues = {
-    title: "Major Championships",
-    description: "",
-    values: [
-      {
-        icon: "Award",
-        title: "Professional Development",
-        description:
-          "Continuous education and certification programs for coaches at all levels",
-        color: "from-[#00704A] to-[#005239]",
-      },
-      {
-        icon: "Award",
-        title: "Community Building",
-        description:
-          "Foster collaboration and knowledge sharing among athletics coaches nationwide",
-        color: "from-[#00704A] to-[#005239]",
-      },
-      {
-        icon: "Award",
-        title: "Standards & Ethics",
-        description:
-          "Establish and maintain high coaching standards and ethical practices",
-        color: "from-[#00704A] to-[#005239]",
-      },
-      {
-        icon: "Award",
-        title: "Performance Excellence",
-        description:
-          "Enhance coaching methodologies to improve athlete performance and success",
-        color: "from-[#00704A] to-[#005239]",
-      },
-      {
-        icon: "Award",
-        title: "Coaching Education",
-        description:
-          "Provide accessible education and resources for aspiring and current coaches",
-        color: "from-[#00704A] to-[#005239]",
-      },
-      {
-        icon: "Award",
-        title: "Recognition & Support",
-        description:
-          "Acknowledge achievements and provide support systems for coaching professionals",
-        color: "from-[#00704A] to-[#005239]",
-      },
-    ],
-  };
+  const stats2 = [
+    {
+      value: "52",
+      label: "Years of Membership",
+      color: "#D4AF37",
+    },
+    {
+      value: "100+",
+      label: "Athletes Registered",
+      color: "#00704A",
+    },
+    {
+      value: "50+",
+      label: "International Events",
+      color: "#C1272D",
+    },
+  ];
 
   return (
     <div className="min-h-screen bg-background">
       <div className="container max-w-6xl mx-auto px-4 py-10">
         <PageHero pageGenericElements={pageGenericElements} />
-
-        <div className="relative mb-10 p-10 text-gray-600 rounded-2xl overflow-hidden shadow-xl shadow-black/10">
-          <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-[#00704A] via-[#C1272D] to-[#D4AF37]" />
-          <div className="flex justify-evenly items-center gap-6">
-            <div className="bg-secondary rounded-2xl m-4 p-8 w-50 shadow-xl">
-              <Globe size={128} color="#00704A" />
+        {/* Contact Section */}
+        <div className="relative mb-10 p-6 md:p-10 text-gray-600 rounded-2xl overflow-hidden shadow-xl shadow-black/10">
+          <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-tag-green via-tag-red to-tag-yellow" />
+          <div className="flex flex-col md:flex-row md:justify-evenly items-center gap-8">
+            <div className="bg-secondary rounded-2xl p-6 md:p-8 shadow-xl flex justify-center items-center md:m-4">
+              <MapPin
+                size={96}
+                className="md:w-[128px] md:h-[128px]"
+                color="#C1272D"
+              />
             </div>
-            <div className="w-160">
+            <div className="w-full md:w-160">
               <Contact
                 title="Headquarters"
                 icon={<MapPin size={24} />}
-                iconColor="text-[#00704A]"
-                description={
-                  <>
-                    <p>Singapore</p>
-                  </>
-                }
+                iconColor="text-tag-green"
+                description={<p>Singapore</p>}
               />
+
               <Contact
                 title="Founded"
                 icon={<CalendarRange size={24} />}
-                iconColor="text-[#C1272D]"
-                description={
-                  <>
-                    <p>November 26, 1973</p>
-                  </>
-                }
+                iconColor="text-tag-red"
+                description={<p>November 26, 1973</p>}
               />
+
               <Contact
                 title="Membership"
                 icon={<Users size={24} />}
-                iconColor="text-[#D4AF37]"
-                description={
-                  <>
-                    <p>45 Member Federations</p>
-                  </>
-                }
+                iconColor="text-tag-yellow"
+                description={<p>45 Member Federations</p>}
               />
+
               <Contact
                 title="President"
                 icon={<Award size={24} />}
-                iconColor="text-[#7e22ce]"
-                description={
-                  <>
-                    <p>Dahlan Jumaan Al Hamad (Qatar)</p>
-                  </>
-                }
+                iconColor="text-tag-purple"
+                description={<p>Dahlan Jumaan Al Hamad (Qatar)</p>}
               />
             </div>
           </div>
@@ -182,7 +140,7 @@ export default function EventsPage() {
           <MissionCard
             title="Mission"
             icon={<Target size={24} className="text-white" />}
-            iconBgClass="bg-gradient-to-b from-[#00704A] to-[#005239]"
+            iconBgClass="bg-gradient-to-b from-tag-green to-tag-greenDark"
             description={
               <>
                 To promote, coordinate, and develop athletics in Asia, ensuring
@@ -195,13 +153,13 @@ export default function EventsPage() {
               "Organize world-class continental championships",
               "Enhance competitive standards in Asian athletics",
             ]}
-            bulletIcon={<CircleCheckBig size={20} className="text-[#00704A]" />}
+            bulletIcon={<CircleCheckBig size={20} className="text-tag-green" />}
           />
 
           <FeatureCard
             title="Key Priorities"
             icon={<TrendingUp size={24} className="text-white" />}
-            iconGradient="bg-gradient-to-b from-[#C1272D] to-[#A01F25]"
+            iconGradient="bg-gradient-to-b from-tag-red to-tag-redDark"
             items={[
               {
                 title: "Regional Excellence",
@@ -223,12 +181,67 @@ export default function EventsPage() {
             ]}
           />
         </div>
-        <CoreValuesSection coreValues={coreValues} />
+
+        <ChampCard
+          title="Major"
+          highlightedText="Championships"
+          highlightColorClass="text-tag-red"
+          items={[
+            {
+              title: "Asian Athletics Championships",
+              icon: <Award size={28} />,
+              showFrequency: true,
+              frequency: "Biennial",
+              showNextEdition: true,
+              nextEdition: "2025",
+            },
+            {
+              title: "Asian Indoor Championships",
+              icon: <Award size={28} />,
+              showFrequency: true,
+              frequency: "Biennial",
+              showNextEdition: true,
+              nextEdition: "2026",
+            },
+            {
+              title: "Asian Cross Country Championships",
+              icon: <Award size={28} />,
+              showFrequency: true,
+              frequency: "Annual",
+              showNextEdition: true,
+              nextEdition: "2025",
+            },
+            {
+              title: "Asian Race Walking Championships",
+              icon: <Award size={28} />,
+              showFrequency: true,
+              frequency: "Biennial",
+              showNextEdition: true,
+              nextEdition: "2026",
+            },
+            {
+              title: "Asian Youth Championships",
+              icon: <Award size={28} />,
+              showFrequency: true,
+              frequency: "Biennial",
+              showNextEdition: true,
+              nextEdition: "2025",
+            },
+            {
+              title: "Asian Junior Championships",
+              icon: <Award size={28} />,
+              showFrequency: true,
+              frequency: "Biennial",
+              showNextEdition: true,
+              nextEdition: "2026",
+            },
+          ]}
+        />
 
         <Region
           title="Regional"
           highlightedText="Zones"
-          highlightColorClass="text-[#C1272D]"
+          highlightColorClass="text-tag-red"
           icon={<Globe size={32} />}
           items={[
             {
@@ -271,9 +284,7 @@ export default function EventsPage() {
             with AAA on technical development, coaching education programs, and
             youth athlete development initiatives.
           </div>
-          <div className="m-4">
-            <StatisticsSection stats={stats} />
-          </div>
+          <StatCard states={stats2} />
         </div>
         <Footer
           icon={<Globe size={48} />}
@@ -284,7 +295,7 @@ export default function EventsPage() {
               and results
             </>
           }
-          backgroundClass="bg-gradient-to-b from-[#00704A] to-[#005239]"
+          backgroundClass="bg-gradient-to-b from-tag-red to-tag-redDark"
           buttons={[
             {
               label: "Visit AAA Athletics",
