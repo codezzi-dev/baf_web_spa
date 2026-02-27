@@ -74,7 +74,7 @@ export default function EventsPage() {
         <div className="relative mb-10 p-6 md:p-10 text-gray-600 rounded-2xl overflow-hidden shadow-xl shadow-black/10">
           <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-tag-green via-tag-red to-tag-yellow" />
           <div className="flex flex-col md:flex-row md:justify-evenly items-center gap-8">
-            <div className="bg-secondary rounded-2xl p-6 md:p-8 shadow-xl flex justify-center items-center md:m-4">
+            <div className="bg-tag-yellow/30 rounded-2xl p-6 md:p-8 shadow-xl flex justify-center items-center md:m-4">
               <Flag
                 size={96}
                 className="md:w-[128px] md:h-[128px]"

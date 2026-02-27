@@ -38,7 +38,7 @@ const ZoneSection: React.FC<ZoneSectionProps> = ({
             className="flex flex-col items-center h-40 w-50 p-2 gap-4 rounded-2xl shadow-2xl border-2 border-gray-200 shadow-gray-200 hover:border-[#C1272D] transition"
           >
             {/* Icon */}
-            <div className="text-[#C1272D]">{icon}</div>
+            <div className="text-[#C1272D] mt-3">{icon}</div>
 
             {/* Title */}
             <div className="text-xl font-semibold text-center">

@@ -74,7 +74,7 @@ export default function EventsPage() {
           <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-tag-green via-tag-red to-tag-yellow" />
 
           <div className="flex flex-col md:flex-row md:justify-evenly items-center gap-8">
-            <div className="bg-secondary rounded-2xl p-6 md:p-8 shadow-xl flex justify-center items-center md:m-4">
+            <div className="bg-tag-green/30 rounded-2xl p-6 md:p-8 shadow-xl flex justify-center items-center md:m-4">
               <Globe
                 size={96}
                 className="md:w-[128px] md:h-[128px]"
