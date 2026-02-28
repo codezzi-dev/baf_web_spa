@@ -3,8 +3,6 @@
 import React, { useEffect, useState } from "react";
 import {
   Sparkles,
-  CircleCheckBig,
-  Target,
   Users,
   Mail,
   Phone,
@@ -15,8 +13,9 @@ import {
 
 import DynamicHeading from "@/components/Home/HeadingComponent";
 import Loading from "@/components/common/Loading";
-import MissionCard from "@/components/Card/MissionCard";
-import Footer from "@/components/common/PageFooter2";
+import MissionVissionSection, {
+  MissionVision,
+} from "@/components/about-us/mission-vision/MissionVisionSection";
 import StatisticsSection from "@/components/common/StatisticsSection";
 import CoreValuesSection, {
   CoreValues,
@@ -31,10 +30,6 @@ import abdun_naser_khan from "@/assets/images/organizational-people/abdun-naser-
 import iqbal_hossain from "@/assets/images/organizational-people/iqbal_hossain.jpg";
 import shah_alom from "@/assets/images/organizational-people/shah_alam.jpg";
 import kitab_ali from "@/assets/images/organizational-people/kitab_ali.jpg";
-import mizanur_rahman from "@/assets/images/organizational-people/mizanur_rahman.jpeg";
-
-import sabbir_mostofa from "@/assets/images/organizational-people/sabbir-mostafa-khan.png";
-import muzibar_rahman_mollick from "@/assets/images/organizational-people/mujibur-rahman-mollick.jpg";
 
 const dummyMembers = [
   {
@@ -134,51 +129,6 @@ const dummyMembers = [
       "Expanded outreach initiatives",
     ],
   },
-  {
-    id: 7,
-    full_name: "Md. Mizanur Rahman",
-    category: ["trainingSelection", "futurePlanning"],
-    position: "Joint-Secretary",
-    email: "sajjad.karim@example.com",
-    phone: "+8801819-868982",
-    photo_url: "https://randomuser.me/api/portraits/men/9.jpg",
-    image: mizanur_rahman,
-    bio: "Manages the financial planning and auditing for the federation.",
-    achievements: [
-      "Digitized financial reporting",
-      "Secured corporate sponsorships",
-    ],
-  },
-  {
-    id: 8,
-    full_name: "Dr. Md. Sabbir Mostafa Khan",
-    category: ["finance", "sponsor"],
-    position: "Treasurer",
-    email: "rumana.akter@example.com",
-    phone: "+8801911-554088",
-    photo_url: "https://randomuser.me/api/portraits/women/52.jpg",
-    image: sabbir_mostofa,
-    bio: "Specializes in sprint and endurance training programs.",
-    achievements: [
-      "Developed athlete performance metrics",
-      "Trained 3 regional winners",
-    ],
-  },
-  {
-    id: 9,
-    full_name: "Muzibar Rahman Mollick",
-    category: ["trainingSelection"],
-    position: "Member",
-    email: "ashraful.islam@example.com",
-    phone: "+8801711-306274",
-    photo_url: "https://randomuser.me/api/portraits/men/15.jpg",
-    image: muzibar_rahman_mollick,
-    bio: "Responsible for managing public relations and media coverage.",
-    achievements: [
-      "Launched federation’s digital presence",
-      "Increased media reach by 40%",
-    ],
-  },
 ];
 
 const categoryInfo = {
@@ -223,6 +173,27 @@ const categoryInfo = {
     icon: Briefcase,
   },
 } as const;
+
+const coachAssociationCompass: MissionVision = {
+  option: [
+    {
+      icon: "Users",
+      title: "Our Mission",
+      description:
+        "To empower and unite athletics coaches across Bangladesh through professional development, ethical leadership, and collaborative excellence, ensuring every athlete receives world-class coaching that enables them to reach their full potential.",
+      tags: ["Coaches", "Development", "Standards"],
+      color: "tag-green",
+    },
+    {
+      icon: "Target",
+      title: "Our Vision",
+      description:
+        "To be recognized as South Asia's leading athletics coaching organization, producing internationally certified coaches who consistently develop world-class athletes and contribute to Bangladesh's prominence in global athletics competitions.",
+      tags: ["Performance", "Collaboration", "Impact"],
+      color: "tag-red",
+    },
+  ],
+};
 
 const coreValues: CoreValues = {
   title: "Our Strategic Objectives",
@@ -276,8 +247,8 @@ const coreValues: CoreValues = {
 
 const stats = [
   {
-    value: "150+",
-    label: "Certified Coaches",
+    value: "50+",
+    label: "Qualified Judges",
   },
   {
     value: "8",
@@ -293,7 +264,7 @@ const stats = [
   },
 ];
 
-const BangladeshCoachAssociationPage = () => {
+const BangladeshJudgeAssociationPage = () => {
   // Keeping loading behavior like your other pages (but no API fetch here)
   const [isLoading, setIsLoading] = useState(true);
 
@@ -318,13 +289,13 @@ const BangladeshCoachAssociationPage = () => {
           </div>
 
           <DynamicHeading
-            title="Bangladesh Athletics Coach Association"
+            title="Bangladesh Athletics Judge Association"
             className="text-4xl lg:text-6xl font-bold"
           />
 
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            A unified platform dedicated to empowering athletics coaches through
-            development, standards, and collaboration.
+            Dedicated to maintaining fairness, integrity, and professional
+            standards in athletics officiating across Bangladesh.
           </p>
         </div>
 
@@ -337,68 +308,20 @@ const BangladeshCoachAssociationPage = () => {
             <div className="bg-gradient-to-b from-[#00704A] to-[#005239] w-12 h-12 rounded-full flex items-center justify-center">
               <Sparkles size={24} className="text-white" />
             </div>
-            <span className="text-2xl text-black font-bold">Overview</span>
+            <span className="text-2xl text-gray-500 font-bold">Overview</span>
           </div>
-          The Bangladesh Athletics Coach Association (BACA) was established in
-          2008 as the premier professional organization dedicated to advancing
-          the art and science of athletics coaching in Bangladesh. We represent
-          coaches at all levels, from grassroots community programs to elite
-          international competition. <br /> <br /> Our association serves as the
-          collective voice of athletics coaches across the nation, advocating
-          for professional recognition, improved working conditions, and access
-          to world-class coaching education. We are committed to elevating the
-          coaching profession and, by extension, the performance of Bangladeshi
-          athletes on both national and international stages. <br /> <br />
-          Through our comprehensive network of regional chapters, we facilitate
-          knowledge exchange, mentorship opportunities, and collaborative
-          problem-solving among coaches from diverse backgrounds and
-          specializations. Our members benefit from exclusive access to
-          cutting-edge research, international coaching methodologies, and
-          professional development resources.
+          The Bangladesh Athletics Judge Association (BAJA) is responsible for
+          developing professional officiating standards and ensuring fair
+          competition management across national athletics events.
+          <br />
+          <br />
+          Through structured training programs and certification systems, we
+          promote technical excellence and accountability among registered
+          judges.
         </div>
 
         {/* Cards Section */}
-        <div className="flex justify-around gap-4 ">
-          <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-tag-green via-tag-red to-tag-yellow" />
-          <MissionCard
-            title="Mission"
-            icon={<Users size={24} className="text-white" />}
-            iconBgClass="bg-gradient-to-b from-tag-red to-tag-redDark"
-            description={
-              <>
-                To empower and unite athletics coaches across Bangladesh through
-                professional development, ethical leadership, and collaborative
-                excellence, ensuring every athlete receives world-class coaching
-                that enables them to reach their full potential.
-              </>
-            }
-            bulletPoints={[
-              "Promote highest standards of coaching professionalism and ethics",
-              "Provide continuous education and certification opportunities",
-              "Foster collaboration and knowledge sharing among coaching community",
-            ]}
-            bulletIcon={<CircleCheckBig size={20} className="text-tag-red" />}
-          />
-          <MissionCard
-            title="Mission"
-            icon={<Target size={24} className="text-white" />}
-            iconBgClass="bg-gradient-to-b from-tag-green to-tag-greenDark"
-            description={
-              <>
-                To be recognized as South Asia's leading athletics coaching
-                organization, producing internationally certified coaches who
-                consistently develop world-class athletes and contribute to
-                Bangladesh's prominence in global athletics competitions.
-              </>
-            }
-            bulletPoints={[
-              "Establish international recognition for Bangladeshi coaching excellence",
-              "Create sustainable pathways from grassroots to elite coaching",
-              "Position Bangladesh as a regional hub for coaching education",
-            ]}
-            bulletIcon={<CircleCheckBig size={20} className="text-tag-green" />}
-          />
-        </div>
+        <MissionVissionSection missionVision={coachAssociationCompass} />
 
         <CoreValuesSection coreValues={coreValues} />
         <div className="rounded-2xl p-12 ">
@@ -407,8 +330,7 @@ const BangladeshCoachAssociationPage = () => {
             <div className="font-bold text-tag-green text-3xl">Committee</div>
           </div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-10 text-center">
-            A unified platform dedicated to empowering athletics coaches through
-            development, standards, and collaboration.
+            Our Qualified Judges
           </p>
           <div>
             {dummyMembers?.length > 0 ? (
@@ -528,34 +450,37 @@ const BangladeshCoachAssociationPage = () => {
               </Card>
             )}
           </div>
-          <Footer
-            icon={<Users size={48} />}
-            title="Join Our Community"
-            description={
-              <>
+          <div className="mt-16 p-4 bg-gradient-to-b from-[#00704A] to-[#005239] rounded-2xl">
+            <div className="flex flex-col items-center">
+              <div className="text-[#e5e7eb] mt-6">
+                <Users size={48} />
+              </div>
+              <div className="font-bold text-white m-3 text-3xl">
+                Join Our Community
+              </div>
+              <div className="text-center text-white m-3 text-lg">
                 Become a member of Bangladesh's premier athletics coaching
-                association and access exclusive resources, training, and
+                association and <br /> access exclusive resources, training, and
                 networking opportunities
-              </>
-            }
-            backgroundClass="bg-gradient-to-b from-tag-green to-tag-greenDark"
-            buttons={[
-              {
-                label: "Apply for Membership",
-                variant: "filled",
-                onClick: () => console.log("Apply clicked"),
-              },
-              {
-                label: "Contact Us",
-                variant: "outline",
-                onClick: () => console.log("Contact us clicked"),
-              },
-            ]}
-          />
+              </div>
+              <div className="flex justify-center gap-4 my-6">
+                <div>
+                  <button className="bg-background rounded-2xl p-4 text-[#00704A] hover:bg-accent">
+                    Apply for Membership
+                  </button>
+                </div>
+                <div>
+                  <button className="rounded-2xl p-4 text-white border-2 border-white hover:bg-white/20">
+                    Contact Us
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default BangladeshCoachAssociationPage;
+export default BangladeshJudgeAssociationPage;
