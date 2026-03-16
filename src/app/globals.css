@@ -47,10 +47,14 @@
   --color-green-light: var(--green-light);
   --color-green-dark: var(--green-dark);
   --color-tag-red: var(--tag-red);
+  --color-tag-redDark: var(--tag-redDark);
   --color-tag-green: var(--tag-green);
+  --color-tag-greenDark: var(--tag-greenDark);
   --color-tag-yellow: var(--tag-yellow);
-  --color-tag-blue: var(--tag-blue);
+  --color-tag-yellowDark: var(--tag-yellowDark);
   --color-tag-purple: var(--tag-purple);
+  --color-tag-purpleDark: var(--tag-purpleDark);
+  --color-tag-blue: var(--tag-blue);
 
   --color-card: var(--card);
   --radius-sm: calc(var(--radius) - 4px);
@@ -103,11 +107,15 @@ body {
   /* very light pastel green ≈ hsl(150 40% 95%) */
   --green-dark: oklch(28% 0.13 145);
   /* deep forest green ≈ hsl(150 70% 20%) */
-  --tag-red: oklch(0.54 0.19 25);
+  --tag-red: oklab(52.928% 0.17153 0.07981);
+  --tag-redDark: oklab(46.117000000000004% 0.14936 0.06816);
   --tag-green: oklab(48.152% -0.10119 0.03437);
-  --tag-yellow: oklch(0.75 0.16 95);
+  --tag-greenDark: oklab(38.847% -0.0792 0.02184);
+  --tag-yellow: oklab(76.652% -0.00258 0.13859);
+  --tag-yellowDark: oklab(68.121% 0.00004 0.1308);
+  --tag-purple: oklab(55.754000000000005% 0.13505 -0.21347);
+  --tag-purpleDark: oklab(49.552% 0.1253 -0.20113);
   --tag-blue: oklch(52.3% 0.313 264.1);
-  --tag-purple: oklch(0.627 0.265 303.9);
 
   --chart-1: oklch(67.432% 0.20018 39.935);
   --chart-2: oklch(0.6 0.118 184.704);
