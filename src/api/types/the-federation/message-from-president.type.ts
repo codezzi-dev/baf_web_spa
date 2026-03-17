@@ -24,5 +24,5 @@ export type MessageFromPresident = {
 export type MessageFromPresidentWrapperDto = {
     readonly pageMessageFromPresidentDto: MessageFromPresident;
     readonly pageGenericElements: GenericElement;
-    readonly elementSteps: unknown[]; // empty in current response — tighten once shape is known
+    readonly elementSteps: unknown[];
 };

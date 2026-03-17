@@ -17,7 +17,7 @@ const page = () => {
   if (error) {
     return <Error />;
   }
-  data && console.log(data)
+
   const pageGenericElements = data?.data?.pageGenericElements;
   const pageMessageFromPresident = data?.data?.pageMessageFromPresidentDto
   return (

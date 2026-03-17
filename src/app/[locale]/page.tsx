@@ -14,6 +14,9 @@ import UpcomingEvents from "@/components/Home/UpcommingEvents";
 import QuickLinks from "@/components/Home/QuickLinks";
 import RunningNotice from "@/components/news/RunningNotice";
 import AthleteSpotlight2 from "@/components/Home/AthleteSpotlight2";
+import Loading from "@/components/common/Loading";
+import Error from "@/components/common/Error";
+import { useGetHomePageElements } from "@/api/hooks/home/home.hook";
 
 
 const sponsors = [
@@ -60,12 +63,38 @@ const sponsors = [
 ];
 
 const HomePage = () => {
+  const { data, error, isLoading } = useGetHomePageElements();
+  if (isLoading) {
+    return <Loading />;
+  }
+  if (error) {
+    return <Error />;
+  }
+
+  const notice = data?.data?.notice;           // Notice[]
+  const elements = data?.data?.elements;       // StepGroup[]
+  const news = data?.data?.newsAnnouncements;  // NewsAnnouncement[]
+  const athletes = data?.data?.athletes;       // Athlete[]
+
+  const mappedNotices = notice?.map((n, index) => ({
+    id: index.toString(),
+    text: n.message,
+    isNew: n.isNew,
+  }));
+
+  const missionData = elements?.find(
+    (el) => el.stepGroupName === "our_mission"
+  );
+  console.log(missionData)
   return (
     <div>
       <Hero />
-      <RunningNotice/>
-      <OurMission />
-      <LatestNews   />
+      {notice && <RunningNotice notices={mappedNotices} />}
+      {/* <RunningNotice /> */}
+
+      {missionData && <OurMission missionData={missionData} />}
+      <LatestNews />
+      {/* <LatestNews /> */}
       <UpcomingEvents />
       {/* <AthleteSpotlight /> */}
       <AthleteSpotlight2 />
