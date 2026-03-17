@@ -25,8 +25,6 @@ const MessageContentCard: FC<EmployeeDetailsCardProps> = ({ pageMessageFromPresi
             __html: pageMessageFromPresident.messageFromPresidentSection1,
           }}
         />
-
-
         {/* Vision Box */}
         <Card className="border-l-4 border-success bg-secondary/5 p-6">
           <h3 className="mb-3 font-playfair text-lg font-bold text-foreground">

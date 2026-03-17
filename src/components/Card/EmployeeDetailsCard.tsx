@@ -40,8 +40,7 @@ const EmployeeDetailsCard: FC<EmployeeDetailsCardProps> = ({ pageMessageFromPres
                         {pageMessageFromPresident.messageFromPresidentName}
                     </h2>
                     <p className="mt-1 text-sm font-medium text-primary">
-                        {/* {pageMessageFromPresident.}, {president.organization} */}
-                        President, Bangladesh Athletics Fedaration
+                        {pageMessageFromPresident.messageFromPresidentTitle}
                     </p>
                     <Separator className="my-4" />
                     <div className="mt-6 space-y-3 text-left">
