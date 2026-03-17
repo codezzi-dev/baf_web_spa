@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
 import { Card } from '../ui/card'
 import { Globe, Heart, Quote, TrendingUp } from 'lucide-react'
-import { Employee } from '../data/introduction'
 import { MessageFromPresident } from '@/api/types/the-federation/message-from-president.type'
 
 interface EmployeeDetailsCardProps {
