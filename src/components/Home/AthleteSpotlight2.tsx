@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import DynamicHeading from "./HeadingComponent";
 import Image from "next/image";
@@ -46,9 +47,9 @@ const FeaturedAthletes: React.FC<FeaturedAthletesProps> = ({ ourChampionsData, a
                 >
                     <CarouselContent className="mb-8">
                         {athletes.map((athlete) => (
-                            <CarouselItem key={athlete.athleteUniqueId} className="basis-1/4">
+                            <CarouselItem key={athlete.athleteUniqueId} className="basis-1/4 ">
                                 <div className="bg-white min-w-[300px] rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 cursor-pointer">
-                                    <div className="">
+                                    <div className="h-80 w-full">
                                         <Image src={athlete.athleteProfileImageUrl ?? SampleImage} width={500} height={500} alt="imranur-rahman" className="h-72" />
                                     </div>
 

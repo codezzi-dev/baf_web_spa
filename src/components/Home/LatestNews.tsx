@@ -73,51 +73,58 @@ const LatestNews: React.FC<LatestNewsProps> = ({ newsData, newsAnnouncements }) 
 
         {/* News Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8 mx-10">
-          {newsAnnouncements.map((news) => (
-            <div
-              key={news.newsId}
-              className="bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 cursor-pointer"
-            >
-              {/* Image Placeholder */}
-              {/* <div
+          {newsAnnouncements.map((news) => {
+            const expiryDate = new Date(news.newsExpiryDate).toLocaleDateString("default", {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+            });
+            const image = sampleNews;
+            // const image = news.newsImageUrl ?? sampleNews;
+            return (
+              <div
+                key={news.newsId}
+                className="bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 cursor-pointer"
+              >
+                {/* Image Placeholder */}
+                {/* <div
                 className={`h-48 bg-gradient-to-br ${news.gradient} flex items-center justify-center text-white text-2xl font-semibold`}
               >
                 {news.emoji} News Image
               </div> */}
 
-              <div className="">
-                <Image
-                  src={news.newsThumbnailImageUrl || sampleNews}
-                  width={500}
-                  height={500}
-                  alt="latest-news"
-                  className="h-64"
-                />
-              </div>
-
-
-
-              {/* Content */}
-              <div className="p-6  h-[280px] flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center justify-between space-x-4 text-sm text-gray-500 mb-3">
-                    <span>📅 {news.newsExpiryDate}</span>
-                    <div className="px-2 py-0.5 border border-gray-200 rounded-full">
-                      <span>🏃 {news.newsCategoryId}</span>
-                    </div>
-                  </div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-3 leading-tight line-clamp-2">{news.newsTitle}</h3>
-
-                  <p className="text-gray-600 mb-4 leading-relaxed line-clamp-3">{news.newsContent}</p>
+                <div className="">
+                  <Image
+                    src={image}
+                    width={500}
+                    height={500}
+                    alt="latest-news"
+                    className="h-64 w-full object-cover"
+                  />
                 </div>
 
-                <button className="text-[#00916e] font-semibold flex items-center space-x-1 hover:space-x-2 transition-all duration-200 cursor-pointer">
-                  <span>Read More</span>
-                  <span>→</span>
-                </button>
+                {/* Content */}
+                <div className="p-6  h-[280px] flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between space-x-4 text-sm text-gray-500 mb-3">
+                      <span>📅 {expiryDate}</span>
+                      <div className="px-2 py-0.5 border border-gray-200 rounded-full">
+                        <span>🏃 {news.newsCategoryId}</span>
+                      </div>
+                    </div>
+                    <h3 className="text-lg font-bold text-gray-900 mb-3 leading-tight line-clamp-2">{news.newsTitle}</h3>
+
+                    <p className="text-gray-600 mb-4 leading-relaxed line-clamp-3">{news.newsShortContent}</p>
+                  </div>
+
+                  <button className="text-[#00916e] font-semibold flex items-center space-x-1 hover:space-x-2 transition-all duration-200 cursor-pointer">
+                    <span>Read More</span>
+                    <span>→</span>
+                  </button>
+                </div>
               </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </div>
     </section>

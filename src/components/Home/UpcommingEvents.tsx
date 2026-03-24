@@ -11,6 +11,25 @@ interface UpcomingEventsProps {
   events: Event[];
 }
 
+export const parseEventDate = (dateString: string) => {
+  const date = new Date(dateString);
+
+  return {
+    day: date.getDate(),
+    month: date.toLocaleString("default", { month: "short" }).toUpperCase(),
+    year: date.getFullYear(),
+    time: date.toLocaleTimeString("default", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    }),
+    formatted: date.toLocaleDateString("default", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    }),
+  };
+};
 const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ markYourCalendarData, events }) => {
   const router = useRouter();
 
@@ -62,42 +81,35 @@ const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ markYourCalendarData, e
 
         {/* Events List */}
         <div className="max-w-4xl mx-auto space-y-6">
-          {events.map((event) => {
-            const time = new Date(event.EventStartDate).toLocaleTimeString("default", {
-              hour: "2-digit",
-              minute: "2-digit",
-              hour12: true,
-            });
-            const date = new Date(event.EventStartDate);
-            const day = date.getDate();
-            const month = date.toLocaleString("default", { month: "short" }).toUpperCase();
+          {events.map((event, index) => {
+            const { day, month, time } = parseEventDate(event.eventStartDate);
             return (
               <div
-                key={event.EventUniqueId}
+                key={event.eventUniqueId ?? index}
                 className="bg-white border-2 border-gray-200 rounded-2xl p-6 grid grid-cols-1 lg:grid-cols-[auto_1fr_auto] gap-6 items-center transition-all duration-300 hover:border-[#00916e] hover:shadow-lg cursor-pointer"
               >
                 {/* Date */}
                 <div className="bg-gray-50 rounded-xl p-4 text-center min-w-20">
-                  <div className="text-2xl font-bold text-[#00916e] leading-none">{day}.</div>
+                  <div className="text-2xl font-bold text-[#00916e] leading-none">{day}</div>
                   <div className="text-sm font-semibold text-gray-600 uppercase mt-1">{month}</div>
                 </div>
 
                 {/* Details */}
                 <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{event.EventTitle}</h3>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">{event.eventTitle}</h3>
                   <div className="flex flex-wrap gap-4 text-sm text-gray-600">
                     <span className="flex items-center space-x-1">
                       <FaMapMarkerAlt className="text-gray-400" />
-                      <span>{event.EventLocation}</span>
+                      <span>{event.eventLocation}</span>
                     </span>
                     <span className="flex items-center space-x-1">
                       <FaClock className="text-gray-400" />
                       <span>{time}</span>
                     </span>
-                    <span className="flex items-center space-x-1">
+                    {event.eventCategory ?? <span className="flex items-center space-x-1">
                       <FaUsers className="text-gray-400" />
-                      <span>{event.EventCategory}</span>
-                    </span>
+                      <span>{event.eventCategory}</span>
+                    </span>}
                   </div>
                 </div>
 
