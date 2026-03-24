@@ -5,11 +5,14 @@ import latest_news_2 from '@/assets/images/home/latest-news/latest-news-2.jpg'
 import latest_news_3 from '@/assets/images/home/latest-news/latest-news-3.jpg'
 import latest_news_4 from '@/assets/images/home/latest-news/latest-news-4.jpg'
 import Image from "next/image";
+import { StepGroup } from "@/api/types/home/home.type";
+
+interface LatestNewsProps {
+  newsData?: StepGroup;
+}
 
 
-
-
-const LatestNews: React.FC = () => {
+const LatestNews: React.FC<LatestNewsProps> = ({ newsData }) => {
   const newsItems = [
     {
       id: 1,
@@ -34,7 +37,7 @@ const LatestNews: React.FC = () => {
     {
       id: 3,
       title: "ঢাকায় দেশের প্রথম স্টেডিয়াম আল্ট্রা-রান “ঢাকা স্টেডিয়াম রান” শুরু হবে আগামীকাল সকাল ৬টায়।",
-      excerpt:"বাংলাদেশ  ক্রীড়াক্ষেত্র একটি ঐতিহাসিক মাইলফলকের সাক্ষী হতে চলছে। প্রথমবারের মতো স্টেডিয়াম-ভিত্তিক আল্ট্রা-রানিং ইভেন্ট, ঢাকা স্টেডিয়াম রান ২০২৫ প্রতিযোগিতা ২৬-২৭ ডিসেম্বর,২০২৫ রাজধানীর আইকনিক জাতীয় স্টেডিয়ামে অনুষ্ঠিত হবে। আগামীকাল ভোর ৬ টায় শুরু ২৭ ডিসেম্বর সন্ধ্যা ৬:৩০টায় সমাপ্তি হবে।",
+      excerpt: "বাংলাদেশ  ক্রীড়াক্ষেত্র একটি ঐতিহাসিক মাইলফলকের সাক্ষী হতে চলছে। প্রথমবারের মতো স্টেডিয়াম-ভিত্তিক আল্ট্রা-রানিং ইভেন্ট, ঢাকা স্টেডিয়াম রান ২০২৫ প্রতিযোগিতা ২৬-২৭ ডিসেম্বর,২০২৫ রাজধানীর আইকনিক জাতীয় স্টেডিয়ামে অনুষ্ঠিত হবে। আগামীকাল ভোর ৬ টায় শুরু ২৭ ডিসেম্বর সন্ধ্যা ৬:৩০টায় সমাপ্তি হবে।",
       date: "December 25, 2025",
       category: "News",
       gradient: "from-blue-500 to-blue-400",
@@ -60,9 +63,9 @@ const LatestNews: React.FC = () => {
         <div className="text-center mb-16">
           <div className="text-[#00916e] font-semibold text-sm uppercase tracking-wider mb-2">Stay Updated</div>
           {/* <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Latest News & Announcements</h2> */}
-          <DynamicHeading title="Latest News & Announcements" />
+          <DynamicHeading title={newsData?.stepGroupTitle ?? ''} />
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Get the latest updates on events, achievements, and federation activities
+            {newsData?.stepGroupSummary}
           </p>
         </div>
 
@@ -81,7 +84,7 @@ const LatestNews: React.FC = () => {
               </div> */}
 
               <div className="">
-                <Image src={news.image} width={500} height={500} alt="latest-news" className="h-64"/>
+                <Image src={news.image} width={500} height={500} alt="latest-news" className="h-64" />
               </div>
 
 

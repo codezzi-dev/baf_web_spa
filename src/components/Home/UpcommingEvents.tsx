@@ -4,10 +4,14 @@ import { FaMapMarkerAlt, FaClock, FaUsers } from "react-icons/fa";
 import DynamicHeading from "./HeadingComponent";
 import { useRouter } from 'next/navigation';
 import { Button } from "../ui/Button";
+import { StepGroup } from "@/api/types/home/home.type";
 
+interface UpcomingEventsProps {
+  markYourCalendarData?: StepGroup;
+}
 
-const UpcomingEvents: React.FC = () => {
-    const router = useRouter();
+const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ markYourCalendarData }) => {
+  const router = useRouter();
 
   const handleClick = () => {
     router.push('/all-event');
@@ -49,9 +53,9 @@ const UpcomingEvents: React.FC = () => {
         <div className="text-center mb-16">
           <div className="text-[#00916e] font-semibold text-sm uppercase tracking-wider mb-2">Mark Your Calendar</div>
           {/* <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Upcoming Events & Competitions</h2> */}
-          <DynamicHeading title="Upcoming Competitions" />
+          <DynamicHeading title={markYourCalendarData?.stepGroupTitle ?? ''} />
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Don&apos;t miss these exciting athletic events and championships
+            {markYourCalendarData?.stepGroupSummary}
           </p>
         </div>
 
@@ -100,7 +104,7 @@ const UpcomingEvents: React.FC = () => {
 
         {/* View More Button */}
         <div className="flex justify-center mt-12">
-      
+
           <Button onClick={handleClick} className="px-8 py-3 bg-[#00916e] text-white rounded-lg font-semibold hover:bg-teal-700 transition-colors duration-200 shadow-md hover:shadow-lg cursor-pointer">
             View More
           </Button>

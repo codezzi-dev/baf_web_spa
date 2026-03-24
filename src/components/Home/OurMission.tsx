@@ -28,8 +28,7 @@ const OurMission: React.FC<OurMissionProps> = ({ missionData }) => {
               {lastWord}
             </span>
           </h2> */}
-          <DynamicHeading title={missionData?.stepGroupTitle?.toString()} />
-          {/* <h1>{missionData?.stepGroupTitle.toString()}</h1> */}
+          <DynamicHeading title={missionData?.stepGroupTitle ?? ''} />          {/* <h1>{missionData?.stepGroupTitle.toString()}</h1> */}
           <p className="text-lg text-gray-500 max-w-2xl mx-auto">
             {missionData?.stepGroupSummary}
           </p>

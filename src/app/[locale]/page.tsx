@@ -85,7 +85,19 @@ const HomePage = () => {
   const missionData = elements?.find(
     (el) => el.stepGroupName === "our_mission"
   );
-  console.log(missionData)
+  const newsData = elements?.find(
+    (el) => el.stepGroupName === "stay_updated"
+  );
+  const markYourCalendarData = elements?.find(
+    (el) => el.stepGroupName === "mark_your_calendar"
+  );
+  const ourChampionsData = elements?.find(
+    (el) => el.stepGroupName === "our_champions"
+  );
+  const quickLinksData = elements?.find(
+    (el) => el.stepGroupName === "quick_access"
+  );
+
   return (
     <div>
       <Hero />
@@ -93,13 +105,12 @@ const HomePage = () => {
       {/* <RunningNotice /> */}
 
       {missionData && <OurMission missionData={missionData} />}
-      <LatestNews />
-      {/* <LatestNews /> */}
-      <UpcomingEvents />
-      {/* <AthleteSpotlight /> */}
-      <AthleteSpotlight2 />
+      {newsData && <LatestNews newsData={newsData} />}
+      {markYourCalendarData && <UpcomingEvents markYourCalendarData={markYourCalendarData} />}
+      {ourChampionsData && <AthleteSpotlight2 ourChampionsData={ourChampionsData} />}
+      {quickLinksData && <QuickLinks quickLinksData={quickLinksData} />}
       {/* <SponsorsSection sponsors={sponsors} page="home" /> */}
-      <QuickLinks />
+      {/* <QuickLinks /> */}
     </div>
   );
 };

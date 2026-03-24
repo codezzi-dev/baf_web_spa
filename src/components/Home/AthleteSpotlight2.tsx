@@ -10,8 +10,12 @@ import {
     //   CarouselNext,
     //   CarouselPrevious,
 } from "@/components/ui/carousel"
+import { StepGroup } from "@/api/types/home/home.type";
+interface FeaturedAthletesProps {
+    ourChampionsData?: StepGroup;
+}
 
-const FeaturedAthletes: React.FC = () => {
+const FeaturedAthletes: React.FC<FeaturedAthletesProps> = ({ ourChampionsData }) => {
 
     return (
         <section className="py-20 bg-gray-50">
@@ -20,9 +24,9 @@ const FeaturedAthletes: React.FC = () => {
                 <div className="text-center mb-16">
                     <div className="text-[#00916e] font-semibold text-sm uppercase tracking-wider mb-2">Our Champions</div>
                     {/* <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Featured Athletes</h2> */}
-                    <DynamicHeading title="Featured Athletes" />
+                    <DynamicHeading title={ourChampionsData?.stepGroupTitle ?? ''} />
                     <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                        Meet the athletes who represent Bangladesh on the global stage
+                        {ourChampionsData?.stepGroupSummary}
                     </p>
                 </div>
 
