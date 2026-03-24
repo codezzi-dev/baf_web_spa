@@ -11,7 +11,7 @@ const homeApi = {
     getHomePageContent: (locale: string) => {
         const lang = LOCALE_TO_LANG[locale] ?? "1";
         return request<ApiResponse<HomePageWrapperDto>>(  // ✅ removed []
-            `/HomePageContent/GetHomePageContent/3/3/3/${lang}`
+            `/HomePageContent/GetHomePageContent/50/50/50/${lang}`
         );
     },
 };

@@ -2,7 +2,7 @@ import React from "react";
 import DynamicHeading from "./HeadingComponent";
 import Image from "next/image";
 import Autoplay from "embla-carousel-autoplay";
-import { athletes } from "../data/Athletes";
+import SampleImage from "@/assets/images/athletes/sample-image.png"
 import {
     Carousel,
     CarouselContent,
@@ -11,11 +11,13 @@ import {
     //   CarouselPrevious,
 } from "@/components/ui/carousel"
 import { StepGroup } from "@/api/types/home/home.type";
+import { Athlete } from "@/api/types/home/home.type";
 interface FeaturedAthletesProps {
     ourChampionsData?: StepGroup;
+    athletes: Athlete[];
 }
 
-const FeaturedAthletes: React.FC<FeaturedAthletesProps> = ({ ourChampionsData }) => {
+const FeaturedAthletes: React.FC<FeaturedAthletesProps> = ({ ourChampionsData, athletes }) => {
 
     return (
         <section className="py-20 bg-gray-50">
@@ -44,36 +46,36 @@ const FeaturedAthletes: React.FC<FeaturedAthletesProps> = ({ ourChampionsData })
                 >
                     <CarouselContent className="mb-8">
                         {athletes.map((athlete) => (
-                            <CarouselItem key={athlete.id} className="basis-1/4">
+                            <CarouselItem key={athlete.athleteUniqueId} className="basis-1/4">
                                 <div className="bg-white min-w-[300px] rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 cursor-pointer">
                                     <div className="">
-                                        <Image src={athlete.image} width={500} height={500} alt="imranur-rahman" className="h-72" />
+                                        <Image src={athlete.athleteProfileImageUrl ?? SampleImage} width={500} height={500} alt="imranur-rahman" className="h-72" />
                                     </div>
 
                                     {/* Info */}
                                     <div className="p-6 text-center">
-                                        <h3 className="text-xl font-bold text-gray-900 mb-1">{athlete.name}</h3>
+                                        <h3 className="text-xl font-bold text-gray-900 mb-1">{athlete.athleteFullName}</h3>
                                         <div className="bg-gradient-to-r from-[#C1272D] to-[#A01F25] bg-clip-text text-transparent font-semibold text-sm mb-4">
-                                            {athlete.specialty}
+                                            {athlete.athleteBestPerformanceType}
                                         </div>
 
                                         {/* Stats */}
                                         <div className="grid grid-cols-3 gap-4 pt-4 border-t border-gray-200">
                                             {/* Best Time */}
                                             <div className="text-center">
-                                                <div className="text-lg font-bold text-[#00916e]">{athlete.bestTime}</div>
+                                                <div className="text-lg font-bold text-[#00916e]">{athlete.athleteBestPerformanceValue}</div>
                                                 <div className="text-xs text-gray-500">Best Time</div>
                                             </div>
 
                                             {/* Gold */}
                                             <div className="text-center">
-                                                <div className="text-lg font-bold text-[#00916e]">{athlete.goldMedals}</div>
+                                                <div className="text-lg font-bold text-[#00916e]">{athlete.athleteTotalGoldMedals}</div>
                                                 <div className="text-xs text-gray-500 font-medium">Gold</div>
                                             </div>
 
                                             {/* Silver */}
                                             <div className="text-center">
-                                                <div className="text-lg font-bold text-[#00916e]">{athlete.silverMedals}</div>
+                                                <div className="text-lg font-bold text-[#00916e]">{athlete.athleteTotalSilverMedals}</div>
                                                 <div className="text-xs text-gray-500 font-medium">Silver</div>
                                             </div>
                                         </div>

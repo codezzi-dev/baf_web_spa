@@ -85,6 +85,20 @@ export type Athlete = {
     readonly athleteProfileImageUrl: string | null;
     readonly athleteStatus: number;
 };
+export type Event = {
+    readonly EventUniqueId: string;
+    readonly EventTitle: string;
+    readonly EventShortDescription: string;
+    readonly EventLevel: string;
+    readonly EventCategory: string;
+    readonly EventStartDate: string;
+    readonly EventEndDate: string;
+    readonly EventRegOpenDate: string;
+    readonly EventRegCloseDate: string;
+    readonly EventLocation: string;
+    readonly EventSlug: string;
+
+};
 
 // ──────────────────────────────────────────────
 // API data wrapper (inside `data`)
@@ -94,6 +108,6 @@ export type HomePageWrapperDto = {
     readonly notice: Notice[];
     readonly elements: StepGroup[];
     readonly newsAnnouncements: NewsAnnouncement[];
-    readonly events: unknown[];
+    readonly events: Event[];
     readonly athletes: Athlete[];
 };

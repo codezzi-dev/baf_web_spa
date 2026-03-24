@@ -72,9 +72,11 @@ const HomePage = () => {
   }
 
   const notice = data?.data?.notice;           // Notice[]
-  const elements = data?.data?.elements;       // StepGroup[]
-  const news = data?.data?.newsAnnouncements;  // NewsAnnouncement[]
-  const athletes = data?.data?.athletes;       // Athlete[]
+  const elements = data?.data?.elements ?? [];      // StepGroup[]
+  const newsAnnouncements = data?.data?.newsAnnouncements ?? [];  // NewsAnnouncement[]
+  const events = data?.data?.events ?? [];  // Event[]
+  const athletes = data?.data?.athletes ?? [];      // Athlete[]
+
 
   const mappedNotices = notice?.map((n, index) => ({
     id: index.toString(),
@@ -105,9 +107,9 @@ const HomePage = () => {
       {/* <RunningNotice /> */}
 
       {missionData && <OurMission missionData={missionData} />}
-      {newsData && <LatestNews newsData={newsData} />}
-      {markYourCalendarData && <UpcomingEvents markYourCalendarData={markYourCalendarData} />}
-      {ourChampionsData && <AthleteSpotlight2 ourChampionsData={ourChampionsData} />}
+      {newsData && <LatestNews newsData={newsData} newsAnnouncements={newsAnnouncements} />}
+      {markYourCalendarData && <UpcomingEvents markYourCalendarData={markYourCalendarData} events={events} />}
+      {ourChampionsData && <AthleteSpotlight2 ourChampionsData={ourChampionsData} athletes={athletes} />}
       {quickLinksData && <QuickLinks quickLinksData={quickLinksData} />}
       {/* <SponsorsSection sponsors={sponsors} page="home" /> */}
       {/* <QuickLinks /> */}
