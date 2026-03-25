@@ -3,6 +3,7 @@ import { Building, GraduationCap, School, Building2, Landmark } from "lucide-rea
 import CategorySection from "../common/CategorySection";
 import SearchBarSection from "../common/SearchBarSection";
 import SubCategorySection from "../common/SubCategorySection";
+import { useGetAllDivisions } from "@/api/hooks/key-value/location.hook"
 
 interface AffiliateSearchFiltersProps {
   activeCategory: string;
@@ -21,6 +22,8 @@ const AffiliateSearchFilters = ({
   searchQuery,
   setSearchQuery,
 }: AffiliateSearchFiltersProps) => {
+  const { data: districtData, error: districtError, isLoading: districtIsloading } = useGetAllDivisions();
+  !districtIsloading && console.log("districtData", districtData)
   const categories = [
     { id: "", label: "All Entities", icon: Building },
 
@@ -30,20 +33,27 @@ const AffiliateSearchFilters = ({
     { id: "PE College", label: "PE Colleges", icon: School },
   ];
 
+  // const subCategories = [
+  //   { id: "", label: "All Divisions" },
+
+  //   { id: "Dhaka", label: "Dhaka" },
+  //   { id: "Chittagong", label: "Chittagong" },
+  //   { id: "Rajshahi", label: "Rajshahi" },
+  //   { id: "Khulna", label: "Khulna" },
+  //   { id: "Sylhet", label: "Sylhet" },
+  //   { id: "Rangpur", label: "Rangpur" },
+  //   { id: "Barisal", label: "Barisal" },
+  //   { id: "Mymensingh", label: "Mymensingh" }
+  // ]
+
+  // in JSX:
   const subCategories = [
-    { id: "", label: "All Divisions" },
-
-    { id: "Dhaka", label: "Dhaka" },
-    { id: "Chittagong", label: "Chittagong" },
-    { id: "Rajshahi", label: "Rajshahi" },
-    { id: "Khulna", label: "Khulna" },
-    { id: "Sylhet", label: "Sylhet" },
-    { id: "Rangpur", label: "Rangpur" },
-    { id: "Barisal", label: "Barisal" },
-    { id: "Mymensingh", label: "Mymensingh" }
-
-
-  ]
+    { id: "" as string, label: "All Divisions" },
+    ...(districtData?.data ?? []).map((division) => ({
+      id: String(division.key),
+      label: division.value ?? "",
+    })),
+  ];
 
   return (
     <div className="mb-8 space-y-4">
@@ -64,11 +74,11 @@ const AffiliateSearchFilters = ({
 
       {/* Sub-Category Buttons */}
       {activeCategory === "Division" && (
-       <SubCategorySection 
-        subCategories={subCategories}
-        activeSubCategory={activeSubCategory}
-        setActiveSubCategory={setActiveSubCategory}
-       />
+        <SubCategorySection
+          subCategories={subCategories}
+          activeSubCategory={activeSubCategory}
+          setActiveSubCategory={setActiveSubCategory}
+        />
       )}
 
     </div>

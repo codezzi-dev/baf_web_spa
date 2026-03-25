@@ -10,6 +10,7 @@ import ReportConcernCTA from "@/components/safeguarding/ReportConcernCTA";
 import Loading from "@/components/common/Loading";
 import Error from "@/components/common/Error";
 import { useGetSafeguardingOfficer } from "@/api/hooks/the-federation/safeguarding-officer.hook";
+import PageHero from "@/components/common/PageHero";
 
 const Page = () => {
   const { data, error, isLoading } = useGetSafeguardingOfficer();
@@ -20,14 +21,29 @@ const Page = () => {
     return <Error />;
   }
   data && console.log(data)
+  const elements = data?.data?.elementDtos;
   const pageGenericElements = data?.data?.pageGenericElements;
   const pageSafeguardingOfficer = data?.data?.pageSafeguardingOfficerDto
+
+
+  const roleAndResponsibilities = elements?.find(
+    (el) => el.stepGroupName === "role_&_responsibilities"
+  );
+  const contactTheSafeguardingOfficer = elements?.find(
+    (el) => el.stepGroupName === "contact_the_safeguarding_officer"
+  );
+  const ourSafeguardingPrinciples = elements?.find(
+    (el) => el.stepGroupName === "our_safeguarding_principles"
+  );
+  const importantInformation = elements?.find(
+    (el) => el.stepGroupName === "important_information"
+  );
+
   return (
     <div className="min-h-screen bg-background">
-      <div className="container max-w-6xl mx-auto px-4 py-36 space-y-8">
+      <div className="container max-w-6xl mx-auto px-4 space-y-8">
         {/* Hero Section */}
-        {/* {pageGenericElements && <PageHero pageGenericElements={pageGenericElements} />} */}
-        <HeroSection />
+        {pageGenericElements && <PageHero pageGenericElements={pageGenericElements} />}
 
         {/* Officer Card + Roles Section */}
         <section className="grid lg:grid-cols-3 gap-8">

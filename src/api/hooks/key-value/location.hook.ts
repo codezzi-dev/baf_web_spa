@@ -5,12 +5,12 @@ import { KeyValueType } from "@/api/types/common/key-value.type";
 import { useLocale } from "next-intl";
 
 
-export const useGetAllDistricts = () => {
+export const useGetAllDivisions = () => {
     const locale = useLocale();
 
     return useQuery<ApiResponse<KeyValueType[]>>({
-        queryKey: ["districts-content", locale],
-        queryFn: () => locationApi.getDistrictsInKeyValue(),
+        queryKey: ["divisions-content", locale],
+        queryFn: () => locationApi.getDivisionsInKeyValue(),
     });
 };
 
