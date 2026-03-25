@@ -14,9 +14,9 @@ const MessageContentCard: FC<EmployeeDetailsCardProps> = ({ pageMessageFromPresi
         <Quote className="h-10 w-10 text-green-200" />
 
         {/* Opening */}
-        <p className="font-playfair text-lg italic text-foreground">
+        {/* <p className="font-playfair text-lg italic text-foreground">
           {pageMessageFromPresident.messageFromPresidentDescription},
-        </p>
+        </p> */}
         {/* Message Body */}
         {/* Part 1 */}
         <div
