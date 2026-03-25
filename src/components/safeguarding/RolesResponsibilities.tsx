@@ -1,5 +1,6 @@
 import { Star, CheckCircle } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { ElementDto } from "@/api/types/the-federation/safeguarding-officer.type";
 
 const responsibilities = [
   "Policy development and implementation",
@@ -11,14 +12,16 @@ const responsibilities = [
   "Risk assessment and management",
   "Promoting safeguarding awareness"
 ];
-
-const RolesResponsibilities = () => {
+interface RolesResponsibilitiesProps {
+  roleAndResponsibilities: ElementDto
+}
+const RolesResponsibilities: React.FC<RolesResponsibilitiesProps> = ({ roleAndResponsibilities }) => {
   return (
     <Card className="card">
       <CardHeader className="card-header gradient-light-green">
         <CardTitle className="card-title">
           <Star className="w-5 h-5 text-yellow" />
-          Role & Responsibilities
+          {roleAndResponsibilities.stepGroupTitle}
         </CardTitle>
       </CardHeader>
 

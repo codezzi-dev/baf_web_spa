@@ -1,7 +1,12 @@
 import { Phone, Mail, Clock, Shield } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import { ElementDto } from "@/api/types/the-federation/safeguarding-officer.type";
 
-const OfficerCard = () => {
+interface OfficerCardProps {
+  contactTheSafeguardingOfficer: ElementDto
+}
+
+const OfficerCard: React.FC<OfficerCardProps> = ({ contactTheSafeguardingOfficer }) => {
   return (
     <Card className="overflow-hidden">
       {/* Header with icon */}
@@ -10,14 +15,14 @@ const OfficerCard = () => {
           <Shield className="w-12 h-12 text-maroon-foreground" />
         </div>
       </div>
-      
+
       {/* Officer info */}
       <div className="p-6 text-center">
         <h3 className="text-xl font-bold text-foreground">Dr. Nasrin Sultana</h3>
         <p className="text-primary font-medium">Chief Safeguarding Officer</p>
         <p className="text-accent text-sm font-medium">Licensed Child Protection Specialist</p>
       </div>
-      
+
       {/* Emergency Contact */}
       <div className="px-6 pb-4">
         <div className="bg-green-light rounded-lg p-4">
@@ -37,7 +42,7 @@ const OfficerCard = () => {
           </div>
         </div>
       </div>
-      
+
       {/* 24/7 Support */}
       <div className="px-6 pb-6">
         <div className="bg-yellow/10 border border-yellow/30 rounded-lg p-4">

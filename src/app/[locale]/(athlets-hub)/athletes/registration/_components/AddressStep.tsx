@@ -5,7 +5,7 @@ import type { FormData } from "./FormSchema";
 import { FormInputField, FormSelectField } from "./FormFields";
 import React, { useEffect, useState, useMemo, useRef, useCallback } from "react";
 import { Checkbox } from "./Checkbox";
-import { useGetAllDistricts, useGetAllSubDistricts } from "@/api/hooks/key-value/location.hook";
+import { useGetAllDivisions, useGetAllSubDistricts } from "@/api/hooks/key-value/location.hook";
 
 export function AddressesStep() {
   const {
@@ -31,7 +31,7 @@ export function AddressesStep() {
   const presentAddress = watch("addresses.0");
 
   // Fetch data
-  const { data: districts, isLoading: districtsLoading } = useGetAllDistricts();
+  const { data: districts, isLoading: districtsLoading } = useGetAllDivisions();
   const { data: presentSubDistricts, isLoading: presentSubDistrictsLoading } =
     useGetAllSubDistricts(presentDistrictId || "");
   const { data: permanentSubDistricts, isLoading: permanentSubDistrictsLoading } =
