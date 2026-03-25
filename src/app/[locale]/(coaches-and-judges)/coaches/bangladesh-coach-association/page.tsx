@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from "react";
 import {
   Sparkles,
+  CircleCheckBig,
+  Target,
   Users,
   Mail,
   Phone,
@@ -13,9 +15,8 @@ import {
 
 import DynamicHeading from "@/components/Home/HeadingComponent";
 import Loading from "@/components/common/Loading";
-import MissionVissionSection, {
-  MissionVision,
-} from "@/components/about-us/mission-vision/MissionVisionSection";
+import MissionCard from "@/components/Card/MissionCard";
+import Footer from "@/components/common/PageFooter2";
 import StatisticsSection from "@/components/common/StatisticsSection";
 import CoreValuesSection, {
   CoreValues,
@@ -34,7 +35,6 @@ import mizanur_rahman from "@/assets/images/organizational-people/mizanur_rahman
 
 import sabbir_mostofa from "@/assets/images/organizational-people/sabbir-mostafa-khan.png";
 import muzibar_rahman_mollick from "@/assets/images/organizational-people/mujibur-rahman-mollick.jpg";
-import { Button } from "antd";
 
 const dummyMembers = [
   {
@@ -224,27 +224,6 @@ const categoryInfo = {
   },
 } as const;
 
-const coachAssociationCompass: MissionVision = {
-  option: [
-    {
-      icon: "Users",
-      title: "Our Mission",
-      description:
-        "To empower and unite athletics coaches across Bangladesh through professional development, ethical leadership, and collaborative excellence, ensuring every athlete receives world-class coaching that enables them to reach their full potential.",
-      tags: ["Coaches", "Development", "Standards"],
-      color: "tag-green",
-    },
-    {
-      icon: "Target",
-      title: "Our Vision",
-      description:
-        "To be recognized as South Asia's leading athletics coaching organization, producing internationally certified coaches who consistently develop world-class athletes and contribute to Bangladesh's prominence in global athletics competitions.",
-      tags: ["Performance", "Collaboration", "Impact"],
-      color: "tag-red",
-    },
-  ],
-};
-
 const coreValues: CoreValues = {
   title: "Our Strategic Objectives",
   description:
@@ -294,13 +273,6 @@ const coreValues: CoreValues = {
     },
   ],
 };
-
-// const stats = [
-//   { value: "150+", label: "Certified Coaches", color: "bg-tag-green" },
-//   { value: "8", label: "Divisions", color: "bg-tag-red" },
-//   { value: "12", label: "Specializations", color: "bg-tag-yellow" },
-//   { value: "25+", label: "Years Legacy", color: "bg-tag-purple" },
-// ];
 
 const stats = [
   {
@@ -386,7 +358,47 @@ const BangladeshCoachAssociationPage = () => {
         </div>
 
         {/* Cards Section */}
-        <MissionVissionSection missionVision={coachAssociationCompass} />
+        <div className="flex justify-around gap-4 ">
+          <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-tag-green via-tag-red to-tag-yellow" />
+          <MissionCard
+            title="Mission"
+            icon={<Users size={24} className="text-white" />}
+            iconBgClass="bg-gradient-to-b from-tag-red to-tag-redDark"
+            description={
+              <>
+                To empower and unite athletics coaches across Bangladesh through
+                professional development, ethical leadership, and collaborative
+                excellence, ensuring every athlete receives world-class coaching
+                that enables them to reach their full potential.
+              </>
+            }
+            bulletPoints={[
+              "Promote highest standards of coaching professionalism and ethics",
+              "Provide continuous education and certification opportunities",
+              "Foster collaboration and knowledge sharing among coaching community",
+            ]}
+            bulletIcon={<CircleCheckBig size={20} className="text-tag-red" />}
+          />
+          <MissionCard
+            title="Mission"
+            icon={<Target size={24} className="text-white" />}
+            iconBgClass="bg-gradient-to-b from-tag-green to-tag-greenDark"
+            description={
+              <>
+                To be recognized as South Asia's leading athletics coaching
+                organization, producing internationally certified coaches who
+                consistently develop world-class athletes and contribute to
+                Bangladesh's prominence in global athletics competitions.
+              </>
+            }
+            bulletPoints={[
+              "Establish international recognition for Bangladeshi coaching excellence",
+              "Create sustainable pathways from grassroots to elite coaching",
+              "Position Bangladesh as a regional hub for coaching education",
+            ]}
+            bulletIcon={<CircleCheckBig size={20} className="text-tag-green" />}
+          />
+        </div>
 
         <CoreValuesSection coreValues={coreValues} />
         <div className="rounded-2xl p-12 ">
@@ -516,33 +528,30 @@ const BangladeshCoachAssociationPage = () => {
               </Card>
             )}
           </div>
-          <div className="mt-16 p-4 bg-gradient-to-b from-[#00704A] to-[#005239] rounded-2xl">
-            <div className="flex flex-col items-center">
-              <div className="text-[#e5e7eb] mt-6">
-                <Users size={48} />
-              </div>
-              <div className="font-bold text-white m-3 text-3xl">
-                Join Our Community
-              </div>
-              <div className="text-center text-white m-3 text-lg">
+          <Footer
+            icon={<Users size={48} />}
+            title="Join Our Community"
+            description={
+              <>
                 Become a member of Bangladesh's premier athletics coaching
-                association and <br /> access exclusive resources, training, and
+                association and access exclusive resources, training, and
                 networking opportunities
-              </div>
-              <div className="flex justify-center gap-4 my-6">
-                <div>
-                  <button className="bg-background rounded-2xl p-4 text-[#00704A] hover:bg-accent">
-                    Apply for Membership
-                  </button>
-                </div>
-                <div>
-                  <button className="rounded-2xl p-4 text-white border-2 border-white hover:bg-white/20">
-                    Contact Us
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+              </>
+            }
+            backgroundClass="bg-gradient-to-b from-tag-green to-tag-greenDark"
+            buttons={[
+              {
+                label: "Apply for Membership",
+                variant: "filled",
+                onClick: () => console.log("Apply clicked"),
+              },
+              {
+                label: "Contact Us",
+                variant: "outline",
+                onClick: () => console.log("Contact us clicked"),
+              },
+            ]}
+          />
         </div>
       </div>
     </div>
