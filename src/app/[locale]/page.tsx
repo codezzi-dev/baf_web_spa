@@ -14,6 +14,9 @@ import UpcomingEvents from "@/components/Home/UpcommingEvents";
 import QuickLinks from "@/components/Home/QuickLinks";
 import RunningNotice from "@/components/news/RunningNotice";
 import AthleteSpotlight2 from "@/components/Home/AthleteSpotlight2";
+import Loading from "@/components/common/Loading";
+import Error from "@/components/common/Error";
+import { useGetHomePageElements } from "@/api/hooks/home/home.hook";
 
 
 const sponsors = [
@@ -60,17 +63,56 @@ const sponsors = [
 ];
 
 const HomePage = () => {
+  const { data, error, isLoading } = useGetHomePageElements();
+  if (isLoading) {
+    return <Loading />;
+  }
+  if (error) {
+    return <Error />;
+  }
+
+  const notice = data?.data?.notice;           // Notice[]
+  const elements = data?.data?.elements ?? [];      // StepGroup[]
+  const newsAnnouncements = data?.data?.newsAnnouncements ?? [];  // NewsAnnouncement[]
+  const events = data?.data?.events ?? [];  // Event[]
+  const athletes = data?.data?.athletes ?? [];      // Athlete[]
+
+
+  const mappedNotices = notice?.map((n, index) => ({
+    id: index.toString(),
+    text: n.message,
+    isNew: n.isNew,
+  }));
+
+  const missionData = elements?.find(
+    (el) => el.stepGroupName === "our_mission"
+  );
+  const newsData = elements?.find(
+    (el) => el.stepGroupName === "stay_updated"
+  );
+  const markYourCalendarData = elements?.find(
+    (el) => el.stepGroupName === "mark_your_calendar"
+  );
+  const ourChampionsData = elements?.find(
+    (el) => el.stepGroupName === "our_champions"
+  );
+  const quickLinksData = elements?.find(
+    (el) => el.stepGroupName === "quick_access"
+  );
+
   return (
     <div>
       <Hero />
-      <RunningNotice/>
-      <OurMission />
-      <LatestNews   />
-      <UpcomingEvents />
-      {/* <AthleteSpotlight /> */}
-      <AthleteSpotlight2 />
+      {notice && <RunningNotice notices={mappedNotices} />}
+      {/* <RunningNotice /> */}
+
+      {missionData && <OurMission missionData={missionData} />}
+      {newsData && <LatestNews newsData={newsData} newsAnnouncements={newsAnnouncements} />}
+      {markYourCalendarData && <UpcomingEvents markYourCalendarData={markYourCalendarData} events={events} />}
+      {ourChampionsData && <AthleteSpotlight2 ourChampionsData={ourChampionsData} athletes={athletes} />}
+      {quickLinksData && <QuickLinks quickLinksData={quickLinksData} />}
       {/* <SponsorsSection sponsors={sponsors} page="home" /> */}
-      <QuickLinks />
+      {/* <QuickLinks /> */}
     </div>
   );
 };

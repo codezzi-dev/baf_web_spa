@@ -10,8 +10,11 @@ import { FaRankingStar } from "react-icons/fa6";
 import { FaChildReaching } from "react-icons/fa6";
 import { MdModelTraining } from "react-icons/md";
 import { MdPermMedia } from "react-icons/md";
-
-const QuickLinks: React.FC = () => {
+import { StepGroup } from "@/api/types/home/home.type";
+interface QuickLinksProps {
+  quickLinksData?: StepGroup;
+}
+const QuickLinks: React.FC<QuickLinksProps> = ({ quickLinksData }) => {
   // .quick-icon.green { background: linear-gradient(135deg, var(--#00916e) 0%, var(--#00b383) 100%); }
   // .quick-icon.orange { background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%); }
   // .quick-icon.blue { background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%); }
@@ -90,9 +93,10 @@ const QuickLinks: React.FC = () => {
         <div className="text-center mb-16">
           <div className="text-green-600 font-semibold text-sm uppercase tracking-wider mb-2">Quick Access</div>
           {/* <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Everything You Need</h2> */}
-          <DynamicHeading title="Everything You Need" />
+          <DynamicHeading title={quickLinksData?.stepGroupTitle ?? ''} />
+
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Access all federation services, resources, and information from one place
+            {quickLinksData?.stepGroupSummary}
           </p>
         </div>
 

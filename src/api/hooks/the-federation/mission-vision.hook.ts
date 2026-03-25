@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import missionVisionApi from "@/api/services/the-federation/mission-vision";
+import missionVisionApi from "@/api/services/the-federation/mission-vision.api";
 import { ApiResponse } from "@/api/types/common/api-response.type";
 import { MissionVisionContentWrapperDto } from "@/api/types/the-federation/mission-vision";
 import { useLocale } from "next-intl";

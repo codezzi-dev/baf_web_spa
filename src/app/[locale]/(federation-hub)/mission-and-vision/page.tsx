@@ -10,7 +10,7 @@ import CoreValuesSection, { CoreValues } from "@/components/about-us/mission-vis
 import StrategicObjectivesSection, { StrategicObjectives } from "@/components/about-us/mission-vision/StrategicObjectivesSection";
 import Loading from "@/components/common/Loading";
 import Error from "@/components/common/Error";
-import { useGetAllMissionVisions } from "@/api/hooks/the-federation/mission-vision";
+import { useGetAllMissionVisions } from "@/api/hooks/the-federation/mission-vision.hook";
 
 const compass: MissionVision = {
   option: [

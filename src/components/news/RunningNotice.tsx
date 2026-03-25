@@ -28,7 +28,7 @@ const RunningNotice = ({ notices = defaultNotices }: RunningNoticeProps) => {
           <Megaphone className="h-4 w-4" />
           <span>NOTICE</span>
         </div>
-        
+
         <div className="marquee-container overflow-hidden flex-1 relative">
           <div className="flex marquee-content whitespace-nowrap">
             {duplicatedNotices.map((notice, index) => (
