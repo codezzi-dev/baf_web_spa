@@ -1,5 +1,6 @@
 import { Heart, Users, Lock, ShieldCheck } from "lucide-react";
-import {Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { ElementDto } from "@/api/types/the-federation/safeguarding-officer.type";
 
 const principles = [
   {
@@ -27,14 +28,16 @@ const principles = [
     color: "bg-primary",
   },
 ];
-
-const SafeguardingPrinciples = () => {
+interface SafeguardingPrinciplesProps {
+  ourSafeguardingPrinciples: ElementDto
+}
+const SafeguardingPrinciples: React.FC<SafeguardingPrinciplesProps> = ({ ourSafeguardingPrinciples }) => {
   return (
     <Card className="card">
       <CardHeader className="card-header gradient-light-red">
         <CardTitle className="card-title">
           <Heart className="w-5 h-5 text-tag-red" />
-          <h2 className="text-xl font-bold">Our Safeguarding Principles</h2>
+          <h2 className="text-xl font-bold">{ourSafeguardingPrinciples.stepGroupTitle}</h2>
         </CardTitle>
       </CardHeader>
 

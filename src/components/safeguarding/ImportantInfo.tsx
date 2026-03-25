@@ -1,5 +1,6 @@
 import { Info } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { ElementDto } from "@/api/types/the-federation/safeguarding-officer.type";
 
 const infoItems = [
   {
@@ -24,14 +25,16 @@ const infoItems = [
     textColor: "text-tag-blue",
   },
 ];
-
-const ImportantInfo = () => {
+interface ImportantInfoProps {
+  importantInformation: ElementDto
+}
+const ImportantInfo: React.FC<ImportantInfoProps> = ({ importantInformation }) => {
   return (
     <Card className="card">
       <CardHeader className="card-header gradient-light-green">
         <CardTitle className="card-title">
           <Info className="w-5 h-5 text-muted-foreground" />
-          Important Information
+          {importantInformation.stepGroupTitle}
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4 card-content">

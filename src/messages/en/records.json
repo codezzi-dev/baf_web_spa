@@ -1,0 +1,18 @@
+{
+    "record-type": "Record Type",
+    "category": "Category",
+    "gender": "Gender",
+    "all": "All",
+    "discipline": "Discipline",
+    "national": "National",
+    "international": "International",
+    "senior": "Senior",
+    "under-18": "Under-18",
+    "under-16": "Under-16",
+    "men": "Men",
+    "women": "Women",
+    "u18-boys": "Boys",
+    "u18-girls": "Girls",
+    "u16-boys": "Boys",
+    "u16-girls": "Girls"
+}

@@ -1,12 +1,13 @@
 import { Phone, Mail, Clock, Shield } from "lucide-react";
 import { Card } from "@/components/ui/card";
-import { ElementDto } from "@/api/types/the-federation/safeguarding-officer.type";
+import { ElementDto, SafeguardingOfficer } from "@/api/types/the-federation/safeguarding-officer.type";
 
 interface OfficerCardProps {
   contactTheSafeguardingOfficer: ElementDto
+  pageSafeguardingOfficer: SafeguardingOfficer
 }
 
-const OfficerCard: React.FC<OfficerCardProps> = ({ contactTheSafeguardingOfficer }) => {
+const OfficerCard: React.FC<OfficerCardProps> = ({ contactTheSafeguardingOfficer, pageSafeguardingOfficer }) => {
   return (
     <Card className="overflow-hidden">
       {/* Header with icon */}
@@ -18,9 +19,9 @@ const OfficerCard: React.FC<OfficerCardProps> = ({ contactTheSafeguardingOfficer
 
       {/* Officer info */}
       <div className="p-6 text-center">
-        <h3 className="text-xl font-bold text-foreground">Dr. Nasrin Sultana</h3>
-        <p className="text-primary font-medium">Chief Safeguarding Officer</p>
-        <p className="text-accent text-sm font-medium">Licensed Child Protection Specialist</p>
+        <h3 className="text-xl font-bold text-foreground">{pageSafeguardingOfficer.safeguardingOfficerName}</h3>
+        <p className="text-primary font-medium">{pageSafeguardingOfficer.safeguardingOfficerDesignation}</p>
+        <p className="text-primary text-sm font-medium">{pageSafeguardingOfficer.safeguardingOfficerDescription}</p>
       </div>
 
       {/* Emergency Contact */}
@@ -33,11 +34,11 @@ const OfficerCard: React.FC<OfficerCardProps> = ({ contactTheSafeguardingOfficer
           <div className="space-y-1 text-sm">
             <div className="flex items-center gap-2 text-muted-foreground">
               <Phone className="w-3 h-3" />
-              <span>+880 1711-999888</span>
+              <span>{pageSafeguardingOfficer.safeguardingOfficerPhone}</span>
             </div>
             <div className="flex items-center gap-2 text-muted-foreground">
               <Mail className="w-3 h-3" />
-              <span>safeguarding@bdathletics.gov.bd</span>
+              <span>{pageSafeguardingOfficer.safeguardingOfficerEmail}</span>
             </div>
           </div>
         </div>
@@ -51,7 +52,7 @@ const OfficerCard: React.FC<OfficerCardProps> = ({ contactTheSafeguardingOfficer
             <span className="text-sm">24/7 Support</span>
           </div>
           <p className="text-xs text-muted-foreground">
-            Available round-the-clock for urgent safeguarding concerns
+            {pageSafeguardingOfficer.safeguardingOfficerSupport}
           </p>
         </div>
       </div>
