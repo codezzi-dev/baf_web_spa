@@ -441,6 +441,7 @@ export default function AthleticsRecordsPage() {
   }
 
   const allRecords = apiResponse.data ?? [];
+
   // Filter dummy records
   const records = allRecords.filter((record) => {
     const matchesType = record.AthleteRecordType === selectedRecordType;
