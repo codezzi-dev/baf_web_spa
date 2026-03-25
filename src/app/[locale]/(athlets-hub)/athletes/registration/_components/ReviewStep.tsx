@@ -4,7 +4,7 @@ import type React from "react";
 import { useFormContext } from "react-hook-form";
 import { ClipboardCheck, Edit3 } from "lucide-react";
 import type { FormData } from "./FormSchema";
-import { useGetAllDistricts, useGetAllSubDistricts } from "@/api/hooks/key-value/location.hook";
+import { useGetAllDivisions, useGetAllSubDistricts } from "@/api/hooks/key-value/location.hook";
 import { useMemo } from "react";
 import type { KeyValueType } from "@/api/types/common/key-value.type";
 import { useGetAllInstitutes } from "@/api/hooks/key-value/Institutes.hook";
@@ -19,7 +19,7 @@ export function ReviewStep({ onEdit }: ReviewStepProps) {
 
   // Fetch shared data
   const { data: institutes } = useGetAllInstitutes();
-  const { data: districts } = useGetAllDistricts();
+  const { data: districts } = useGetAllDivisions();
 
   // Fetch sub-districts for BOTH addresses
   const presentDistrictId = formData.addresses?.[0]?.athleteAddressDistrictId || "";
