@@ -4,9 +4,9 @@ import request from "../../api";
 
 // API calls
 const locationApi = {
-    getDistrictsInKeyValue: () => {
+    getDivisionsInKeyValue: () => {
         return request<ApiResponse<KeyValueType[]>>(
-            `/KeyValue/GetDistrictsInKeyValue`
+            `/KeyValue/GetDivisionsInKeyValue`
         )
     },
     getSubDistrictsInKeyValue: (districtId: string) => {

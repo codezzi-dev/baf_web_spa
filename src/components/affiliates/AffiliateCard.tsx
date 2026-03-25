@@ -1,34 +1,35 @@
 import { MapPin, Phone, Mail, ExternalLink, Building2, Users } from "lucide-react";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/Badge";
+import { AffiliateOrganization } from "@/api/types/the-federation/affiliated-organizations.type";
 
 export type OrganizationCategory = "Division" | "University" | "Board" | "PE College";
 type OrganizationStatus = "active" | "verified" | "online";
 export type OrganizationDivition = "Dhaka" | "Chittagong" | "Rajshahi" | "Khulna" | "Barishal" | "Sylhet" | "Rangpur" | "Mymensingh";
 
-type OrganizationBase = {
-  id: string;
-  name: string;
-  description: string;
-  location: string;
-  phone?: string;
-  email?: string;
-  website?: string;
-  status: OrganizationStatus;
-};
+// type OrganizationBase = {
+//   id: string;
+//   name: string;
+//   description: string;
+//   location: string;
+//   phone?: string;
+//   email?: string;
+//   website?: string;
+//   status: OrganizationStatus;
+// };
 
-export type Organization =
-  | (OrganizationBase & {
-    category: "Division";
-    division: OrganizationDivition;
-  })
-  | (OrganizationBase & {
-    category: Exclude<OrganizationCategory, "Division">;
-    division?: OrganizationDivition;
-  });
+// export type Organization =
+//   | (OrganizationBase & {
+//     category: "Division";
+//     division: OrganizationDivition;
+//   })
+//   | (OrganizationBase & {
+//     category: Exclude<OrganizationCategory, "Division">;
+//     division?: OrganizationDivition;
+//   });
 
 interface AffiliateCardProps {
-  organization: Organization;
+  organization: AffiliateOrganization;
 }
 
 const statusColors = {
@@ -45,37 +46,37 @@ const AffiliateCard = ({ organization }: AffiliateCardProps) => {
           <Building2 className="w-8 h-8 text-white" />
         </div>
 
-        <Badge className={`absolute bottom-2 left-4 ${statusColors[organization.status]}`}>
-          {organization.category === "Division" && organization.division} {organization.category}
+        <Badge className={`absolute bottom-2 left-4 ${statusColors[organization.affiliateOrganizationStatus]}`}>
+          {organization.organizationDistrictId === 2 && organization.organizationDistrictId} {organization.affiliateOrganizationCategoryId}
         </Badge>
       </CardHeader>
 
       <CardContent className="p-4">
         <h3 className="font-semibold text-foreground mb-2 line-clamp-2 min-h-[48px]">
-          {organization.name}
+          {organization.organizationName}
         </h3>
 
         <p className="text-sm text-muted-foreground mb-4 line-clamp-2 min-h-[40px]">
-          {organization.description}
+          {organization.organizationBio}
         </p>
 
         <div className="space-y-2 text-sm">
           <div className="flex items-start gap-2 text-muted-foreground">
             <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0 text-maroon" />
-            <span className="line-clamp-1">{organization.location}</span>
+            <span className="line-clamp-1">{organization.organizationAddress}</span>
           </div>
 
-          {organization.phone && (
+          {organization.organizationPhone && (
             <div className="flex items-center gap-2 text-muted-foreground">
               <Phone className="w-4 h-4 shrink-0 text-green-600" />
-              <span>{organization.phone}</span>
+              <span>{organization.organizationPhone}</span>
             </div>
           )}
 
-          {organization.email && (
+          {organization.organizationEmail && (
             <div className="flex items-center gap-2 text-muted-foreground">
               <Mail className="w-4 h-4 shrink-0 text-blue-600" />
-              <span className="truncate">{organization.email}</span>
+              <span className="truncate">{organization.organizationEmail}</span>
             </div>
           )}
         </div>
@@ -89,13 +90,17 @@ const AffiliateCard = ({ organization }: AffiliateCardProps) => {
               <span>220 Athletes</span>
             </div>
             <Badge variant="outline" className="text-xs">
-              {organization.status === "active" ? "Active" : organization.status === "verified" ? "Verified" : "Online"}
+              {organization.affiliateOrganizationStatus === 1
+                ? "Active"
+                : organization.affiliateOrganizationStatus === 2
+                  ? "Verified"
+                  : "Online"}
             </Badge>
           </div>
 
-          {organization.website && (
+          {organization.organizationWebsiteUrl && (
             <a
-              href={organization.website}
+              href={organization.organizationWebsiteUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-1 text-sm text-tag-green bg-tag-green/10 font-medium w-full rounded-md py-2"
