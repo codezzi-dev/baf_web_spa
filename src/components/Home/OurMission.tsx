@@ -5,14 +5,18 @@ import { LuTarget } from "react-icons/lu";
 import { LuUsers } from "react-icons/lu";
 import { LuAward } from "react-icons/lu";
 import DynamicHeading from "./HeadingComponent";
+import { StepGroup } from "@/api/types/home/home.type";
 
-const OurMission = () => {
+interface OurMissionProps {
+  missionData?: StepGroup;  // ✅ single, not array
+}
+const OurMission: React.FC<OurMissionProps> = ({ missionData }) => {
   // Split the title into words
   const title = " Building Champions On and Off the Field";
   const words = title.trim().split(" ");
   const lastWord = words.pop(); // Remove the last word
   const rest = words.join(" "); // Join the rest
-
+  console.log(missionData)
   return (
     <section className="py-20 bg-white">
       <div className="main_container px-4 sm:px-6 lg:px-8">
@@ -24,10 +28,9 @@ const OurMission = () => {
               {lastWord}
             </span>
           </h2> */}
-          <DynamicHeading title="Building Champions On and Off the Field" />
+          <DynamicHeading title={missionData?.stepGroupTitle ?? ''} />          {/* <h1>{missionData?.stepGroupTitle.toString()}</h1> */}
           <p className="text-lg text-gray-500 max-w-2xl mx-auto">
-            Our mission is to develop athletes with discipline, teamwork, and passion — fostering both physical
-            excellence and strong character to achieve greatness in every arena.
+            {missionData?.stepGroupSummary}
           </p>
         </div>
 

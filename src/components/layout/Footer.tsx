@@ -7,8 +7,8 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 
 const Footer: React.FC = () => {
-    const tFooter = useTranslations("footer");
-  
+  const tFooter = useTranslations("footer");
+
   const quickLinks = [
     { name: tFooter("about-us"), href: "#about" },
     { name: tFooter("events"), href: "#events" },
@@ -115,7 +115,7 @@ const Footer: React.FC = () => {
                 </li>
                 <li>
                   <a href="tel:+880123456789" className="hover:text-green-400 transition-colors duration-200">
-                   {tFooter("phone")}
+                    {tFooter("phone")}
                   </a>
                 </li>
                 <li>
@@ -192,12 +192,13 @@ const Footer: React.FC = () => {
             <ul className="space-y-3 text-gray-400">
               <li>
                 <a href="mailto:info@baf.gov.bd" className="hover:text-[#00916e] transition-colors duration-200">
-                   {tFooter("email")}
+                  {tFooter("email")}
                 </a>
               </li>
               <li>
-                <a href="tel:+880123456789" className="hover:text-[#00916e] transition-colors duration-200">
-                   {tFooter("phone")}
+                <a href="tel:+880123456789"
+                  className="hover:text-[#00916e] transition-colors duration-200">
+                  {tFooter("phone")}
                 </a>
               </li>
               <li>

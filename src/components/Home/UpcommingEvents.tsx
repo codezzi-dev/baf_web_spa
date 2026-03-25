@@ -4,43 +4,67 @@ import { FaMapMarkerAlt, FaClock, FaUsers } from "react-icons/fa";
 import DynamicHeading from "./HeadingComponent";
 import { useRouter } from 'next/navigation';
 import { Button } from "../ui/Button";
+import { StepGroup, Event } from "@/api/types/home/home.type";
 
+interface UpcomingEventsProps {
+  markYourCalendarData?: StepGroup;
+  events: Event[];
+}
 
-const UpcomingEvents: React.FC = () => {
-    const router = useRouter();
+export const parseEventDate = (dateString: string) => {
+  const date = new Date(dateString);
+
+  return {
+    day: date.getDate(),
+    month: date.toLocaleString("default", { month: "short" }).toUpperCase(),
+    year: date.getFullYear(),
+    time: date.toLocaleTimeString("default", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    }),
+    formatted: date.toLocaleDateString("default", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    }),
+  };
+};
+const UpcomingEvents: React.FC<UpcomingEventsProps> = ({ markYourCalendarData, events }) => {
+  const router = useRouter();
 
   const handleClick = () => {
     router.push('/all-event');
   };
-  const events = [
-    {
-      id: 1,
-      title: "National Junior Athletics Training Camp",
-      day: "05",
-      month: "Apr",
-      location: "National Stadium, Dhaka",
-      time: "9:00 AM - 5:00 PM",
-      category: "Junior Category",
-    },
-    {
-      id: 2,
-      title: "40th National Junior Athletics Championship",
-      day: "01",
-      month: "Apr",
-      location: "National Stadium, Dhaka",
-      time: "8:00 AM - 6:00 PM",
-      category: "All Categories",
-    },
-    {
-      id: 3,
-      title: "49th National Athletics Championship",
-      day: "22",
-      month: "May",
-      location: "National Stadium, Dhaka",
-      time: "9:00 AM - 5:00 PM",
-      category: "Open Category",
-    },
-  ];
+  // const events = [
+  //   {
+  //     id: 1,
+  //     title: "National Junior Athletics Training Camp",
+  //     day: "05",
+  //     month: "Apr",
+  //     location: "National Stadium, Dhaka",
+  //     time: "9:00 AM - 5:00 PM",
+  //     category: "Junior Category",
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "40th National Junior Athletics Championship",
+  //     day: "01",
+  //     month: "Apr",
+  //     location: "National Stadium, Dhaka",
+  //     time: "8:00 AM - 6:00 PM",
+  //     category: "All Categories",
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "49th National Athletics Championship",
+  //     day: "22",
+  //     month: "May",
+  //     location: "National Stadium, Dhaka",
+  //     time: "9:00 AM - 5:00 PM",
+  //     category: "Open Category",
+  //   },
+  // ];
 
   return (
     <section className="py-20 bg-white">
@@ -49,58 +73,61 @@ const UpcomingEvents: React.FC = () => {
         <div className="text-center mb-16">
           <div className="text-[#00916e] font-semibold text-sm uppercase tracking-wider mb-2">Mark Your Calendar</div>
           {/* <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Upcoming Events & Competitions</h2> */}
-          <DynamicHeading title="Upcoming Competitions" />
+          <DynamicHeading title={markYourCalendarData?.stepGroupTitle ?? ''} />
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Don&apos;t miss these exciting athletic events and championships
+            {markYourCalendarData?.stepGroupSummary}
           </p>
         </div>
 
         {/* Events List */}
         <div className="max-w-4xl mx-auto space-y-6">
-          {events.map((event) => (
-            <div
-              key={event.id}
-              className="bg-white border-2 border-gray-200 rounded-2xl p-6 grid grid-cols-1 lg:grid-cols-[auto_1fr_auto] gap-6 items-center transition-all duration-300 hover:border-[#00916e] hover:shadow-lg cursor-pointer"
-            >
-              {/* Date */}
-              <div className="bg-gray-50 rounded-xl p-4 text-center min-w-20">
-                <div className="text-2xl font-bold text-[#00916e] leading-none">{event.day}</div>
-                <div className="text-sm font-semibold text-gray-600 uppercase mt-1">{event.month}</div>
-              </div>
-
-              {/* Details */}
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{event.title}</h3>
-                <div className="flex flex-wrap gap-4 text-sm text-gray-600">
-                  <span className="flex items-center space-x-1">
-                    <FaMapMarkerAlt className="text-gray-400" />
-                    <span>{event.location}</span>
-                  </span>
-                  <span className="flex items-center space-x-1">
-                    <FaClock className="text-gray-400" />
-                    <span>{event.time}</span>
-                  </span>
-                  <span className="flex items-center space-x-1">
-                    <FaUsers className="text-gray-400" />
-                    <span>{event.category}</span>
-                  </span>
-                </div>
-              </div>
-
-              {/* Register Button */}
-              <a
-                href="#"
-                className="px-6 py-3 bg-[#00916e] text-white rounded-lg font-semibold hover:bg-teal-700 transition-colors duration-200 text-center"
+          {events.map((event, index) => {
+            const { day, month, time } = parseEventDate(event.eventStartDate);
+            return (
+              <div
+                key={event.eventUniqueId ?? index}
+                className="bg-white border-2 border-gray-200 rounded-2xl p-6 grid grid-cols-1 lg:grid-cols-[auto_1fr_auto] gap-6 items-center transition-all duration-300 hover:border-[#00916e] hover:shadow-lg cursor-pointer"
               >
-                Register Now
-              </a>
-            </div>
-          ))}
+                {/* Date */}
+                <div className="bg-gray-50 rounded-xl p-4 text-center min-w-20">
+                  <div className="text-2xl font-bold text-[#00916e] leading-none">{day}</div>
+                  <div className="text-sm font-semibold text-gray-600 uppercase mt-1">{month}</div>
+                </div>
+
+                {/* Details */}
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">{event.eventTitle}</h3>
+                  <div className="flex flex-wrap gap-4 text-sm text-gray-600">
+                    <span className="flex items-center space-x-1">
+                      <FaMapMarkerAlt className="text-gray-400" />
+                      <span>{event.eventLocation}</span>
+                    </span>
+                    <span className="flex items-center space-x-1">
+                      <FaClock className="text-gray-400" />
+                      <span>{time}</span>
+                    </span>
+                    {event.eventCategory ?? <span className="flex items-center space-x-1">
+                      <FaUsers className="text-gray-400" />
+                      <span>{event.eventCategory}</span>
+                    </span>}
+                  </div>
+                </div>
+
+                {/* Register Button */}
+                <a
+                  href="#"
+                  className="px-6 py-3 bg-[#00916e] text-white rounded-lg font-semibold hover:bg-teal-700 transition-colors duration-200 text-center"
+                >
+                  Register Now
+                </a>
+              </div>
+            )
+          })}
         </div>
 
         {/* View More Button */}
         <div className="flex justify-center mt-12">
-      
+
           <Button onClick={handleClick} className="px-8 py-3 bg-[#00916e] text-white rounded-lg font-semibold hover:bg-teal-700 transition-colors duration-200 shadow-md hover:shadow-lg cursor-pointer">
             View More
           </Button>
