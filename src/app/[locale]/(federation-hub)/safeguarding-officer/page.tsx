@@ -48,10 +48,13 @@ const Page = () => {
         {/* Officer Card + Roles Section */}
         <section className="grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-1">
-            <OfficerCard />
+            {contactTheSafeguardingOfficer && (
+              <OfficerCard contactTheSafeguardingOfficer={contactTheSafeguardingOfficer} />
+            )}
           </div>
           <div className="lg:col-span-2 space-y-6">
-            <RolesResponsibilities />
+            {roleAndResponsibilities &&
+              (<RolesResponsibilities roleAndResponsibilities={roleAndResponsibilities} />)}
             <WhenToContact />
           </div>
         </section>
