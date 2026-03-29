@@ -2,16 +2,6 @@ import { Star, CheckCircle } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { ElementDto } from "@/api/types/the-federation/safeguarding-officer.type";
 
-const responsibilities = [
-  "Policy development and implementation",
-  "Investigating safeguarding concerns",
-  "Training staff and volunteers",
-  "Managing disclosure procedures",
-  "Liaison with external authorities",
-  "Record keeping and reporting",
-  "Risk assessment and management",
-  "Promoting safeguarding awareness"
-];
 interface RolesResponsibilitiesProps {
   roleAndResponsibilities: ElementDto
 }
@@ -27,15 +17,14 @@ const RolesResponsibilities: React.FC<RolesResponsibilitiesProps> = ({ roleAndRe
 
       <CardContent className="card-content">
         <p className="text-sm text-muted-foreground mb-6">
-          The Safeguarding Officer is responsible for ensuring the welfare, safety, and protection of all athletes,
-          particularly children and vulnerable adults, within the Bangladesh Athletics Federation.
+          {roleAndResponsibilities.stepGroupSummary}
         </p>
 
         <div className="grid md:grid-cols-2 gap-x-8 gap-y-3">
-          {responsibilities.map((item, index) => (
+          {roleAndResponsibilities.stepFromDtos.map((item, index) => (
             <div key={`left-${index}`} className="flex items-center gap-2 bg-green-900/5 p-4 rounded-md">
               <CheckCircle className="w-4 h-4 text-tag-green flex-shrink-0" />
-              <span className="text-sm text-muted-foreground">{item}</span>
+              <span className="text-sm text-muted-foreground">{item.stepTitle}</span>
             </div>
           ))}
         </div>

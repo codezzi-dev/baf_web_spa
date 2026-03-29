@@ -23,7 +23,8 @@ const Page = () => {
   data && console.log(data)
   const elements = data?.data?.elementDtos;
   const pageGenericElements = data?.data?.pageGenericElements;
-  const pageSafeguardingOfficer = data?.data?.pageSafeguardingOfficerDto
+  const pageSafeguardingOfficer = data?.data?.pageSafeguardingOfficerDto;
+  const pageSafeguardingResources = data?.data?.safeguardingResources;
 
 
   const roleAndResponsibilities = elements?.find(
@@ -58,7 +59,8 @@ const Page = () => {
           <div className="lg:col-span-2 space-y-6">
             {roleAndResponsibilities &&
               (<RolesResponsibilities roleAndResponsibilities={roleAndResponsibilities} />)}
-            <WhenToContact />
+            {contactTheSafeguardingOfficer &&
+              (<WhenToContact contactTheSafeguardingOfficer={contactTheSafeguardingOfficer} />)}
           </div>
         </section>
 
@@ -67,7 +69,7 @@ const Page = () => {
 
         {/* Resources + Important Info */}
         <section className="grid md:grid-cols-2 gap-8 mb-12">
-          <ResourcesSection />
+          {pageSafeguardingResources && <ResourcesSection safeguardingResources={pageSafeguardingResources} />}
           {importantInformation && <ImportantInfo importantInformation={importantInformation} />}
         </section>
 
