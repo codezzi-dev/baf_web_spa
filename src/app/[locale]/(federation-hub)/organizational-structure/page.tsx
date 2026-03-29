@@ -28,7 +28,11 @@ import riajul_islam from '@/assets/images/organizational-people/md-riajul-islam.
 import touhidul_islam from '@/assets/images/organizational-people/colonel-md-touhidul-islam.png'
 import nadiruzamman from '@/assets/images/organizational-people/commander-nadiruzzaman.png'
 import ekramul_haque from '@/assets/images/organizational-people/wing-commander-md-ekramul-haque.png'
+import Loading from "@/components/common/Loading";
+import Error from "@/components/common/Error";
 
+import { useGetOrgStructurePublicContent } from "@/api/hooks/the-federation/organizational-structure.hook";
+import PageHero from "@/components/common/PageHero";
 
 
 
@@ -359,33 +363,52 @@ const dummyMembers = [
 ];
 
 export default function BoardMembers() {
-  const [activeCategory, setActiveCategory] = useState("all");
+  // const [activeCategory, setActiveCategory] = useState("all");
 
-  const filteredMembers =
-    activeCategory === "all" ? dummyMembers : dummyMembers.filter((m) => m.category.includes(activeCategory));
-  // activeCategory === "all" ? dummyMembers : dummyMembers.filter((m) => m.category === activeCategory);
+  // const filteredMembers =
+  //   activeCategory === "all" ? dummyMembers : dummyMembers.filter((m) => m.category.includes(activeCategory));
 
-  console.log({ activeCategory })
+  const { data, error, isLoading } = useGetOrgStructurePublicContent();
+  if (isLoading) {
+    return <Loading />;
+  }
+  if (error) {
+    return <Error />;
+  }
+  data && console.log(data)
+  const committees = data?.data?.committees ?? [];
+  const pageGenericElements = data?.data?.pageGenericElements;
+  const committeeWithMembers = data?.data?.committeeWithMembers ?? [];
+  const categoryInfo = Object.fromEntries(
+    committees.map((committee) => [
+      (committee.key ?? "").toString(),
+      {
+        title: committee.value,
+        color: "from-[#00704A] to-[#005239]",
+        icon: Shield,
+      },
+    ])
+  );
 
+  const [activeCategory, setActiveCategory] = useState<string>("");
+  const effectiveCategory =
+    activeCategory || committees[0]?.key?.toString() || "";
+  const activeCategoryInfo = categoryInfo[effectiveCategory];
+
+  // Filter members by active committeeId matching effectiveCategory
+  const filteredMembers = !effectiveCategory
+    ? committeeWithMembers
+    : committeeWithMembers.filter(
+      (m) => m.committeeId?.toString() === effectiveCategory
+    );
   return (
     <div className="pt-40 bg-gradient-to-br from-[#F8F6F3] to-white ">
       <div className="main_container mx-auto px-3 md:px-0">
         {/* Hero Section */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#00704A]/10 to-[#C1272D]/10 rounded-full mb-6">
-            <Users className="w-4 h-4 text-[#00704A]" />
-            <span className="text-sm font-semibold text-[#00704A]">Leadership Team</span>
-          </div>
+        {pageGenericElements && <PageHero pageGenericElements={pageGenericElements} />}
 
-          <DynamicHeading title="Board Members" className="text-4xl lg:text-6xl font-bold" />
-
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Meet the dedicated leaders and professionals guiding Bangladesh Athletics Federation towards excellence and
-            growth.
-          </p>
-        </div>
         {/* Tabs */}
-        <Tabs value={activeCategory} onValueChange={setActiveCategory} className="mb-12 p-2 md:w-fit">
+        <Tabs value={effectiveCategory} onValueChange={setActiveCategory} className="mb-12 p-2 md:w-fit">
           <TabsList className="flex flex-row items-center gap-4 bg-white border border-gray-200 p-1 rounded-xl overflow-auto">
             {Object.entries(categoryInfo).map(([key, info]) => {
               const Icon = info.icon;
@@ -393,10 +416,10 @@ export default function BoardMembers() {
                 <TabsTrigger
                   key={key}
                   value={key}
-                  className="rounded-lg p-3  data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#00704A] data-[state=active]:to-[#005239] data-[state=active]:text-white"
+                  className="rounded-lg p-3 data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#00704A] data-[state=active]:to-[#005239] data-[state=active]:text-white"
                 >
-                  <Icon className="w-4 h-4 mr" />
-                  {info.title.split(" ")[0]}
+                  <Icon className="w-4 h-4 mr-2" />
+                  {info.title}
                 </TabsTrigger>
               );
             })}
@@ -404,109 +427,110 @@ export default function BoardMembers() {
         </Tabs>
 
         {/* Category Description */}
-        <div className="mb-12">
-          <Card className="border-none shadow-lg bg-gradient-to-r from-white to-[#F8F6F3]">
-            <CardContent className="p-8">
-              <div className="flex items-center gap-4">
-                <div
-                  className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${categoryInfo[activeCategory].color} flex items-center justify-center shadow-lg`}
-                >
-                  {React.createElement(categoryInfo[activeCategory].icon, {
-                    className: "w-8 h-8 text-white",
-                  })}
+        {activeCategoryInfo && (
+          <div className="mb-12">
+            <Card className="border-none shadow-lg bg-gradient-to-r from-white to-[#F8F6F3]">
+              <CardContent className="p-8">
+                <div className="flex items-center gap-4">
+                  <div
+                    className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${activeCategoryInfo.color} flex items-center justify-center shadow-lg`}
+                  >
+                    {React.createElement(activeCategoryInfo.icon, {
+                      className: "w-8 h-8 text-white",
+                    })}
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-bold text-[#2D3436] mb-1">
+                      {activeCategoryInfo.title}
+                    </h2>
+                  </div>
                 </div>
-                <div>
-                  <h2 className="text-2xl font-bold text-[#2D3436] mb-1">{categoryInfo[activeCategory].title}</h2>
-                  <p className="text-gray-600">{categoryInfo[activeCategory].description}</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
+              </CardContent>
+            </Card>
+          </div>
+        )}
         {/* Members Grid */}
-        {filteredMembers.length > 0 ? (
+        {effectiveCategory.length > 0 ? (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredMembers.map((member, index) => (
-              <Card
-                key={member.id}
-                className="border-none shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden group"
-              >
-                {/* Photo */}
-                <div className="h-80 bg-gradient-to-br from-white-100 to-white-200 relative overflow-hidden">
-                  {member.image ? (
-                    <img
-                      src={member.image?.src}
-                      alt={member.full_name}
-                      className="w-full h-full object-contain transition-transform duration-500 ease-out group-hover:scale-110"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200">
-                      <div
-                        className={`w-28 h-28 rounded-full bg-gradient-to-br ${categoryInfo[member.category[index]].color
-                          } flex items-center justify-center shadow-md`}
-                      >
-                        <span className="text-4xl font-semibold text-white">{member.full_name.charAt(0)}</span>
-                      </div>
-                    </div>
-                  )}
+            {filteredMembers.map((member) => {
+              const memberCategoryInfo = categoryInfo[member.committeeId?.toString() ?? ""] ?? {
+                color: "from-[#00704A] to-[#005239]",
+                icon: Shield,
+              };
 
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <Badge
-                      className={`bg-gradient-to-r ${categoryInfo[member.category[index]]?.color
-                        } text-white border-none px-2 py-1 rounded-2xl`}
-                    >
-                      {member.position}
-                    </Badge>
-                  </div>
-                </div>
-
-                {/* Content */}
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-bold text-[#2D3436] mb-3">{member.full_name}</h3>
-
-                  {member.bio && <p className="text-gray-600 text-sm mb-4 line-clamp-3">{member.bio}</p>}
-
-                  {member.achievements && member.achievements.length > 0 && (
-                    <div className="mb-4 pb-4 border-b border-gray-100">
-                      <div className="flex items-center gap-2 mb-2">
-                        <Award className="w-4 h-4 text-[#D4AF37]" />
-                        <span className="text-sm font-semibold text-gray-700">Key Achievements</span>
-                      </div>
-                      <ul className="space-y-1">
-                        {member.achievements.slice(0, 2).map((a, idx) => (
-                          <li key={idx} className="text-xs text-gray-600 flex items-start gap-2">
-                            <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37] mt-1.5 flex-shrink-0" />
-                            <span className="line-clamp-1">{a}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-
-                  <div className="space-y-2">
-                    {member.email && (
-                      <div className="flex items-center gap-2 text-sm text-gray-600">
-                        <Mail className="w-4 h-4 text-[#00704A]" />
-                        <a href={`mailto:${member.email}`} className="hover:text-[#00704A] transition-colors">
-                          {member.email}
-                        </a>
+              return (
+                <Card key={member.memberUniqueId} className="border-none shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden group">
+                  <div className="h-80 relative overflow-hidden">
+                    {member.memberImgUrl ? (
+                      <img
+                        src={member.memberImgUrl}
+                        alt={member.memberName}
+                        className="w-full h-full object-contain transition-transform duration-500 ease-out group-hover:scale-110"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200">
+                        <div className={`w-28 h-28 rounded-full bg-gradient-to-br ${memberCategoryInfo.color} flex items-center justify-center shadow-md`}>
+                          <span className="text-4xl font-semibold text-white">
+                            {member.memberName?.charAt(0)}
+                          </span>
+                        </div>
                       </div>
                     )}
 
-                    {member.phone && (
-                      <div className="flex items-center gap-2 text-sm text-gray-600">
-                        <Phone className="w-4 h-4 text-[#C1272D]" />
-                        <a href={`tel:${member.phone}`} className="hover:text-[#C1272D] transition-colors">
-                          {member.phone}
-                        </a>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <Badge className={`bg-gradient-to-r ${memberCategoryInfo.color} text-white border-none px-2 py-1 rounded-2xl`}>
+                        {member.designationTitle}
+                      </Badge>
+                    </div>
+                  </div>
+
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-bold text-[#2D3436] mb-3">{member.memberName}</h3>
+
+                    {member.memberIntro && (
+                      <p className="text-gray-600 text-sm mb-4 line-clamp-3">{member.memberIntro}</p>
+                    )}
+
+                    {member.achievements?.length > 0 && (
+                      <div className="mb-4 pb-4 border-b border-gray-100">
+                        <div className="flex items-center gap-2 mb-2">
+                          <Award className="w-4 h-4 text-[#D4AF37]" />
+                          <span className="text-sm font-semibold text-gray-700">Key Achievements</span>
+                        </div>
+                        <ul className="space-y-1">
+                          {member.achievements.slice(0, 2).map((a, idx) => (
+                            <li key={idx} className="text-xs text-gray-600 flex items-start gap-2">
+                              <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37] mt-1.5 flex-shrink-0" />
+                              <span className="line-clamp-1">{a}</span>
+                            </li>
+                          ))}
+                        </ul>
                       </div>
                     )}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+
+                    <div className="space-y-2">
+                      {member.memberEmail && (
+                        <div className="flex items-center gap-2 text-sm text-gray-600">
+                          <Mail className="w-4 h-4 text-[#00704A]" />
+                          <a href={`mailto:${member.memberEmail}`} className="hover:text-[#00704A] transition-colors">
+                            {member.memberEmail}
+                          </a>
+                        </div>
+                      )}
+                      {member.memberContactNo && (
+                        <div className="flex items-center gap-2 text-sm text-gray-600">
+                          <Phone className="w-4 h-4 text-[#C1272D]" />
+                          <a href={`tel:${member.memberContactNo}`} className="hover:text-[#C1272D] transition-colors">
+                            {member.memberContactNo}
+                          </a>
+                        </div>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
         ) : (
           <Card className="border-none shadow-lg">
