@@ -6,16 +6,16 @@ export type AthleteEarlierRecordDto = {
     readonly DisciplineMeasurementUnitShortName: string;
 };
 export type AthleteRecordDto = {
-    readonly AthleteRecordType: string;
-    readonly AthleteRecordValue: number;
-    readonly DisciplineMeasurementUnitShortName: string;
-    readonly DisciplineName: string;
-    readonly AthleteRecordYear: string;
-    readonly AthleteRecordVenue: string;
-    readonly AthleteRecordCategory: string;
-    readonly AthleteGender: string;
-    readonly AthleteFullName: string;
-    AthleteEarlierRecords: AthleteEarlierRecordDto[]
+    readonly athleteRecordType: string;
+    readonly athleteRecordValue: number;
+    readonly disciplineMeasurementUnitShortName: string;
+    readonly disciplineName: string;
+    readonly athleteRecordYear: number;      // number, not string
+    readonly athleteRecordVenue: string;
+    readonly athleteRecordCategory: string;
+    readonly athleteGender: string;
+    readonly athleteFullName: string;
+    athleteEarlierRecords: AthleteEarlierRecordDto[];
 };
 
 

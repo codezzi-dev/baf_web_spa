@@ -441,20 +441,20 @@ export default function AthleticsRecordsPage() {
   }
 
   const allRecords = apiResponse.data ?? [];
-
+  console.log(allRecords)
   // Filter dummy records
   const records = allRecords.filter((record) => {
-    const matchesType = record.AthleteRecordType === selectedRecordType;
-    const matchesCategory = record.AthleteRecordCategory === selectedCategory;
-    const matchesGender = record.AthleteGender === selectedGender;
-    const matchesDiscipline = selectedDiscipline === "All Disciplines" || record.DisciplineName === selectedDiscipline;
+    const matchesType = record.athleteRecordType?.toLowerCase() === selectedRecordType.toLowerCase();
+    const matchesCategory = selectedCategory === "all" || record.athleteRecordCategory?.toLowerCase() === selectedCategory.toLowerCase();
+    const matchesGender = selectedGender === "all" || record.athleteGender?.toLowerCase() === selectedGender.toLowerCase();
+    const matchesDiscipline = selectedDiscipline === ALL_DISCIPLINES || record.disciplineName === selectedDiscipline;
 
     return matchesType && matchesCategory && matchesGender && matchesDiscipline;
   });
 
   const groupedRecords = records.reduce<Record<string, typeof records>>((acc, record) => {
-    if (!acc[record.DisciplineName]) acc[record.DisciplineName] = [];
-    acc[record.DisciplineName].push(record);
+    if (!acc[record.disciplineName]) acc[record.disciplineName] = [];
+    acc[record.disciplineName].push(record);
     return acc;
   }, {});
 
@@ -531,14 +531,14 @@ export default function AthleticsRecordsPage() {
                       <TabsTrigger value="all">
                         {trecords("all")}
                       </TabsTrigger>
-                      <TabsTrigger value="male">
+                      <TabsTrigger value="Male">
                         {selectedCategory === "senior" || selectedCategory === "all"
                           ? trecords("men")
                           : selectedCategory === "u-16"
                             ? trecords("u16-boys")
                             : trecords("u18-boys")}
                       </TabsTrigger>
-                      <TabsTrigger value="female">
+                      <TabsTrigger value="Female">
                         {selectedCategory === "senior" || selectedCategory === "all"
                           ? trecords("women")
                           : selectedCategory === "u-16"
@@ -593,9 +593,9 @@ export default function AthleticsRecordsPage() {
                 <div className="grid md:grid-cols-2 gap-6">
                   {disciplineRecords.map((record, index) => {
                     console.log("record", record)
-                    const RecordIcon = recordTypeIcons[record.AthleteRecordType as keyof typeof recordTypeIcons];
+                    const RecordIcon = recordTypeIcons[record.athleteRecordType?.toLowerCase() as keyof typeof recordTypeIcons] ?? Trophy;
                     const currentYear = new Date().getFullYear();
-                    const recordYear = new Date(record.AthleteRecordYear).getFullYear();
+                    const recordYear = new Date(record.athleteRecordYear).getFullYear();
                     const yearsStanding = currentYear - recordYear;
 
                     return (
@@ -605,11 +605,11 @@ export default function AthleticsRecordsPage() {
                       >
                         {/* Header */}
                         <div className="h-32 bg-gradient-to-br from-[#D4AF37] to-[#B8941F] relative overflow-hidden">
-                          {record.DisciplineName && (
+                          {record.disciplineName && (
                             <>
                               <img
-                                src={record.AthleteFullName}
-                                alt={record.AthleteFullName}
+                                src={record.athleteFullName}
+                                alt={record.athleteFullName}
                                 className="w-full h-full object-cover opacity-40"
                               />
                               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
@@ -622,9 +622,9 @@ export default function AthleticsRecordsPage() {
                                 variant="outline"
                                 className="bg-white/20 backdrop-blur-sm text-white border-none mb-2"
                               >
-                                {record.AthleteRecordType.replace("_", " ").toUpperCase()} RECORD
+                                {record.athleteRecordType.replace("_", " ").toUpperCase()} RECORD
                               </Badge>
-                              <h3 className="text-2xl font-bold text-white">{record.AthleteRecordValue}</h3>
+                              <h3 className="text-2xl font-bold text-white">{record.athleteRecordValue}</h3>
                             </div>
                             <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center">
                               <RecordIcon className="w-8 h-8 text-white" />
@@ -635,8 +635,8 @@ export default function AthleticsRecordsPage() {
                         {/* Content */}
                         <CardContent className="p-6 space-y-4">
                           <div>
-                            <h4 className="text-2xl font-bold text-[#2D3436] mb-1">{record.AthleteFullName}</h4>
-                            <p className="text-gray-600">{record.DisciplineName}</p>
+                            <h4 className="text-2xl font-bold text-[#2D3436] mb-1">{record.athleteFullName}</h4>
+                            <p className="text-gray-600">{record.disciplineName}</p>
                           </div>
 
                           <div className="grid grid-cols-2 gap-4">
@@ -644,9 +644,7 @@ export default function AthleticsRecordsPage() {
                               <Calendar className="w-4 h-4 text-[#00704A]" />
                               <div>
                                 <div className="text-xs text-gray-500">Date</div>
-                                <div className="font-semibold">
-                                  {format(new Date(record.AthleteRecordVenue), "MMM d, yyyy")}
-                                </div>
+                                <div className="font-semibold">{record.athleteRecordYear}</div>
                               </div>
                             </div>
 
@@ -654,7 +652,7 @@ export default function AthleticsRecordsPage() {
                               <MapPin className="w-4 h-4 text-[#C1272D]" />
                               <div>
                                 <div className="text-xs text-gray-500">Venue</div>
-                                <div className="font-semibold line-clamp-1">{record.AthleteRecordVenue}</div>
+                                <div className="font-semibold line-clamp-1">{record.athleteRecordVenue}</div>
                               </div>
                             </div>
                           </div>
@@ -673,12 +671,12 @@ export default function AthleticsRecordsPage() {
                             </div>
                           )}
 
-                          {record.AthleteEarlierRecords && (
+                          {record.athleteEarlierRecords && (
                             <div className="pt-4 border-t border-gray-100">
                               <div className="text-xs text-gray-500 mb-1">Previous Record</div>
                               <div className="flex items-center justify-between">
-                                <span className="text-sm font-semibold text-gray-700">{record.AthleteFullName}</span>
-                                <span className="text-sm font-bold text-gray-600">{record.AthleteRecordValue}</span>
+                                <span className="text-sm font-semibold text-gray-700">{record.athleteFullName}</span>
+                                <span className="text-sm font-bold text-gray-600">{record.athleteRecordValue}</span>
                               </div>
                             </div>
                           )}
