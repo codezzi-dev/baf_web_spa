@@ -225,75 +225,6 @@ const categoryInfo = {
   },
 } as const;
 
-const coreValues: CoreValues = {
-  title: "Our Strategic Objectives",
-  description:
-    "Six core objectives guiding our mission to elevate coaching standards and athlete performance across Bangladesh",
-  values: [
-    {
-      icon: "Award",
-      title: "Professional Development",
-      description:
-        "Continuous education and certification programs for coaches at all levels",
-      color: "from-[#00704A] to-[#005239]",
-    },
-    {
-      icon: "Users",
-      title: "Community Building",
-      description:
-        "Foster collaboration and knowledge sharing among athletics coaches nationwide",
-      color: "from-[#00704A] to-[#005239]",
-    },
-    {
-      icon: "Disk2",
-      title: "Standards & Ethics",
-      description:
-        "Establish and maintain high coaching standards and ethical practices",
-      color: "from-[#00704A] to-[#005239]",
-    },
-    {
-      icon: "TrendingUp",
-      title: "Performance Excellence",
-      description:
-        "Enhance coaching methodologies to improve athlete performance and success",
-      color: "from-[#00704A] to-[#005239]",
-    },
-    {
-      icon: "GraduationCap",
-      title: "Coaching Education",
-      description:
-        "Provide accessible education and resources for aspiring and current coaches",
-      color: "from-[#00704A] to-[#005239]",
-    },
-    {
-      icon: "CircleCheckBig",
-      title: "Recognition & Support",
-      description:
-        "Acknowledge achievements and provide support systems for coaching professionals",
-      color: "from-[#00704A] to-[#005239]",
-    },
-  ],
-};
-
-// const stats = [
-//   {
-//     value: "150+",
-//     label: "Certified Coaches",
-//   },
-//   {
-//     value: "8",
-//     label: "Divisions",
-//   },
-//   {
-//     value: "12",
-//     label: "Specializations",
-//   },
-//   {
-//     value: "25+",
-//     label: "Years Legacy",
-//   },
-// ];
-
 const BangladeshCoachAssociationPage = () => {
   const { data, error, isLoading } = useGetCoachAssociationHistories();
   if (isLoading) {
@@ -342,10 +273,12 @@ const BangladeshCoachAssociationPage = () => {
         {/* Hero Section */}
         {pageGenericElements && <PageHero pageGenericElements={pageGenericElements} />}
 
+        {/* Statistics Section */}
         <div className="pb-16 text-center">
           <StatisticsSection stats={stats} />
         </div>
 
+        {/* Overview Section */}
         <div className=" mb-10 p-10 text-gray-600 rounded-2xl ">
           <div className="flex items-center gap-2 mb-4">
             <div className="bg-gradient-to-b from-[#00704A] to-[#005239] w-12 h-12 rounded-full flex items-center justify-center">
@@ -358,11 +291,10 @@ const BangladeshCoachAssociationPage = () => {
               __html: overview?.stepGroupSummary ?? "",
             }}
           />
-
-
         </div>
 
-        {/* Cards Section */}
+        {/* Mission Vission Section */}
+
         <div className="flex justify-around gap-4 ">
           <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-tag-green via-tag-red to-tag-yellow" />
           {ourMissionVision?.stepFromDtos.map((step, index) => (
@@ -389,44 +321,6 @@ const BangladeshCoachAssociationPage = () => {
               }
             />
           ))}
-          {/* <MissionCard
-            title="Mission"
-            icon={<Users size={24} className="text-white" />}
-            iconBgClass="bg-gradient-to-b from-tag-red to-tag-redDark"
-            description={
-              <>
-                To empower and unite athletics coaches across Bangladesh through
-                professional development, ethical leadership, and collaborative
-                excellence, ensuring every athlete receives world-class coaching
-                that enables them to reach their full potential.
-              </>
-            }
-            bulletPoints={[
-              "Promote highest standards of coaching professionalism and ethics",
-              "Provide continuous education and certification opportunities",
-              "Foster collaboration and knowledge sharing among coaching community",
-            ]}
-            bulletIcon={<CircleCheckBig size={20} className="text-tag-red" />}
-          />
-          <MissionCard
-            title="Mission"
-            icon={<Target size={24} className="text-white" />}
-            iconBgClass="bg-gradient-to-b from-tag-green to-tag-greenDark"
-            description={
-              <>
-                To be recognized as South Asia's leading athletics coaching
-                organization, producing internationally certified coaches who
-                consistently develop world-class athletes and contribute to
-                Bangladesh's prominence in global athletics competitions.
-              </>
-            }
-            bulletPoints={[
-              "Establish international recognition for Bangladeshi coaching excellence",
-              "Create sustainable pathways from grassroots to elite coaching",
-              "Position Bangladesh as a regional hub for coaching education",
-            ]}
-            bulletIcon={<CircleCheckBig size={20} className="text-tag-green" />}
-          /> */}
         </div>
 
         <CoreValuesSection coreValues={coreValues} />
@@ -558,6 +452,7 @@ const BangladeshCoachAssociationPage = () => {
               </Card>
             )}
           </div>
+          {/* Footer Section */}
           <Footer
             icon={<Users size={48} />}
             title={pageGenericElements?.pageBottomTitle ?? "Join Our Community"}
