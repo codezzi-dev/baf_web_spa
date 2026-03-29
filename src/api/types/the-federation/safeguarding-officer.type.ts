@@ -1,32 +1,5 @@
 import { GenericElement } from "../common/generic.type";
-
-// ──────────────────────────────────────────────
-// Step (inside a group)
-// ──────────────────────────────────────────────
-
-export type StepFromDto = {
-    stepId: number;
-    stepTitle: string;
-    stepDescription: string;
-    stepIcon: string | null;
-    stepTags: string[] | null;
-    stepOrder: number;
-    stepItemFromDtos: unknown[];
-};
-
-// ──────────────────────────────────────────────
-// Step group
-// ──────────────────────────────────────────────
-
-export type ElementDto = {
-    readonly stepGroupId: number;
-    readonly stepGroupKey: string;
-    readonly stepGroupName: string;
-    readonly stepGroupOrder: number;
-    readonly stepGroupTitle: string;
-    readonly stepGroupSummary: string;
-    readonly stepFromDtos: StepFromDto[];
-};
+import { ElementDto } from "../common/element.type";
 
 // ──────────────────────────────────────────────
 // Safeguarding Officer

@@ -1,6 +1,6 @@
 import { Heart, Users, Lock, ShieldCheck, LucideIcon } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { ElementDto } from "@/api/types/the-federation/safeguarding-officer.type";
+import { ElementDto } from "@/api/types/common/element.type";
 
 const principlesMeta: Record<string, { icon: LucideIcon; color: string }> = {
   "Child-Centered": { icon: Heart, color: "bg-tag-green" },

@@ -1,6 +1,6 @@
 import { Star, CheckCircle } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { ElementDto } from "@/api/types/the-federation/safeguarding-officer.type";
+import { ElementDto } from "@/api/types/common/element.type";
 
 interface RolesResponsibilitiesProps {
   roleAndResponsibilities: ElementDto

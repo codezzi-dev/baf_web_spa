@@ -1,6 +1,7 @@
 import { Phone, Mail, Clock, Shield } from "lucide-react";
 import { Card } from "@/components/ui/card";
-import { ElementDto, SafeguardingOfficer } from "@/api/types/the-federation/safeguarding-officer.type";
+import { SafeguardingOfficer } from "@/api/types/the-federation/safeguarding-officer.type";
+import { ElementDto } from "@/api/types/common/element.type";
 
 interface OfficerCardProps {
   contactTheSafeguardingOfficer: ElementDto

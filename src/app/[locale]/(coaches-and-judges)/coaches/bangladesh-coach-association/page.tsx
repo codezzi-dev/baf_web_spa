@@ -12,8 +12,6 @@ import {
   Shield,
   Briefcase,
 } from "lucide-react";
-
-import DynamicHeading from "@/components/Home/HeadingComponent";
 import Loading from "@/components/common/Loading";
 import MissionCard from "@/components/Card/MissionCard";
 import Footer from "@/components/common/PageFooter2";
@@ -35,6 +33,9 @@ import mizanur_rahman from "@/assets/images/organizational-people/mizanur_rahman
 
 import sabbir_mostofa from "@/assets/images/organizational-people/sabbir-mostafa-khan.png";
 import muzibar_rahman_mollick from "@/assets/images/organizational-people/mujibur-rahman-mollick.jpg";
+import Error from "@/components/common/Error";
+import { useGetCoachAssociationHistories } from "@/api/hooks/coaches-and-judges/coaches.hook";
+import PageHero from "@/components/common/PageHero";
 
 const dummyMembers = [
   {
@@ -274,59 +275,72 @@ const coreValues: CoreValues = {
   ],
 };
 
-const stats = [
-  {
-    value: "150+",
-    label: "Certified Coaches",
-  },
-  {
-    value: "8",
-    label: "Divisions",
-  },
-  {
-    value: "12",
-    label: "Specializations",
-  },
-  {
-    value: "25+",
-    label: "Years Legacy",
-  },
-];
+// const stats = [
+//   {
+//     value: "150+",
+//     label: "Certified Coaches",
+//   },
+//   {
+//     value: "8",
+//     label: "Divisions",
+//   },
+//   {
+//     value: "12",
+//     label: "Specializations",
+//   },
+//   {
+//     value: "25+",
+//     label: "Years Legacy",
+//   },
+// ];
 
 const BangladeshCoachAssociationPage = () => {
-  // Keeping loading behavior like your other pages (but no API fetch here)
-  const [isLoading, setIsLoading] = useState(true);
+  const { data, error, isLoading } = useGetCoachAssociationHistories();
+  if (isLoading) {
+    return <Loading />;
+  }
+  if (error) {
+    return <Error />;
+  }
+  data && console.log(data)
+  const elements = data?.data?.elementDtos;
+  const pageGenericElements = data?.data?.pageGenericElements;
+  const pageCoachAssociationHistories = data?.data?.pageCoachAssociationHistories;
 
-  useEffect(() => {
-    // Fake loader so you can see Loading component briefly (remove anytime)
-    const t = setTimeout(() => setIsLoading(false), 300);
-    return () => clearTimeout(t);
-  }, []);
 
-  if (isLoading) return <Loading />;
+  const overview = elements?.find(
+    (el) => el.stepGroupName === "overview"
+  );
+  const ourMissionVision = elements?.find(
+    (el) => el.stepGroupName === "our_mission_vision"
+  );
+  const ourStrategicObjectives = elements?.find(
+    (el) => el.stepGroupName === "our_strategic_objectives"
+  );
+
+  const stats = [
+    { value: `${pageCoachAssociationHistories?.totalCertifiedCoaches ?? 0}+`, label: "Certified Coaches" },
+    { value: `${pageCoachAssociationHistories?.totalYearOfServices ?? 0}+`, label: "Years of Service" },
+    { value: `${pageCoachAssociationHistories?.totalAnnualWorkshops ?? 0}+`, label: "Annual Workshops" },
+    { value: pageCoachAssociationHistories?.totalRegionalChapters ?? 0, label: "Regional Chapters" },
+  ];
+
+  const coreValues: CoreValues = {
+    title: ourStrategicObjectives?.stepGroupTitle ?? "",
+    description: ourStrategicObjectives?.stepGroupSummary ?? "",
+    values: ourStrategicObjectives?.stepFromDtos.map((step) => ({
+      icon: step.stepIcon || "Target",
+      title: step.stepTitle,
+      description: step.stepDescription.replace(/<[^>]*>/g, ""),
+      color: "from-[#00704A] to-[#005239]",
+    })) ?? [],
+  };
 
   return (
     <div className="min-h-screen bg-background">
       <div className="container max-w-6xl mx-auto px-4 py-40">
         {/* Hero Section */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#00704A]/10 to-[#C1272D]/10 rounded-full mb-6">
-            <Sparkles className="w-4 h-4 text-[#00704A]" />
-            <span className="text-sm font-semibold text-[#00704A]">
-              Bangladesh Athletics
-            </span>
-          </div>
-
-          <DynamicHeading
-            title="Bangladesh Athletics Coach Association"
-            className="text-4xl lg:text-6xl font-bold"
-          />
-
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            A unified platform dedicated to empowering athletics coaches through
-            development, standards, and collaboration.
-          </p>
-        </div>
+        {pageGenericElements && <PageHero pageGenericElements={pageGenericElements} />}
 
         <div className="pb-16 text-center">
           <StatisticsSection stats={stats} />
@@ -337,30 +351,45 @@ const BangladeshCoachAssociationPage = () => {
             <div className="bg-gradient-to-b from-[#00704A] to-[#005239] w-12 h-12 rounded-full flex items-center justify-center">
               <Sparkles size={24} className="text-white" />
             </div>
-            <span className="text-2xl text-black font-bold">Overview</span>
+            <span className="text-2xl text-black font-bold">{overview?.stepGroupTitle}</span>
           </div>
-          The Bangladesh Athletics Coach Association (BACA) was established in
-          2008 as the premier professional organization dedicated to advancing
-          the art and science of athletics coaching in Bangladesh. We represent
-          coaches at all levels, from grassroots community programs to elite
-          international competition. <br /> <br /> Our association serves as the
-          collective voice of athletics coaches across the nation, advocating
-          for professional recognition, improved working conditions, and access
-          to world-class coaching education. We are committed to elevating the
-          coaching profession and, by extension, the performance of Bangladeshi
-          athletes on both national and international stages. <br /> <br />
-          Through our comprehensive network of regional chapters, we facilitate
-          knowledge exchange, mentorship opportunities, and collaborative
-          problem-solving among coaches from diverse backgrounds and
-          specializations. Our members benefit from exclusive access to
-          cutting-edge research, international coaching methodologies, and
-          professional development resources.
+          <p
+            dangerouslySetInnerHTML={{
+              __html: overview?.stepGroupSummary ?? "",
+            }}
+          />
+
+
         </div>
 
         {/* Cards Section */}
         <div className="flex justify-around gap-4 ">
           <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-tag-green via-tag-red to-tag-yellow" />
-          <MissionCard
+          {ourMissionVision?.stepFromDtos.map((step, index) => (
+            <MissionCard
+              key={step.stepId}
+              title={step.stepTitle}
+              icon={index === 0
+                ? <Users size={24} className="text-white" />
+                : <Target size={24} className="text-white" />
+              }
+              iconBgClass={index === 0
+                ? "bg-gradient-to-b from-tag-red to-tag-redDark"
+                : "bg-gradient-to-b from-tag-green to-tag-greenDark"
+              }
+              description={
+                <p dangerouslySetInnerHTML={{ __html: step.stepDescription ?? "" }} />
+              }
+              bulletPoints={step.stepItemFromDtos.map((item) => item.stepItemName)}
+              bulletIcon={
+                <CircleCheckBig
+                  size={20}
+                  className={index === 0 ? "text-tag-red" : "text-tag-green"}
+                />
+              }
+            />
+          ))}
+          {/* <MissionCard
             title="Mission"
             icon={<Users size={24} className="text-white" />}
             iconBgClass="bg-gradient-to-b from-tag-red to-tag-redDark"
@@ -397,10 +426,11 @@ const BangladeshCoachAssociationPage = () => {
               "Position Bangladesh as a regional hub for coaching education",
             ]}
             bulletIcon={<CircleCheckBig size={20} className="text-tag-green" />}
-          />
+          /> */}
         </div>
 
         <CoreValuesSection coreValues={coreValues} />
+
         <div className="rounded-2xl p-12 ">
           <div className="flex justify-center align-center mb-10 gap-1">
             <div className="font-bold text-black text-3xl">Executive</div>
@@ -530,12 +560,10 @@ const BangladeshCoachAssociationPage = () => {
           </div>
           <Footer
             icon={<Users size={48} />}
-            title="Join Our Community"
+            title={pageGenericElements?.pageBottomTitle ?? "Join Our Community"}
             description={
               <>
-                Become a member of Bangladesh's premier athletics coaching
-                association and access exclusive resources, training, and
-                networking opportunities
+                {pageGenericElements?.pageBottomSummary}
               </>
             }
             backgroundClass="bg-gradient-to-b from-tag-green to-tag-greenDark"

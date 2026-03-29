@@ -1,3 +1,4 @@
+"use client";
 import { FileText, Download } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { SafeguardingResources } from "@/api/types/the-federation/safeguarding-officer.type";

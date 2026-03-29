@@ -1,5 +1,4 @@
 "use client";
-import HeroSection from "@/components/safeguarding/HeroSection";
 import OfficerCard from "@/components/safeguarding/OfficerCard";
 import RolesResponsibilities from "@/components/safeguarding/RolesResponsibilities";
 import WhenToContact from "@/components/safeguarding/WhenToContact";

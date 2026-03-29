@@ -21,7 +21,7 @@ const CoreValuesSection: FC<CoreValuesProps> = ({ coreValues }) => {
 
   return (
     <div className="mb-20">
-      <SectionHeader header = {coreValues}/>
+      <SectionHeader header={coreValues} />
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {coreValues.values.map((value, index) => {
           const Icon = icons[value.icon] ?? Target;
