@@ -1,11 +1,4 @@
-import { Search, Dumbbell, Medal, Timer, Target, Footprints, MapPin } from "lucide-react";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Dumbbell, Medal, Timer, Target, Footprints, LucideIcon } from "lucide-react";
 import SearchBarSection from "@/components/common/SearchBarSection";
 import CategorySection from "@/components/common/CategorySection";
 import SubCategorySection from "@/components/common/SubCategorySection";
@@ -17,41 +10,18 @@ interface CoachSearchFiltersProps {
   setSearchQuery: (query: string) => void;
   selectedDivision: string;
   setSelectedDivision: (division: string) => void;
+  categories: { key?: string | number | null; value?: string | null }[];
+  divisions: { key?: string | number | null; value?: string | null }[];
 }
 
-const specializations = [
-  { id: "sprints", label: "Sprints", icon: Timer },
-  { id: "distance", label: "Distance", icon: Footprints },
-  { id: "throws", label: "Throws", icon: Target },
-  { id: "jumps", label: "Jumps", icon: Dumbbell },
-  { id: "combined", label: "Combined", icon: Medal },
-];
-
-// const divisions = [
-//   "All Divisions",
-//   "Dhaka",
-//   "Chittagong",
-//   "Rajshahi",
-//   "Khulna",
-//   "Sylhet",
-//   "Barisal",
-//   "Rangpur",
-//   "Mymensingh",
-// ];
-  const divisions = [
-    { id: "", label: "All Divisions" },
-
-    { id: "Dhaka", label: "Dhaka" },
-    { id: "Chittagong", label: "Chittagong" },
-    { id: "Rajshahi", label: "Rajshahi" },
-    { id: "Khulna", label: "Khulna" },
-    { id: "Sylhet", label: "Sylhet" },
-    { id: "Rangpur", label: "Rangpur" },
-    { id: "Barisal", label: "Barisal" },
-    { id: "Mymensingh", label: "Mymensingh" }
-
-
-  ]
+// Icon map to match API category names to icons
+const specializationIconMap: Record<string, LucideIcon> = {
+  Sprints: Timer,
+  Distance: Footprints,
+  Throws: Target,
+  Jumps: Dumbbell,
+  Combined: Medal,
+};
 
 const CoachSearchFilters = ({
   activeSpecialization,
@@ -60,25 +30,40 @@ const CoachSearchFilters = ({
   setSearchQuery,
   selectedDivision,
   setSelectedDivision,
+  categories,
+  divisions,
 }: CoachSearchFiltersProps) => {
+  const specializations = categories.map((cat) => ({
+    id: String(cat.key ?? ""),
+    label: cat.value ?? "",
+    icon: specializationIconMap[cat.value ?? ""] ?? Dumbbell,
+  }));
+
+  const divisionOptions = [
+    { id: "", label: "All Divisions" },
+    ...divisions.map((div) => ({
+      id: String(div.key ?? ""),
+      label: div.value ?? "",
+    })),
+  ];
   return (
     <div className="mb-8 space-y-4">
       {/* Search Bar */}
-     <SearchBarSection 
-      searchQuery={searchQuery}
-      setSearchQuery={setSearchQuery}
-      placeholder="Search coaches by name, location..."
+      <SearchBarSection
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        placeholder="Search coaches by name, location..."
       />
       {/* Category Icons */}
-        <CategorySection
+      <CategorySection
         categories={specializations}
         activeCategory={activeSpecialization}
         setActiveCategory={setActiveSpecialization}
       />
 
       {/* Division Filter */}
-      <SubCategorySection 
-        subCategories={divisions}
+      <SubCategorySection
+        subCategories={divisionOptions}
         activeSubCategory={selectedDivision}
         setActiveSubCategory={setSelectedDivision}
       />
