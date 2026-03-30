@@ -363,11 +363,7 @@ import PageHero from "@/components/common/PageHero";
 // ];
 
 export default function BoardMembers() {
-  // const [activeCategory, setActiveCategory] = useState("all");
-
-  // const filteredMembers =
-  //   activeCategory === "all" ? dummyMembers : dummyMembers.filter((m) => m.category.includes(activeCategory));
-
+  const [activeCategory, setActiveCategory] = useState<string>("");
   const { data, error, isLoading } = useGetOrgStructurePublicContent();
   if (isLoading) {
     return <Loading />;
@@ -390,7 +386,7 @@ export default function BoardMembers() {
     ])
   );
 
-  const [activeCategory, setActiveCategory] = useState<string>("");
+
   const effectiveCategory =
     activeCategory || committees[0]?.key?.toString() || "";
   const activeCategoryInfo = categoryInfo[effectiveCategory];
