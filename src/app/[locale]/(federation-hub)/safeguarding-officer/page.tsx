@@ -1,5 +1,4 @@
 "use client";
-import HeroSection from "@/components/safeguarding/HeroSection";
 import OfficerCard from "@/components/safeguarding/OfficerCard";
 import RolesResponsibilities from "@/components/safeguarding/RolesResponsibilities";
 import WhenToContact from "@/components/safeguarding/WhenToContact";
@@ -23,7 +22,8 @@ const Page = () => {
   data && console.log(data)
   const elements = data?.data?.elementDtos;
   const pageGenericElements = data?.data?.pageGenericElements;
-  const pageSafeguardingOfficer = data?.data?.pageSafeguardingOfficerDto
+  const pageSafeguardingOfficer = data?.data?.pageSafeguardingOfficerDto;
+  const pageSafeguardingResources = data?.data?.safeguardingResources;
 
 
   const roleAndResponsibilities = elements?.find(
@@ -48,24 +48,28 @@ const Page = () => {
         {/* Officer Card + Roles Section */}
         <section className="grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-1">
-            {contactTheSafeguardingOfficer && (
-              <OfficerCard contactTheSafeguardingOfficer={contactTheSafeguardingOfficer} />
+            {contactTheSafeguardingOfficer && pageSafeguardingOfficer && (
+              <OfficerCard
+                contactTheSafeguardingOfficer={contactTheSafeguardingOfficer}
+                pageSafeguardingOfficer={pageSafeguardingOfficer}
+              />
             )}
           </div>
           <div className="lg:col-span-2 space-y-6">
             {roleAndResponsibilities &&
               (<RolesResponsibilities roleAndResponsibilities={roleAndResponsibilities} />)}
-            <WhenToContact />
+            {contactTheSafeguardingOfficer &&
+              (<WhenToContact contactTheSafeguardingOfficer={contactTheSafeguardingOfficer} />)}
           </div>
         </section>
 
         {/* Safeguarding Principles */}
-        <SafeguardingPrinciples />
+        {ourSafeguardingPrinciples && <SafeguardingPrinciples ourSafeguardingPrinciples={ourSafeguardingPrinciples} />}
 
         {/* Resources + Important Info */}
         <section className="grid md:grid-cols-2 gap-8 mb-12">
-          <ResourcesSection />
-          <ImportantInfo />
+          {pageSafeguardingResources && <ResourcesSection safeguardingResources={pageSafeguardingResources} />}
+          {importantInformation && <ImportantInfo importantInformation={importantInformation} />}
         </section>
 
         {/* CTA Section */}

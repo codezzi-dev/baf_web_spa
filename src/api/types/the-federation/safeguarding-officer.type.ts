@@ -1,24 +1,5 @@
 import { GenericElement } from "../common/generic.type";
-
-// ──────────────────────────────────────────────
-// Step (inside a group)
-// ──────────────────────────────────────────────
-
-export type StepFromDto = Record<string, unknown>; // populate once API returns step data
-
-// ──────────────────────────────────────────────
-// Step group
-// ──────────────────────────────────────────────
-
-export type ElementDto = {
-    readonly stepGroupId: number;
-    readonly stepGroupKey: string;
-    readonly stepGroupName: string;
-    readonly stepGroupOrder: number;
-    readonly stepGroupTitle: string;
-    readonly stepGroupSummary: string;
-    readonly stepFromDtos: StepFromDto[];
-};
+import { ElementDto } from "../common/element.type";
 
 // ──────────────────────────────────────────────
 // Safeguarding Officer
@@ -34,6 +15,17 @@ export type SafeguardingOfficer = {
 };
 
 // ──────────────────────────────────────────────
+// Safeguarding Resources
+// ──────────────────────────────────────────────
+
+export type SafeguardingResources = {
+    readonly documentId: number;
+    readonly documentName: string;
+    readonly documentType: string;
+    readonly documentUrl: string;
+};
+
+// ──────────────────────────────────────────────
 // API data wrapper (inside `data`)
 // ──────────────────────────────────────────────
 
@@ -41,4 +33,6 @@ export type SafeguardingOfficerWrapperDto = {
     readonly elementDtos: ElementDto[];
     readonly pageGenericElements: GenericElement;
     readonly pageSafeguardingOfficerDto: SafeguardingOfficer;
+    readonly safeguardingResources: SafeguardingResources[];
+
 };

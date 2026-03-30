@@ -11,6 +11,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
   const messages = {
     common: (await import(`../messages/${locale}/common.json`)).default,
     nav: (await import(`../messages/${locale}/nav.json`)).default,
+    records: (await import(`../messages/${locale}/records.json`)).default,
     home: (await import(`../messages/${locale}/home.json`)).default,
     athletes: (await import(`../messages/${locale}/athletes.json`)).default,
     coachesAndjudges: (await import(`../messages/${locale}/coaches-and-judges.json`)).default,

@@ -9,9 +9,10 @@ import {
   Award,
   Shield,
   Briefcase,
+  Target,
+  CircleCheckBig,
 } from "lucide-react";
-
-import DynamicHeading from "@/components/Home/HeadingComponent";
+import Footer from "@/components/common/PageFooter2";
 import Loading from "@/components/common/Loading";
 import MissionVissionSection, {
   MissionVision,
@@ -30,6 +31,10 @@ import abdun_naser_khan from "@/assets/images/organizational-people/abdun-naser-
 import iqbal_hossain from "@/assets/images/organizational-people/iqbal_hossain.jpg";
 import shah_alom from "@/assets/images/organizational-people/shah_alam.jpg";
 import kitab_ali from "@/assets/images/organizational-people/kitab_ali.jpg";
+import { useGetJudgesAssociationHistories } from "@/api/hooks/coaches-and-judges/judges.hook";
+import Error from "@/components/common/Error";
+import PageHero from "@/components/common/PageHero";
+import MissionCard from "@/components/Card/MissionCard";
 
 const dummyMembers = [
   {
@@ -265,65 +270,107 @@ const stats = [
 ];
 
 const BangladeshJudgeAssociationPage = () => {
-  // Keeping loading behavior like your other pages (but no API fetch here)
-  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    // Fake loader so you can see Loading component briefly (remove anytime)
-    const t = setTimeout(() => setIsLoading(false), 300);
-    return () => clearTimeout(t);
-  }, []);
+  const { data, error, isLoading } = useGetJudgesAssociationHistories();
+  if (isLoading) {
+    return <Loading />;
+  }
+  if (error) {
+    return <Error />;
+  }
+  data && console.log(data)
+  const elements = data?.data?.elementDtos;
+  const pageGenericElements = data?.data?.pageGenericElements;
+  const pageCoachAssociationHistories = data?.data?.pageJudgesAssociationHistories;
 
-  if (isLoading) return <Loading />;
 
+  const overview = elements?.find(
+    (el) => el.stepGroupName === "overview"
+  );
+  const ourMissionVision = elements?.find(
+    (el) => el.stepGroupName === "our_mission_vision"
+  );
+  const ourStrategicObjectives = elements?.find(
+    (el) => el.stepGroupName === "our_strategic_objectives"
+  );
+
+  const stats = [
+    { value: `${pageCoachAssociationHistories?.totalCertifiedJudges ?? 0}+`, label: "Certified Jaudges" },
+    { value: `${pageCoachAssociationHistories?.totalYearOfServices ?? 0}+`, label: "Years of Service" },
+    { value: `${pageCoachAssociationHistories?.totalAnnualWorkshops ?? 0}+`, label: "Annual Workshops" },
+    { value: pageCoachAssociationHistories?.totalRegionalChapters ?? 0, label: "Regional Chapters" },
+  ];
+
+  const coreValues: CoreValues = {
+    title: ourStrategicObjectives?.stepGroupTitle ?? "",
+    description: ourStrategicObjectives?.stepGroupSummary ?? "",
+    values: ourStrategicObjectives?.stepFromDtos.map((step) => ({
+      icon: step.stepIcon || "Target",
+      title: step.stepTitle,
+      description: step.stepDescription.replace(/<[^>]*>/g, ""),
+      color: "from-[#00704A] to-[#005239]",
+    })) ?? [],
+  };
   return (
     <div className="min-h-screen bg-background">
       <div className="container max-w-6xl mx-auto px-4 py-40">
         {/* Hero Section */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#00704A]/10 to-[#C1272D]/10 rounded-full mb-6">
-            <Sparkles className="w-4 h-4 text-[#00704A]" />
-            <span className="text-sm font-semibold text-[#00704A]">
-              Bangladesh Athletics
-            </span>
-          </div>
+        {pageGenericElements && <PageHero pageGenericElements={pageGenericElements} />}
 
-          <DynamicHeading
-            title="Bangladesh Athletics Judge Association"
-            className="text-4xl lg:text-6xl font-bold"
-          />
-
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Dedicated to maintaining fairness, integrity, and professional
-            standards in athletics officiating across Bangladesh.
-          </p>
-        </div>
-
+        {/* Statistics Section */}
         <div className="pb-16 text-center">
           <StatisticsSection stats={stats} />
         </div>
 
+        {/* Overview Section */}
         <div className=" mb-10 p-10 text-gray-600 rounded-2xl ">
           <div className="flex items-center gap-2 mb-4">
             <div className="bg-gradient-to-b from-[#00704A] to-[#005239] w-12 h-12 rounded-full flex items-center justify-center">
               <Sparkles size={24} className="text-white" />
             </div>
-            <span className="text-2xl text-gray-500 font-bold">Overview</span>
+            <span className="text-2xl text-black font-bold">{overview?.stepGroupTitle}</span>
           </div>
-          The Bangladesh Athletics Judge Association (BAJA) is responsible for
-          developing professional officiating standards and ensuring fair
-          competition management across national athletics events.
-          <br />
-          <br />
-          Through structured training programs and certification systems, we
-          promote technical excellence and accountability among registered
-          judges.
+          <p
+            dangerouslySetInnerHTML={{
+              __html: overview?.stepGroupSummary ?? "",
+            }}
+          />
         </div>
 
-        {/* Cards Section */}
-        <MissionVissionSection missionVision={coachAssociationCompass} />
+        {/* Mission Vission Section */}
 
+        <div className="flex justify-around gap-4 ">
+          <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-tag-green via-tag-red to-tag-yellow" />
+          {ourMissionVision?.stepFromDtos.map((step, index) => (
+            <MissionCard
+              key={step.stepId}
+              title={step.stepTitle}
+              icon={index === 0
+                ? <Users size={24} className="text-white" />
+                : <Target size={24} className="text-white" />
+              }
+              iconBgClass={index === 0
+                ? "bg-gradient-to-b from-tag-red to-tag-redDark"
+                : "bg-gradient-to-b from-tag-green to-tag-greenDark"
+              }
+              description={
+                <p dangerouslySetInnerHTML={{ __html: step.stepDescription ?? "" }} />
+              }
+              bulletPoints={step.stepItemFromDtos.map((item) => item.stepItemName)}
+              bulletIcon={
+                <CircleCheckBig
+                  size={20}
+                  className={index === 0 ? "text-tag-red" : "text-tag-green"}
+                />
+              }
+            />
+          ))}
+        </div>
+
+        {/* Core Values Section */}
         <CoreValuesSection coreValues={coreValues} />
+
+        {/* Executive Committee Section */}
         <div className="rounded-2xl p-12 ">
           <div className="flex justify-center align-center mb-10 gap-1">
             <div className="font-bold text-black text-3xl">Executive</div>
@@ -450,33 +497,30 @@ const BangladeshJudgeAssociationPage = () => {
               </Card>
             )}
           </div>
-          <div className="mt-16 p-4 bg-gradient-to-b from-[#00704A] to-[#005239] rounded-2xl">
-            <div className="flex flex-col items-center">
-              <div className="text-[#e5e7eb] mt-6">
-                <Users size={48} />
-              </div>
-              <div className="font-bold text-white m-3 text-3xl">
-                Join Our Community
-              </div>
-              <div className="text-center text-white m-3 text-lg">
-                Become a member of Bangladesh's premier athletics coaching
-                association and <br /> access exclusive resources, training, and
-                networking opportunities
-              </div>
-              <div className="flex justify-center gap-4 my-6">
-                <div>
-                  <button className="bg-background rounded-2xl p-4 text-[#00704A] hover:bg-accent">
-                    Apply for Membership
-                  </button>
-                </div>
-                <div>
-                  <button className="rounded-2xl p-4 text-white border-2 border-white hover:bg-white/20">
-                    Contact Us
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+
+          {/* Footer Section */}
+          <Footer
+            icon={<Users size={48} />}
+            title={pageGenericElements?.pageBottomTitle ?? "Join Our Community"}
+            description={
+              <>
+                {pageGenericElements?.pageBottomSummary}
+              </>
+            }
+            backgroundClass="bg-gradient-to-b from-tag-green to-tag-greenDark"
+            buttons={[
+              {
+                label: "Apply for Membership",
+                variant: "filled",
+                onClick: () => console.log("Apply clicked"),
+              },
+              {
+                label: "Contact Us",
+                variant: "outline",
+                onClick: () => console.log("Contact us clicked"),
+              },
+            ]}
+          />
         </div>
       </div>
     </div>
